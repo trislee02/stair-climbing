@@ -32,10 +32,13 @@ public class IKFootPlacement : MonoBehaviour
         anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, anim.GetFloat("IKRightFootWeight"));
         anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, anim.GetFloat("IKRightFootWeight"));
 
+        //float maxDistance = distanceToGround + 1f;
+        float maxDistance = Mathf.Infinity;
+
         // Left foot
         RaycastHit hit;
         Ray ray = new Ray(anim.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
-        if (Physics.Raycast(ray, out hit, distanceToGround + 1f, layerMask))
+        if (Physics.Raycast(ray, out hit, maxDistance, layerMask))
         {
             if (hit.transform.tag.Equals("Walkable"))
             {
@@ -48,7 +51,7 @@ public class IKFootPlacement : MonoBehaviour
 
         // Right foot
         ray = new Ray(anim.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
-        if (Physics.Raycast(ray, out hit, distanceToGround + 1f, layerMask))
+        if (Physics.Raycast(ray, out hit, maxDistance, layerMask))
         {
             if (hit.transform.tag.Equals("Walkable"))
             {
