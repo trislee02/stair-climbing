@@ -21,7 +21,7 @@ public class DataManager : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        websocket = new WebSocket("ws://192.168.4.1:80/ws");
+        websocket = new WebSocket("ws://192.168.4.1:8080/ws");
 
         websocket.OnOpen += () =>
         {

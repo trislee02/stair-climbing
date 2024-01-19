@@ -111,21 +111,26 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("isMoving", false);
+        }
+    }
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        if (animator)
+        {
             if (isInitFootHeight)
             {
                 initialLeftFootPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
                 initialRightFootPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
                 isInitFootHeight = false;
             }
-        }
-    }
+            else
+            {
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
-    private void OnAnimatorIK(int layerIndex)
-    {
-        animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
-        animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
-        animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(initialLeftFootPosition.x, initialLeftFootPosition.y + leftFootHeight, initialLeftFootPosition.z));
-        animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(initialRightFootPosition.x, initialRightFootPosition.y + rightFootHeight, initialRightFootPosition.z));
+            }
+        }        
     }
 }
