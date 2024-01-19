@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -19,11 +20,12 @@ public class PlayerMovement : MonoBehaviour
     private float? lastGroundedTime;
     private float? jumpButtonPressedTime;
 
-    private float leftFootHeight;
-    private float rightFootHeight;
+    private Vector3 previousLeftFootIKPosition;
+    private Vector3 previousRightFootIKPosition;
 
-    Vector3 initialLeftFootPosition;
-    Vector3 initialRightFootPosition;
+    private float previousLeftFootRealHeight;
+    private float previousRightFootRealHeight;
+
     bool isInitFootHeight = true;
 
     // Start is called before the first frame update
@@ -40,12 +42,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
-        float leftStepInput = dataManager.accelerator.roll1;
-        float rightStepInput = dataManager.accelerator.roll2;
-
-        leftFootHeight = (leftStepInput + 13) * scaleHeightFootPosition;
-        rightFootHeight = (rightStepInput + 13) * scaleHeightFootPosition;
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
@@ -120,16 +116,31 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isInitFootHeight)
             {
-                initialLeftFootPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
-                initialRightFootPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
+                previousLeftFootRealHeight = dataManager.accelerator.roll1;
+                previousRightFootRealHeight = dataManager.accelerator.roll2;
+
+                previousLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
+                previousRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
                 isInitFootHeight = false;
             }
             else
-            {
+            { 
+                float currentLeftFootHeight = (dataManager.accelerator.roll1 + 13) * scaleHeightFootPosition;
+                float currentRightFootHeight = (dataManager.accelerator.roll2 + 13) * scaleHeightFootPosition;
+
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
+                animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(previousLeftFootIKPosition.x,
+                                                                          previousLeftFootIKPosition.y + currentLeftFootHeight - previousLeftFootRealHeight,
+                                                                          previousLeftFootIKPosition.z));
 
+                animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(previousRightFootIKPosition.x,
+                                                                           previousRightFootIKPosition.y + currentRightFootHeight - previousRightFootRealHeight,
+                                                                           previousRightFootIKPosition.z));
+                
+                previousLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
+                previousRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
             }
         }        
     }
