@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using NativeWebSocket;
+using System.Net;
+using System.Net.Sockets;
+
 using System;
+using System.Text;
 
 [Serializable]
 public class Accelerator
@@ -14,74 +17,44 @@ public class Accelerator
 
 public class DataManager : MonoBehaviour
 {
-    WebSocket websocket;
-
     public Accelerator accelerator;
 
-    // Start is called before the first frame update
-    async void Start()
+    private Socket sock;
+    //
+    public const int BufferSize = 64;// Size of receive buffer
+    private byte[] buffer = new byte[BufferSize];// Receive buffer
+
+    private void Start()
     {
-        websocket = new WebSocket("ws://192.168.4.1:80/ws");
+        sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        sock.Connect(IPAddress.Parse("192.168.137.184"), 4210);
 
-        websocket.OnOpen += () =>
-        {
-            Debug.Log("Connection open!");
-        };
+        Debug.Log("Started socket");
+        Debug.Log("Send pin-code");
+        sock.Send(Encoding.UTF8.GetBytes("150302"));
 
-        websocket.OnError += (e) =>
-        {
-            Debug.Log("Error! " + e);
-        };
-
-        websocket.OnClose += (e) =>
-        {
-            Debug.Log("Connection closed!");
-        };
-
-        websocket.OnMessage += (bytes) =>
-        {
-            Debug.Log("OnMessage!");
-            Debug.Log(bytes);
-
-            // getting the message as a string
-            var message = System.Text.Encoding.UTF8.GetString(bytes);
-            Debug.Log("OnMessage! " + message);
-
-            DataMessage data = DataMessage.CreateFromJSON(message);
-            Debug.Log("Roll 1: " + data.info.roll1);
-            Debug.Log("Roll 2: " + data.info.roll2);
-            accelerator.roll1 = data.info.roll1; 
-            accelerator.roll2 = data.info.roll2;
-        };
-
-        // Keep sending messages at every 0.3s
-        //InvokeRepeating("SendWebSocketMessage", 0.0f, 0.3f);
-
-        // waiting for messages
-        await websocket.Connect();
+        // Begin receiving the data from the remote device.  
+        sock.BeginReceive(this.buffer, 0, DataManager.BufferSize, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
     }
 
-    void Update()
+    private void OnDestroy()
     {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        websocket.DispatchMessageQueue();
-#endif
+        sock.Close();
     }
 
-    async void SendWebSocketMessage()
+    private void ReceiveCallback(IAsyncResult ar)
     {
-        if (websocket.State == WebSocketState.Open)
-        {
-            // Sending bytes
-            await websocket.Send(new byte[] { 10, 20, 30 });
+        int bytesRead = sock.EndReceive(ar);
+        string receivedMessage = System.Text.Encoding.UTF8.GetString(this.buffer, 0, bytesRead);
 
-            // Sending plain text
-            await websocket.SendText("plain text message");
-        }
-    }
+        string[] rolls = receivedMessage.Split(',');
+        accelerator.roll1 = float.Parse(rolls[0]);
+        accelerator.roll2 = float.Parse(rolls[1]);
 
-    private async void OnApplicationQuit()
-    {
-        await websocket.Close();
+        //Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
+        Debug.Log(receivedMessage);
+
+        // Continue receiving the data from the remote device.  
+        sock.BeginReceive(this.buffer, 0, DataManager.BufferSize, 0, new AsyncCallback(ReceiveCallback), null);
     }
 }
