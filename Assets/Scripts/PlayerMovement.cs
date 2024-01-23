@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Specialized;
 using UnityEngine;
 
@@ -28,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool isInitFootHeight = true;
 
+    private float currentLeftFootHeight;
+    private float currentRightFootHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+
+        currentLeftFootHeight = scaleHeightFootPosition * (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
+        currentRightFootHeight = scaleHeightFootPosition * (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
 
         Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
@@ -110,14 +116,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+    float fps = 0;
+    long startTick;
     private void OnAnimatorIK(int layerIndex)
     {
         if (animator)
         {
             if (isInitFootHeight)
             {
-                previousLeftFootRealHeight = dataManager.accelerator.roll1;
-                previousRightFootRealHeight = dataManager.accelerator.roll2;
+                previousLeftFootRealHeight = 0;
+                previousRightFootRealHeight = 0;
 
                 previousLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
                 previousRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
@@ -125,22 +134,37 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             { 
-                float currentLeftFootHeight = (dataManager.accelerator.roll1 + 13) * scaleHeightFootPosition;
-                float currentRightFootHeight = (dataManager.accelerator.roll2 + 13) * scaleHeightFootPosition;
+                //Debug.Log("Current foot height: left: " + currentLeftFootHeight + " right: " + currentRightFootHeight);
 
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(previousLeftFootIKPosition.x,
-                                                                          previousLeftFootIKPosition.y + currentLeftFootHeight - previousLeftFootRealHeight,
+                                                                          previousLeftFootIKPosition.y + currentLeftFootHeight,
                                                                           previousLeftFootIKPosition.z));
 
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(previousRightFootIKPosition.x,
-                                                                           previousRightFootIKPosition.y + currentRightFootHeight - previousRightFootRealHeight,
+                                                                           previousRightFootIKPosition.y + currentRightFootHeight,
                                                                            previousRightFootIKPosition.z));
-                
-                previousLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
-                previousRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
+
+                if (fps < 0.00006)
+                {
+                    startTick = DateTime.Now.Ticks;
+                }
+                //
+                fps += 1.0f;
+                TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
+                if (elapse.TotalSeconds > 10.0)
+                {
+
+                    fps = fps / (float)elapse.TotalSeconds;
+                    Debug.Log("IK FPS: " + fps);
+                    fps = 0;
+                    startTick = DateTime.Now.Ticks;
+                }
+
+                //previousLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
+                //previousRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
             }
         }        
     }

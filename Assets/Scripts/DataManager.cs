@@ -11,13 +11,19 @@ using System.Text;
 [Serializable]
 public class Accelerator
 {
+    public Accelerator() 
+    { 
+        roll1 = 0;
+        roll2 = 0;
+    }
+
     public float roll1 { get; set; }
     public float roll2 { get; set; }
 }
 
 public class DataManager : MonoBehaviour
 {
-    public Accelerator accelerator;
+    public Accelerator accelerator = new Accelerator();
 
     private Socket sock;
     //
@@ -27,7 +33,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        sock.Connect(IPAddress.Parse("192.168.137.88"), 4210);
+        sock.Connect(IPAddress.Parse("192.168.137.49"), 4210);
 
         Debug.Log("Started socket");
         Debug.Log("Send pin-code");
@@ -42,6 +48,8 @@ public class DataManager : MonoBehaviour
         sock.Close();
     }
 
+    float fps = 0;
+    long startTick;
     private void ReceiveCallback(IAsyncResult ar)
     {
         int bytesRead = sock.EndReceive(ar);
@@ -53,6 +61,22 @@ public class DataManager : MonoBehaviour
 
         //Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
         Debug.Log(receivedMessage);
+
+        if (fps < 0.00006)
+        {
+            startTick = DateTime.Now.Ticks;
+        }
+        //
+        fps += 1.0f;
+        TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
+        if (elapse.TotalSeconds > 10.0)
+        {
+
+            fps = fps / (float)elapse.TotalSeconds;
+            Debug.Log("D FPS: " + fps);
+            fps = 0;
+            startTick = DateTime.Now.Ticks;
+        }
 
         // Continue receiving the data from the remote device.  
         sock.BeginReceive(this.buffer, 0, DataManager.BufferSize, 0, new AsyncCallback(ReceiveCallback), null);
