@@ -33,7 +33,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        sock.Connect(IPAddress.Parse("192.168.137.49"), 4210);
+        sock.Connect(IPAddress.Parse("192.168.137.201"), 4210);
 
         Debug.Log("Started socket");
         Debug.Log("Send pin-code");
