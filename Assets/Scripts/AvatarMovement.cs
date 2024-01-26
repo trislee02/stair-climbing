@@ -42,4 +42,6 @@ public class AvatarMovement : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
 
     }
+
+
 }

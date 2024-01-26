@@ -4,28 +4,34 @@ using UnityEngine;
 
 public class LegAnimation : MonoBehaviour
 {
-
-    public float speed;
-    public float rotationSpeed;
-    public float jumpSpeed;
-    public float jumpButtonGracePeriod;
-
     [SerializeField]
     private float scaleHeightFootPosition;
+
+    [SerializeField]
+    private CharacterController characterController;
+
+    [SerializeField]
+    private float forwardSpeed;
 
     private Animator animator;
     private DataManager dataManager;
 
+    private Vector3 initialLeftFootIKPosition = new Vector3(-0.05f, -0.05f, -0.004f);
+    private Vector3 initialRightFootIKPosition = new Vector3(0.05f, -0.05f, -0.004f);
+
     private Vector3 previousLeftFootIKPosition;
     private Vector3 previousRightFootIKPosition;
 
-    private float previousLeftFootRealHeight;
-    private float previousRightFootRealHeight;
+    private bool isInitFootHeight = true;
 
-    bool isInitFootHeight = true;
+    private float ySpeed;
 
     private float currentLeftFootHeight;
     private float currentRightFootHeight;
+
+    private float previousLeftFootHeight;
+    private float previousRightFootHeight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,68 +42,7 @@ public class LegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentLeftFootHeight = scaleHeightFootPosition * (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
-        currentRightFootHeight = scaleHeightFootPosition * (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
-
-        // ******************** Simple method (Work) ********************
-        //if (movementDirection != Vector3.zero)
-        //{
-        //    animator.SetBool("isMoving", true);
-        //    Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-
-        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        //}
-        //else
-        //{
-        //    animator.SetBool("isMoving", false);
-        //}
-        // ******************************************************
-
-        //ySpeed += Physics.gravity.y * Time.deltaTime;
-
-        //if (characterController.isGrounded)
-        //{
-        //    lastGroundedTime = Time.time;
-        //}
-
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    jumpButtonPressedTime = Time.time;
-        //}
-
-        //if (Time.time - lastGroundedTime <= jumpButtonGracePeriod)
-        //{
-        //    characterController.stepOffset = originalStepOffset;
-        //    ySpeed = -0.5f;
-
-        //    if (Time.time - jumpButtonPressedTime <= jumpButtonGracePeriod)
-        //    {
-        //        ySpeed = jumpSpeed;
-        //        jumpButtonPressedTime = null;
-        //        lastGroundedTime = null;
-        //    }
-        //}
-        //else
-        //{
-        //    characterController.stepOffset = 0;
-        //}
-
-        //Vector3 velocity = movementDirection * magnitude;
-        //velocity.y = ySpeed;
-
-        //characterController.Move(velocity * Time.deltaTime);
-
-        //if (movementDirection != Vector3.zero)
-        //{
-        //    animator.SetBool("isMoving", true);
-        //    Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-
-        //    transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        //}
-        //else
-        //{
-        //    animator.SetBool("isMoving", false);
-        //}
+        
     }
 
 
@@ -109,43 +54,71 @@ public class LegAnimation : MonoBehaviour
         {
             if (isInitFootHeight)
             {
-                previousLeftFootRealHeight = 0;
-                previousRightFootRealHeight = 0;
+                previousLeftFootHeight = 0;
+                previousRightFootHeight = 0;
 
-                previousLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
-                previousRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
+                previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
+                previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
+                Debug.Log("transformed point: " + previousLeftFootIKPosition + ", " + previousRightFootIKPosition); 
                 isInitFootHeight = false;
             }
             else
-            { 
-                //Debug.Log("Current foot height: left: " + currentLeftFootHeight + " right: " + currentRightFootHeight);
+            {
+                previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
+                previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
 
+                Debug.Log("transformed point: " + previousLeftFootIKPosition + ", " + previousRightFootIKPosition);
+
+                currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
+                currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
+
+                Debug.Log("Current foot height: left: " + currentLeftFootHeight + " right: " + currentRightFootHeight);
+
+                Vector3 currentLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
+                Vector3 currentRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
+
+                Debug.Log("Current LeftFootIK position: " + currentLeftFootIKPosition + ", Current RightFootIK position: " + currentRightFootIKPosition);
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(previousLeftFootIKPosition.x,
-                                                                          previousLeftFootIKPosition.y + currentLeftFootHeight,
-                                                                          previousLeftFootIKPosition.z));
+                                                                          previousLeftFootIKPosition.y + scaleHeightFootPosition * currentLeftFootHeight,
+                                                                          previousLeftFootIKPosition.z + 1.2f * scaleHeightFootPosition * currentLeftFootHeight));
 
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(previousRightFootIKPosition.x,
-                                                                           previousRightFootIKPosition.y + currentRightFootHeight,
-                                                                           previousRightFootIKPosition.z));
+                                                                           previousRightFootIKPosition.y + scaleHeightFootPosition * currentRightFootHeight,
+                                                                           previousRightFootIKPosition.z + 1.2f * scaleHeightFootPosition * currentRightFootHeight));
 
-                if (fps < 0.00006)
+                float distance = Math.Abs(currentLeftFootHeight - previousLeftFootHeight);
+                if (distance > 0.1f)
                 {
-                    startTick = DateTime.Now.Ticks;
-                }
-                //
-                fps += 1.0f;
-                TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
-                if (elapse.TotalSeconds > 10.0)
-                {
+                    Debug.Log("Movement distance: " + distance);
+                    ySpeed += Physics.gravity.y * Time.deltaTime;
+                    Vector3 velocity = transform.forward * distance * forwardSpeed;
+                    velocity.y = ySpeed;
 
-                    fps = fps / (float)elapse.TotalSeconds;
-                    Debug.Log("IK FPS: " + fps);
-                    fps = 0;
-                    startTick = DateTime.Now.Ticks;
+                    characterController.Move(velocity * Time.deltaTime);
                 }
+
+                previousLeftFootHeight = currentLeftFootHeight;
+                previousRightFootHeight = currentRightFootHeight;
+
+                // Debug 
+                //if (fps < 0.00006)
+                //{
+                //    startTick = DateTime.Now.Ticks;
+                //}
+                ////
+                //fps += 1.0f;
+                //TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
+                //if (elapse.TotalSeconds > 10.0)
+                //{
+
+                //    fps = fps / (float)elapse.TotalSeconds;
+                //    Debug.Log("IK FPS: " + fps);
+                //    fps = 0;
+                //    startTick = DateTime.Now.Ticks;
+                //}
 
                 //previousLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
                 //previousRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);

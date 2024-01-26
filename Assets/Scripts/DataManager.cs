@@ -33,7 +33,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        sock.Connect(IPAddress.Parse("192.168.137.201"), 4210);
+        sock.Connect(IPAddress.Parse("192.168.137.147"), 4210);
 
         Debug.Log("Started socket");
         Debug.Log("Send pin-code");
@@ -60,7 +60,7 @@ public class DataManager : MonoBehaviour
         accelerator.roll2 = float.Parse(rolls[1]);
 
         //Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
-        Debug.Log(receivedMessage);
+        //Debug.Log(receivedMessage);
 
         if (fps < 0.00006)
         {
@@ -73,7 +73,7 @@ public class DataManager : MonoBehaviour
         {
 
             fps = fps / (float)elapse.TotalSeconds;
-            Debug.Log("D FPS: " + fps);
+            Debug.Log("Data received FPS: " + fps);
             fps = 0;
             startTick = DateTime.Now.Ticks;
         }
