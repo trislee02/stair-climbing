@@ -143,9 +143,9 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Movements\FollowTargetProvider.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Visuals\InteractorGroupNodeUI.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\CylinderClipper.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Body\Input\BodyPrimitives.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\OneEuroFilter\OneEuroFilterFactory.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\Hands\DataModifiers\HandFilter.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Body\Input\BodyPrimitives.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\Interactor.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\DistanceGrab\Visuals\DistantInteractionPolylineVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Grab\Visuals\HandPuppet.cs" />
@@ -303,8 +303,8 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\TouchHandGrab\TouchHandGrabInteractorVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\HMD\IHmd.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Locomotion\LocomotionEvent.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Throw\IVelocityCalculator.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Grab\GrabInteractor.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Throw\IVelocityCalculator.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\UpdateDriverAfterDataSource.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Grab\SnapSurfaces\SphereGrabSurface.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\Base\InteractorGroup.cs" />
@@ -359,8 +359,8 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\HandGrab\IHandGrabInteractable.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Debug\ActiveStateDebugVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Grab\GrabbingRule.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\DistanceGrab\IDistanceInteractor.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Movements\MoveTowardsTargetProvider.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\DistanceGrab\IDistanceInteractor.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Visuals\IHandVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Unity\UnityCanvas\CanvasMesh.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\ICandidatePosition.cs" />
@@ -383,9 +383,9 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\MaterialProperties\MaterialPropertyBlockEditor.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\Controllers\Controller.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\CylinderSurface.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\SecondaryInteractorFilter.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\Hands\FingersMetadata.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Grab\Visuals\HandJointMap.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\SecondaryInteractorFilter.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Ray\RayInteractable.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Unity\SelectorUnityEventWrapper.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Movements\IMovement.cs" />
@@ -398,8 +398,8 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Selection\Hands\FingerPinchValue.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Grab\Tween.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\DataSource.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Sequence.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Debug\TransformFeatureDebugVisual.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Sequence.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Attributes\SectionAttribute.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\HMD\Hmd.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\HandGrab\PoseTravelData.cs" />
@@ -452,8 +452,8 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Selection\Hands\ConicalFrustum.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Pointable\PointableDebugGizmos.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Locomotion\Turn\LocomotionTurnerInteractorEventsWrapper.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\CircleSurface.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Grab\SnapSurfaces\GrabPoseHelper.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\CircleSurface.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Selection\Controllers\ControllerSelector.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Locomotion\LocomotionEventsConnection.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\HandGlow\HandRayPinchGlow.cs" />

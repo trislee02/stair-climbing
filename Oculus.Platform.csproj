@@ -164,8 +164,8 @@
     <Compile Include="Assets\Oculus\Platform\Samples\VrHoops\Scripts\PlatformManager.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\NetSyncConnection.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\ChallengeCreationType.cs" />
-    <Compile Include="Assets\Oculus\Platform\Scripts\Models\LaunchReportFlowResult.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\AppDownloadProgressResult.cs" />
+    <Compile Include="Assets\Oculus\Platform\Scripts\Models\LaunchReportFlowResult.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\NetSyncSession.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\Destination.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\InstalledApplication.cs" />
@@ -177,10 +177,10 @@
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\ShareMediaResult.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\IMicrophone.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\ChallengeOptions.cs" />
-    <Compile Include="Assets\Oculus\Platform\Scripts\Models\UserProof.cs" />
     <Compile Include="Assets\Oculus\Platform\Samples\VrVoiceChat\Scripts\VREyeRaycaster.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\UserCapability.cs" />
     <Compile Include="Assets\Oculus\Platform\Samples\VrVoiceChat\Scripts\RoomManager.cs" />
+    <Compile Include="Assets\Oculus\Platform\Scripts\Models\UserProof.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\Room.cs" />
     <Compile Include="Assets\Oculus\Platform\Scripts\Models\LivestreamingVideoStats.cs" />
     <Compile Include="Assets\Oculus\Platform\Samples\VrHoops\Scripts\P2PManager.cs" />

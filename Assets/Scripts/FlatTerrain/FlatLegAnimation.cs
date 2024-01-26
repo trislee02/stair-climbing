@@ -2,10 +2,13 @@ using System;
 using System.Collections.Specialized;
 using UnityEngine;
 
-public class LegAnimation : MonoBehaviour
+public class FlatLegAnimation : MonoBehaviour
 {
     [SerializeField]
     private float scaleHeightFootPosition;
+
+    [SerializeField] 
+    private float scaleDistanceFootPosition;
 
     [SerializeField]
     private CharacterController characterController;
@@ -83,11 +86,11 @@ public class LegAnimation : MonoBehaviour
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(previousLeftFootIKPosition.x,
                                                                           previousLeftFootIKPosition.y + scaleHeightFootPosition * currentLeftFootHeight,
-                                                                          previousLeftFootIKPosition.z + 1.2f * scaleHeightFootPosition * currentLeftFootHeight));
+                                                                          previousLeftFootIKPosition.z + scaleDistanceFootPosition * currentLeftFootHeight));
 
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(previousRightFootIKPosition.x,
                                                                            previousRightFootIKPosition.y + scaleHeightFootPosition * currentRightFootHeight,
-                                                                           previousRightFootIKPosition.z + 1.2f * scaleHeightFootPosition * currentRightFootHeight));
+                                                                           previousRightFootIKPosition.z + scaleDistanceFootPosition * currentRightFootHeight));
 
                 float distance = Math.Abs(currentLeftFootHeight - previousLeftFootHeight);
                 if (distance > 0.1f)

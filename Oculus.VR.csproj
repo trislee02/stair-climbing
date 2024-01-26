@@ -76,8 +76,8 @@
     <Compile Include="Assets\Oculus\VR\Scripts\OVRAnchor\OVRAnchorComponents\OVRLocatable.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Util\SampleMetadata\SampleTelemetryEvents.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\OVRSceneAnchor.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Util\Async\OVRTask.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Util\OVRProgressIndicator.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Util\Async\OVRTask.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Util\OVRMixedRealityCaptureTest.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\OVRSceneVolumeMeshFilter.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\OVRBody.cs" />

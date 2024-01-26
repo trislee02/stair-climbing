@@ -67,8 +67,8 @@
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Data\Configuration\Tabs\WitConfigurationApplicationTab.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Data\Configuration\Tabs\WitConfigurationEntitiesTab.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Data\Configuration\WitApplicationDetailProvider.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Drawers\StringReferenceDrawer.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Windows\PropertyDrawers\WitTraitValuePropertyDrawer.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Drawers\StringReferenceDrawer.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Windows\WitWindowUtility.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Data\Configuration\Tabs\WitConfigurationIntentsTab.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Scripts\Editor\Windows\WitScriptableWizard.cs" />
