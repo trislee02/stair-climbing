@@ -64,8 +64,8 @@ public class StairLegAnimation : MonoBehaviour
             }
             else
             {
-                previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
-                previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
+                //previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
+                //previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
 
                 Debug.Log("transformed point: " + previousLeftFootIKPosition + ", " + previousRightFootIKPosition);
 
@@ -98,7 +98,7 @@ public class StairLegAnimation : MonoBehaviour
                 {
                     movementDirection += transform.up * distance * forwardSpeed;
                 }
-
+                
                 transform.parent.transform.Translate(movementDirection);
 
                 // Inverse kinematics
