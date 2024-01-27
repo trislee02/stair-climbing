@@ -13,6 +13,9 @@ public class StairLegAnimation : MonoBehaviour
     [SerializeField]
     private float forwardSpeed;
 
+    [SerializeField]
+    private float upSpeed;
+
     private Animator animator;
     private DataManager dataManager;
 
@@ -57,15 +60,12 @@ public class StairLegAnimation : MonoBehaviour
                 previousLeftFootHeight = 0;
                 previousRightFootHeight = 0;
 
-                previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
-                previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
-                Debug.Log("transformed point: " + previousLeftFootIKPosition + ", " + previousRightFootIKPosition);
                 isInitFootHeight = false;
             }
             else
             {
-                //previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
-                //previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
+                previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
+                previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
 
                 Debug.Log("transformed point: " + previousLeftFootIKPosition + ", " + previousRightFootIKPosition);
 
@@ -74,13 +74,11 @@ public class StairLegAnimation : MonoBehaviour
 
                 Debug.Log("Current foot height: left: " + currentLeftFootHeight + " right: " + currentRightFootHeight);
 
-                Vector3 currentLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
-                Vector3 currentRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
+                //Vector3 currentLeftFootIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
+                //Vector3 currentRightFootIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
 
-                Debug.Log("Current LeftFootIK position: " + currentLeftFootIKPosition + ", Current RightFootIK position: " + currentRightFootIKPosition);
-                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
-                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-
+                //Debug.Log("Current LeftFootIK position: " + currentLeftFootIKPosition + ", Current RightFootIK position: " + currentRightFootIKPosition);
+                
                 // Move forward
                 float deltaLeftFoot = currentLeftFootHeight - previousLeftFootHeight;
                 float deltaRightFoot = currentRightFootHeight - previousRightFootHeight;
@@ -96,15 +94,17 @@ public class StairLegAnimation : MonoBehaviour
                 // Step on stair
                 if (distance > 0.1f)
                 {
-                    movementDirection += transform.up * distance * forwardSpeed;
+                    movementDirection += transform.up * distance * upSpeed;
                 }
                 
                 transform.parent.transform.Translate(movementDirection);
 
                 // Inverse kinematics
-                deltaLeftFoot = deltaLeftFoot > 0 ? currentLeftFootHeight : 0;
-                deltaRightFoot = deltaRightFoot > 0 ? currentLeftFootHeight : 0;
+                deltaLeftFoot = currentLeftFootHeight; // deltaLeftFoot > 0 ? currentLeftFootHeight : 0;
+                deltaRightFoot = currentRightFootHeight; // deltaRightFoot > 0 ? currentLeftFootHeight : 0;
 
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(previousLeftFootIKPosition.x,
                                                                           previousLeftFootIKPosition.y + scaleHeightFootPosition * deltaLeftFoot,
                                                                           previousLeftFootIKPosition.z + scaleDistanceFootPosition * deltaLeftFoot));
