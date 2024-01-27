@@ -38,7 +38,7 @@ public class IKFootPlacement : MonoBehaviour
 
         //float maxDistance = distanceToGround + 1f;
         float maxDistance = Mathf.Infinity;
- 
+
         // Left foot
         RaycastHit hit;
         Ray ray = new Ray(anim.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
@@ -51,6 +51,9 @@ public class IKFootPlacement : MonoBehaviour
                 footPosition.y += distanceToGround;
                 //anim.SetIKPosition(AvatarIKGoal.LeftFoot, footPosition);
                 anim.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward + transform.up * upwardDegree, hit.normal));
+
+                Quaternion leftQuaternion = Quaternion.LookRotation(transform.forward + transform.up * upwardDegree, hit.normal);
+                Debug.Log("Left Quaternion: " + leftQuaternion.ToString());
             }
         }
 

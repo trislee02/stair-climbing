@@ -92,15 +92,23 @@ public class FlatLegAnimation : MonoBehaviour
                                                                            previousRightFootIKPosition.y + scaleHeightFootPosition * currentRightFootHeight,
                                                                            previousRightFootIKPosition.z + scaleDistanceFootPosition * currentRightFootHeight));
 
+                // IKRotation
+                animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
+                animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
+
+                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.accelerator.roll1, transform.right));
+                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.accelerator.roll2, transform.right));
+
+
                 float distance = Math.Abs(currentLeftFootHeight - previousLeftFootHeight);
                 if (distance > 0.1f)
                 {
                     Debug.Log("Movement distance: " + distance);
-                    ySpeed += Physics.gravity.y * Time.deltaTime;
-                    Vector3 velocity = transform.forward * distance * forwardSpeed;
-                    velocity.y = ySpeed;
-
-                    characterController.Move(velocity * Time.deltaTime);
+                    //ySpeed += Physics.gravity.y * Time.deltaTime;
+                    //Vector3 velocity = transform.forward * distance * forwardSpeed;
+                    //velocity.y = ySpeed;
+                    Vector3 movementDirection = transform.forward * distance * forwardSpeed;
+                    transform.parent.transform.Translate(movementDirection);
                 }
 
                 previousLeftFootHeight = currentLeftFootHeight;
