@@ -89,24 +89,35 @@ public class StairLegAnimation : MonoBehaviour
                 {
                     movementDirection += transform.up * distance * upSpeed;
                 }
-                
-                transform.parent.transform.Translate(movementDirection);
+
+                if ((deltaLeftFoot < 0 && currentLeftFootHeight > 0) || (deltaRightFoot < 0 && currentRightFootHeight > 0))
+                {
+                    Debug.Log("Track move: MOVE");
+                    transform.parent.transform.Translate(movementDirection);
+                }
+                else
+                {
+                    Debug.Log("Track move: NO MOVE");
+                }
 
                 // Inverse kinematics
                 // IKPosition
                 deltaLeftFoot = currentLeftFootHeight; // deltaLeftFoot > 0 ? currentLeftFootHeight : 0;
                 deltaRightFoot = currentRightFootHeight; // deltaRightFoot > 0 ? currentLeftFootHeight : 0;
 
+                float scaleDistanceLeftFoot = currentLeftFootHeight < 0 ? 0 : scaleDistanceFootPosition;
+                float scaleDistanceRightFoot = currentRightFootHeight < 0 ? 0 : scaleDistanceFootPosition;
+
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(previousLeftFootIKPosition.x,
                                                                           previousLeftFootIKPosition.y + scaleHeightFootPosition * deltaLeftFoot,
-                                                                          previousLeftFootIKPosition.z + scaleDistanceFootPosition * deltaLeftFoot));
+                                                                          previousLeftFootIKPosition.z + scaleDistanceLeftFoot * deltaLeftFoot));
 
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(previousRightFootIKPosition.x,
                                                                            previousRightFootIKPosition.y + scaleHeightFootPosition * deltaRightFoot,
-                                                                           previousRightFootIKPosition.z + scaleDistanceFootPosition * deltaRightFoot));
+                                                                           previousRightFootIKPosition.z + scaleDistanceRightFoot * deltaRightFoot));
 
                 // IKRotation
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
