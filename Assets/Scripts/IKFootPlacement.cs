@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class IKFootPlacement : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class IKFootPlacement : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField]
     private float distanceToGround;
+
+    [SerializeField]
+    private float upwardDegree;
 
     [SerializeField]
     private LayerMask layerMask;
@@ -27,14 +31,14 @@ public class IKFootPlacement : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        anim.SetIKPositionWeight(AvatarIKGoal.LeftFoot, anim.GetFloat("IKLeftFootWeight"));
-        anim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, anim.GetFloat("IKLeftFootWeight"));
-        anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, anim.GetFloat("IKRightFootWeight"));
-        anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, anim.GetFloat("IKRightFootWeight"));
+        //anim.SetIKPositionWeight(AvatarIKGoal.LeftFoot, anim.GetFloat("IKLeftFootWeight"));
+        //anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, anim.GetFloat("IKRightFootWeight"));
+        anim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
+        anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
 
         //float maxDistance = distanceToGround + 1f;
         float maxDistance = Mathf.Infinity;
-
+ 
         // Left foot
         RaycastHit hit;
         Ray ray = new Ray(anim.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
@@ -42,10 +46,11 @@ public class IKFootPlacement : MonoBehaviour
         {
             if (hit.transform.tag.Equals("Walkable"))
             {
+                Debug.Log("Hit a walkable object on left leg");
                 Vector3 footPosition = hit.point;
                 footPosition.y += distanceToGround;
-                anim.SetIKPosition(AvatarIKGoal.LeftFoot, footPosition);
-                anim.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, hit.normal));
+                //anim.SetIKPosition(AvatarIKGoal.LeftFoot, footPosition);
+                anim.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward + transform.up * upwardDegree, hit.normal));
             }
         }
 
@@ -57,8 +62,8 @@ public class IKFootPlacement : MonoBehaviour
             {
                 Vector3 footPosition = hit.point;
                 footPosition.y += distanceToGround;
-                anim.SetIKPosition(AvatarIKGoal.RightFoot, footPosition);
-                anim.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, hit.normal));
+                //anim.SetIKPosition(AvatarIKGoal.RightFoot, footPosition);
+                anim.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward + transform.up * upwardDegree, hit.normal));
             }
         }
     }
