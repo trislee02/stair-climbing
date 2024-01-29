@@ -875,13 +875,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 604732109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53897af7093a158479f1b62b3e25906b, type: 3}
+  m_Script: {fileID: 11500000, guid: fb2e6d3d684b78d459e98e0de18da62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleHeightFootPosition: 0.04
-  scaleDistanceFootPosition: 0.036
-  forwardSpeed: 0.03
-  upSpeed: 0.01
+  scaleHeightFootPosition: 0.06
+  scaleDistanceFootPosition: 0.06
+  forwardSpeed: 0.05
+  upSpeed: 0.017
 --- !u!1 &646128365
 GameObject:
   m_ObjectHideFlags: 0

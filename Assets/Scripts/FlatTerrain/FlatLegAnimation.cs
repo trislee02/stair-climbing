@@ -72,8 +72,8 @@ public class FlatLegAnimation : MonoBehaviour
 
                 Debug.Log("transformed point: " + previousLeftFootIKPosition + ", " + previousRightFootIKPosition);
 
-                currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
-                currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
+                currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
+                currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
 
                 Debug.Log("Current foot height: left: " + currentLeftFootHeight + " right: " + currentRightFootHeight);
 
@@ -96,20 +96,20 @@ public class FlatLegAnimation : MonoBehaviour
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
 
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.accelerator.roll1, transform.right));
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.accelerator.roll2, transform.right));
+                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.accelerator.roll1, transform.right));
+                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.accelerator.roll2, transform.right));
 
 
                 float distance = Math.Abs(currentLeftFootHeight - previousLeftFootHeight);
                 if (distance > 0.1f)
                 {
                     Debug.Log("Movement distance: " + distance);
-                    //ySpeed += Physics.gravity.y * Time.deltaTime;
-                    //Vector3 velocity = transform.forward * distance * forwardSpeed;
-                    //velocity.y = ySpeed;
                     Vector3 movementDirection = transform.forward * distance * forwardSpeed;
+                    Debug.Log("Movement vector: " + movementDirection);
                     transform.parent.transform.Translate(movementDirection);
                 }
+
+                Debug.Log("Parent position: " + transform.parent.transform.position);
 
                 previousLeftFootHeight = currentLeftFootHeight;
                 previousRightFootHeight = currentRightFootHeight;

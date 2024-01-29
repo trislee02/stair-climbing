@@ -31,14 +31,12 @@ public class IKFootPlacement : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        //anim.SetIKPositionWeight(AvatarIKGoal.LeftFoot, anim.GetFloat("IKLeftFootWeight"));
-        //anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, anim.GetFloat("IKRightFootWeight"));
         anim.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
         anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
 
         //float maxDistance = distanceToGround + 1f;
         float maxDistance = Mathf.Infinity;
-
+        
         // Left foot
         RaycastHit hit;
         Ray ray = new Ray(anim.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
@@ -53,7 +51,6 @@ public class IKFootPlacement : MonoBehaviour
                 anim.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward + transform.up * upwardDegree, hit.normal));
 
                 Quaternion leftQuaternion = Quaternion.LookRotation(transform.forward + transform.up * upwardDegree, hit.normal);
-                Debug.Log("Left Quaternion: " + leftQuaternion.ToString());
             }
         }
 

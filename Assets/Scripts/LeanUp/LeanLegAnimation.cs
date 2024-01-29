@@ -2,7 +2,7 @@ using System;
 using System.Collections.Specialized;
 using UnityEngine;
 
-public class StairLegAnimation : MonoBehaviour
+public class LeanLegAnimation : MonoBehaviour
 {
     [SerializeField]
     private float scaleHeightFootPosition;
@@ -79,18 +79,17 @@ public class StairLegAnimation : MonoBehaviour
                 float distance = Math.Abs(deltaLeftFoot);
                 Vector3 movementDirection = Vector3.zero;
                 Debug.Log("Movement distance: " + distance);
-                if (distance > 0.01f)
+                if (distance > 0.1f)
                 {
                     movementDirection += transform.forward * distance * forwardSpeed;
                 }
 
                 // Step on stair
-                if (distance > 0.01f)
+                if (distance > 0.1f)
                 {
                     movementDirection += transform.up * distance * upSpeed;
                 }
 
-                // Only move when there is a leg going down
                 if ((deltaLeftFoot < 0 && currentLeftFootHeight > 0) || (deltaRightFoot < 0 && currentRightFootHeight > 0))
                 {
                     Debug.Log("Track move: MOVE");
@@ -119,14 +118,6 @@ public class StairLegAnimation : MonoBehaviour
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(previousRightFootIKPosition.x,
                                                                            previousRightFootIKPosition.y + scaleHeightFootPosition * deltaRightFoot,
                                                                            previousRightFootIKPosition.z + scaleDistanceRightFoot * deltaRightFoot));
-
-                // IKRotation
-                animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
-                animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
-
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.accelerator.roll1, transform.right));
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.accelerator.roll2, transform.right));
-
 
                 previousLeftFootHeight = currentLeftFootHeight;
                 previousRightFootHeight = currentRightFootHeight;
