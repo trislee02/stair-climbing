@@ -106,7 +106,7 @@ public class FlatLegAnimation : MonoBehaviour
                     Debug.Log("Movement distance: " + distance);
                     Vector3 movementDirection = transform.forward * distance * forwardSpeed;
                     Debug.Log("Movement vector: " + movementDirection);
-                    transform.parent.transform.Translate(movementDirection);
+                    transform.parent.parent.transform.Translate(movementDirection);
                 }
 
                 Debug.Log("Parent position: " + transform.parent.transform.position);
