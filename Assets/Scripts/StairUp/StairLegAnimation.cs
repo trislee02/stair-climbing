@@ -13,9 +13,6 @@ public class StairLegAnimation : MonoBehaviour
     [SerializeField]
     private float heightPerStep;
 
-    [SerializeField]
-    private GameObject sphere;
-
     private float heightPerRealHeightUnit;
     private float distancePerRealHeightUnit;
 
@@ -104,7 +101,7 @@ public class StairLegAnimation : MonoBehaviour
                 currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0f) * 0.3f;
                 currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0f) * 0.3f;
                                 
-                Debug.Log("Current left foot height: " + currentLeftFootHeight + "; Current right foot height: " + currentRightFootHeight);
+                Debug.Log("Current real left foot height: " + currentLeftFootHeight + "; Current real right foot height: " + currentRightFootHeight);
 
                 float deltaLeftFoot = currentLeftFootHeight - previousLeftFootHeight;
                 float deltaRightFoot = currentRightFootHeight - previousRightFootHeight;
@@ -142,9 +139,7 @@ public class StairLegAnimation : MonoBehaviour
                                                                            initialRightFootIKWorldPosition.z + scaleDistanceRightFoot * deltaRightFoot));
 
                 Vector3 currentLeftIK = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
-                Debug.Log("Height: " + (currentLeftIK.y - initialLeftFootIKWorldPosition.y));
-
-                sphere.transform.position = currentLeftIK;
+                //Debug.Log("Height: " + (currentLeftIK.y - initialLeftFootIKWorldPosition.y));
 
                 // Update IKRotation
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
