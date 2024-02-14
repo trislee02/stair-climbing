@@ -14,7 +14,7 @@ public class Stair : MonoBehaviour
     {
         for (int i = 1; i <= numberOfSteps; i++)
         {
-            Vector3 stepPosition = new Vector3(startPosition.x, startPosition.y + (i * stepHeight) - (stepHeight / 2), startPosition.z + (i * stepWidth) + (stepWidth / 2));
+            Vector3 stepPosition = new Vector3(startPosition.x, startPosition.y + (i * stepHeight) - (stepHeight / 2), startPosition.z + (i * stepWidth) - (stepWidth / 4));
             GameObject stairStep = GameObject.CreatePrimitive(PrimitiveType.Cube);
             stairStep.transform.position = stepPosition;
             stairStep.transform.localScale = new Vector3(1f, stepHeight, stepWidth);
