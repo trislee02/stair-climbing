@@ -27,20 +27,16 @@ public class StairLegAnimation : MonoBehaviour
 
     private bool isInitFootHeight = true;
 
-    private float currentLeftFootHeight;
-    private float currentRightFootHeight;
+    private float currentLeftFootHeight; // Real height
+    private float currentRightFootHeight; // Real height
 
-    private float previousLeftFootHeight;
-    private float previousRightFootHeight;
-
-    private Vector3 previousLeftFootPosition;
-    private Vector3 previousRightFootPosition;
-    
-    private Vector3 currentLeftFootPosition;
-    private Vector3 currentRightFootPosition;
+    private float previousLeftFootHeight; // Real height
+    private float previousRightFootHeight; // Real height
 
     private bool isLeftAbove;
     private bool isRightAbove;
+
+    private Vector3 destinationAvatarPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -55,41 +51,58 @@ public class StairLegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Transform leftFoot = transform.FindChildRecursive("mixamorig:LeftFoot");
-        Transform rightFoot = transform.FindChildRecursive("mixamorig:RightFoot");
+        float scaleDistanceLeftFoot = currentLeftFootHeight < 0 ? 0 : widthPerRealHeightUnit;
+        float scaleDistanceRightFoot = currentRightFootHeight < 0 ? 0 : widthPerRealHeightUnit;
 
+        float scaleHeightLeftFoot = currentLeftFootHeight < 0 ? 0 : risePerRealHeightUnit;
+        float scaleHeightRightFoot = currentRightFootHeight < 0 ? 0 : risePerRealHeightUnit;
+
+        if (!isLeftAbove && currentLeftFootHeight >= maxFootHeight)
+        {
+            isLeftAbove = true;
+            destinationAvatarPosition = new Vector3(transform.parent.parent.position.x,
+                                                    transform.parent.parent.position.y + scaleHeightLeftFoot * maxFootHeight,
+                                                    transform.parent.parent.position.z + scaleDistanceLeftFoot * maxFootHeight);
+        }
+        if (!isRightAbove && currentRightFootHeight >= maxFootHeight)
+        {
+            isRightAbove = true;
+            destinationAvatarPosition = new Vector3(transform.parent.parent.position.x,
+                                                    transform.parent.parent.position.y + scaleHeightLeftFoot * maxFootHeight,
+                                                    transform.parent.parent.position.z + scaleDistanceLeftFoot * maxFootHeight);
+        }
+        
         // Move the character when a leg is pushing down
-        if (isInitFootHeight)
+        if (isLeftAbove || isRightAbove)
         {
-            previousLeftFootPosition = leftFoot.position;
-            previousRightFootPosition = rightFoot.position;
-        }
-        else
-        {
-            currentLeftFootPosition = leftFoot.position;
-            currentRightFootPosition = rightFoot.position;
-
-            if (isLeftAbove || isRightAbove)
+            if (isLeftAbove)
             {
-                if (previousLeftFootPosition.y > currentLeftFootPosition.y)
-                {
-                    Vector3 direction = previousLeftFootPosition - currentLeftFootPosition;
-                    Debug.Log("Direction left vector: " + (previousLeftFootPosition - currentLeftFootPosition));
-                    transform.parent.parent.Translate(direction, Space.World);
-                }
-            
-                if (previousRightFootPosition.y > currentRightFootPosition.y)
-                {
-                    Vector3 direction = previousRightFootPosition - currentRightFootPosition;
-                    Debug.Log("Direction right vector: " + (previousRightFootPosition - currentRightFootPosition));
-                    transform.parent.parent.Translate(direction, Space.World);
-                }
+                Vector3 currentAvatarPosition = transform.parent.parent.position;
+                Vector3 newAvatarPosition = new Vector3(destinationAvatarPosition.x,
+                                                        destinationAvatarPosition.y - scaleHeightLeftFoot * currentLeftFootHeight,
+                                                        destinationAvatarPosition.z - scaleDistanceLeftFoot * currentLeftFootHeight);
+                transform.parent.parent.position = newAvatarPosition;
             }
-
-            previousLeftFootPosition = leftFoot.position;
-            previousRightFootPosition = rightFoot.position;
-
+            if (isRightAbove)
+            {
+                Vector3 currentAvatarPosition = transform.parent.parent.position;
+                Vector3 newAvatarPosition = new Vector3(destinationAvatarPosition.x,
+                                                        destinationAvatarPosition.y - scaleHeightLeftFoot * currentRightFootHeight,
+                                                        destinationAvatarPosition.z - scaleDistanceLeftFoot * currentRightFootHeight);
+                transform.parent.parent.position = newAvatarPosition;
+            }
+            Debug.Log("Destination Position: " + destinationAvatarPosition + " current position: " + transform.parent.parent.position);
         }
+
+        if (currentLeftFootHeight <= 0)
+        {
+            isLeftAbove = false;
+        }
+        if (currentRightFootHeight <= 0)
+        {
+            isRightAbove = false;
+        }
+
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -113,50 +126,17 @@ public class StairLegAnimation : MonoBehaviour
 
                 Debug.Log("Left height: " + currentLeftFootHeight + "; Right height: " + currentRightFootHeight);
 
+                // Clip foot height
                 currentLeftFootHeight = currentLeftFootHeight < maxFootHeight ? currentLeftFootHeight : maxFootHeight;
                 currentRightFootHeight = currentRightFootHeight < maxFootHeight ? currentRightFootHeight : maxFootHeight;
 
                 currentLeftFootHeight = currentLeftFootHeight < 0 ? 0 : currentLeftFootHeight;
-                currentRightFootHeight = currentRightFootHeight < 0 ? 0 : currentRightFootHeight;
-
-                if (currentLeftFootHeight >= maxFootHeight)
-                {
-                    isLeftAbove = true;
-                }
-                if (currentRightFootHeight >= maxFootHeight)
-                {
-                    isRightAbove = true;
-                }
-                if (currentLeftFootHeight <= 0)
-                {
-                    isLeftAbove = false;
-                }
-                if (currentRightFootHeight <= 0)
-                {
-                    isRightAbove = false;
-                }
-                
-
-                float deltaLeftFoot = currentLeftFootHeight - previousLeftFootHeight;
-                float deltaRightFoot = currentRightFootHeight - previousRightFootHeight;
-
-                // Only move when there is a leg going down
-                if ((deltaLeftFoot < -0.01f && currentLeftFootHeight > 0f) || (deltaRightFoot < -0.01f && currentRightFootHeight > 0f))
-                {
-                    Debug.Log("TracK MOVE");
-                }
-                else
-                {
-                    Debug.Log("Track NO MOVE");
-                }
+                currentRightFootHeight = currentRightFootHeight < 0 ? 0 : currentRightFootHeight;               
 
                 // Inverse kinematics
                 // Update IKPosition
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-
-                deltaLeftFoot = currentLeftFootHeight;
-                deltaRightFoot = currentRightFootHeight;
 
                 float scaleDistanceLeftFoot = currentLeftFootHeight < 0 ? 0 : widthPerRealHeightUnit;
                 float scaleDistanceRightFoot = currentRightFootHeight < 0 ? 0 : widthPerRealHeightUnit;
@@ -164,16 +144,16 @@ public class StairLegAnimation : MonoBehaviour
                 float scaleHeightLeftFoot = currentLeftFootHeight < 0 ? 0 : risePerRealHeightUnit;
                 float scaleHeightRightFoot = currentRightFootHeight < 0 ? 0 : risePerRealHeightUnit;
 
-                Debug.Log("Left displacement: Rise = " + scaleHeightLeftFoot * deltaLeftFoot + ", Tread = " + scaleDistanceLeftFoot * deltaLeftFoot);
-                Debug.Log("Right displacement: Rise = " + scaleHeightRightFoot * deltaRightFoot + ", Tread = " + scaleDistanceRightFoot * deltaRightFoot);
+                Debug.Log("Left displacement: Rise = " + scaleHeightLeftFoot * currentLeftFootHeight + ", Tread = " + scaleDistanceLeftFoot * currentLeftFootHeight);
+                Debug.Log("Right displacement: Rise = " + scaleHeightRightFoot * currentRightFootHeight + ", Tread = " + scaleDistanceRightFoot * currentRightFootHeight);
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(initialLeftFootIKWorldPosition.x,
-                                                                          initialLeftFootIKWorldPosition.y + scaleHeightLeftFoot * deltaLeftFoot,
-                                                                          initialLeftFootIKWorldPosition.z + scaleDistanceLeftFoot * deltaLeftFoot));
+                                                                          initialLeftFootIKWorldPosition.y + scaleHeightLeftFoot * currentLeftFootHeight,
+                                                                          initialLeftFootIKWorldPosition.z + scaleDistanceLeftFoot * currentLeftFootHeight));
 
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(initialRightFootIKWorldPosition.x,
-                                                                           initialRightFootIKWorldPosition.y + scaleHeightRightFoot * deltaRightFoot,
-                                                                           initialRightFootIKWorldPosition.z + scaleDistanceRightFoot * deltaRightFoot));
+                                                                           initialRightFootIKWorldPosition.y + scaleHeightRightFoot * currentRightFootHeight,
+                                                                           initialRightFootIKWorldPosition.z + scaleDistanceRightFoot * currentRightFootHeight));
 
                 Vector3 currentLeftIK = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
                 Vector3 currentRightIK = animator.GetIKPosition(AvatarIKGoal.RightFoot);
@@ -189,12 +169,7 @@ public class StairLegAnimation : MonoBehaviour
                 // Set previous state as current state
                 previousLeftFootHeight = currentLeftFootHeight;
                 previousRightFootHeight = currentRightFootHeight;
-
-                initialIKSphere.transform.position = initialLeftFootIKWorldPosition;
-                currentLeftIKSphere.transform.position = currentLeftIK;
-                currentRightIKSphere.transform.position = currentRightIK;
-                Debug.Log("Initial IK: " + initialIKSphere.transform.position + "; Current IK: " + currentLeftIKSphere.transform.position);
-
+                Debug.Log("current left IK: " + currentLeftIK + "; origin ik: " + initialLeftFootIKWorldPosition);
             }
         }
     }

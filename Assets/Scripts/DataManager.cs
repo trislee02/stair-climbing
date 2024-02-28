@@ -73,7 +73,7 @@ public class DataManager : MonoBehaviour
         {
 
             fps = fps / (float)elapse.TotalSeconds;
-            //Debug.Log("Data received FPS: " + fps);
+            Debug.Log("Data received FPS: " + fps);
             fps = 0;
             startTick = DateTime.Now.Ticks;
         }

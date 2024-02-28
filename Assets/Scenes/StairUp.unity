@@ -249,9 +249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53897af7093a158479f1b62b3e25906b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFootHeight: 0.03
+  maxFootHeight: 0.015
   stepWidth: 0.4
-  stepRise: 0.255
+  stepRise: 0.25
   pedalLength: 0.2
   initialIKSphere: {fileID: 0}
   currentLeftIKSphere: {fileID: 0}
@@ -1040,7 +1040,7 @@ Transform:
   m_GameObject: {fileID: 1870371483}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 1}
+  m_LocalPosition: {x: 1, y: 0.017, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
