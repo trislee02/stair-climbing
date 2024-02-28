@@ -87,7 +87,7 @@ public class PassthroughBrush : MonoBehaviour
             currentLineSegment.positionCount = inkPositions.Count;
             currentLineSegment.SetPositions(inkPositions.ToArray());
             strokeLength += segmentLength;
-            // passing the line length to the shader ensures that the tail/end fades are consistent width
+            // passing the line pedalLength to the shader ensures that the tail/end fades are consistent width
             currentLineSegment.material.SetFloat("_LineLength", strokeLength / strokeWidth);
         }
     }

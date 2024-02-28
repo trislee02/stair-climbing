@@ -56,7 +56,7 @@ namespace OculusSampleFramework
 
         public void UpdatePose(float distance, TrainCarBase train, Pose pose)
         {
-            // distance could be negative; add track length to it in case that happens
+            // distance could be negative; add track pedalLength to it in case that happens
             distance = (train._trainTrack.TrackLength + distance) % train._trainTrack.TrackLength;
             if (distance < 0)
             {

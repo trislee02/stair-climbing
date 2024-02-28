@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df1745be9cc1db4e9a9183580f70575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleHeightFootPosition: 0.035
+  scaleHeightFootPosition: 0.037
   scaleDistanceFootPosition: 0.036
   characterController: {fileID: 1870371486}
   forwardSpeed: 0.03

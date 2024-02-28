@@ -5,16 +5,19 @@ using UnityEngine;
 public class StairLegAnimation : MonoBehaviour
 {
     [SerializeField]
-    private float realHeight;
+    private float maxFootHeight;
 
     [SerializeField]
-    private float distancePerStep;
+    private float stepWidth;
 
     [SerializeField]
-    private float heightPerStep;
+    private float stepRise;
 
-    private float heightPerRealHeightUnit;
-    private float distancePerRealHeightUnit;
+    [SerializeField]
+    float pedalLength = 0.2f; // Distance from the origin of pedal to the sensor
+
+    private float risePerRealHeightUnit;
+    private float widthPerRealHeightUnit;
 
     private Animator animator;
     private DataManager dataManager;
@@ -36,14 +39,17 @@ public class StairLegAnimation : MonoBehaviour
     private Vector3 currentLeftFootPosition;
     private Vector3 currentRightFootPosition;
 
+    private bool isLeftAbove;
+    private bool isRightAbove;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         dataManager = GetComponent<DataManager>();
 
-        heightPerRealHeightUnit = heightPerStep / realHeight;
-        distancePerRealHeightUnit = distancePerStep / realHeight;
+        risePerRealHeightUnit = stepRise / maxFootHeight;
+        widthPerRealHeightUnit = stepWidth / maxFootHeight;
     }
 
     // Update is called once per frame
@@ -63,22 +69,26 @@ public class StairLegAnimation : MonoBehaviour
             currentLeftFootPosition = leftFoot.position;
             currentRightFootPosition = rightFoot.position;
 
-            if (previousLeftFootPosition.y > currentLeftFootPosition.y)
+            if (isLeftAbove || isRightAbove)
             {
-                Vector3 direction = previousLeftFootPosition - currentLeftFootPosition;
-                Debug.Log("Direction left vector: " + (previousLeftFootPosition - currentLeftFootPosition));
-                transform.parent.parent.Translate(direction, Space.World);
-            }
+                if (previousLeftFootPosition.y > currentLeftFootPosition.y)
+                {
+                    Vector3 direction = previousLeftFootPosition - currentLeftFootPosition;
+                    Debug.Log("Direction left vector: " + (previousLeftFootPosition - currentLeftFootPosition));
+                    transform.parent.parent.Translate(direction, Space.World);
+                }
             
-            if (previousRightFootPosition.y > currentRightFootPosition.y)
-            {
-                Vector3 direction = previousRightFootPosition - currentRightFootPosition;
-                Debug.Log("Direction right vector: " + (previousRightFootPosition - currentRightFootPosition));
-                transform.parent.parent.Translate(direction, Space.World);
+                if (previousRightFootPosition.y > currentRightFootPosition.y)
+                {
+                    Vector3 direction = previousRightFootPosition - currentRightFootPosition;
+                    Debug.Log("Direction right vector: " + (previousRightFootPosition - currentRightFootPosition));
+                    transform.parent.parent.Translate(direction, Space.World);
+                }
             }
 
-            previousLeftFootPosition = leftFoot.position; 
+            previousLeftFootPosition = leftFoot.position;
             previousRightFootPosition = rightFoot.position;
+
         }
     }
 
@@ -98,10 +108,34 @@ public class StairLegAnimation : MonoBehaviour
                 Vector3 initialLeftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition);
                 Vector3 initialRightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
 
-                currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0f) * 0.3f;
-                currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0f) * 0.3f;
-                                
-                Debug.Log("Current real left foot height: " + currentLeftFootHeight + "; Current real right foot height: " + currentRightFootHeight);
+                currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
+                currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
+
+                Debug.Log("Left height: " + currentLeftFootHeight + "; Right height: " + currentRightFootHeight);
+
+                currentLeftFootHeight = currentLeftFootHeight < maxFootHeight ? currentLeftFootHeight : maxFootHeight;
+                currentRightFootHeight = currentRightFootHeight < maxFootHeight ? currentRightFootHeight : maxFootHeight;
+
+                currentLeftFootHeight = currentLeftFootHeight < 0 ? 0 : currentLeftFootHeight;
+                currentRightFootHeight = currentRightFootHeight < 0 ? 0 : currentRightFootHeight;
+
+                if (currentLeftFootHeight >= maxFootHeight)
+                {
+                    isLeftAbove = true;
+                }
+                if (currentRightFootHeight >= maxFootHeight)
+                {
+                    isRightAbove = true;
+                }
+                if (currentLeftFootHeight <= 0)
+                {
+                    isLeftAbove = false;
+                }
+                if (currentRightFootHeight <= 0)
+                {
+                    isRightAbove = false;
+                }
+                
 
                 float deltaLeftFoot = currentLeftFootHeight - previousLeftFootHeight;
                 float deltaRightFoot = currentRightFootHeight - previousRightFootHeight;
@@ -124,11 +158,14 @@ public class StairLegAnimation : MonoBehaviour
                 deltaLeftFoot = currentLeftFootHeight;
                 deltaRightFoot = currentRightFootHeight;
 
-                float scaleDistanceLeftFoot = currentLeftFootHeight < 0 ? 0 : distancePerRealHeightUnit;
-                float scaleDistanceRightFoot = currentRightFootHeight < 0 ? 0 : distancePerRealHeightUnit;
+                float scaleDistanceLeftFoot = currentLeftFootHeight < 0 ? 0 : widthPerRealHeightUnit;
+                float scaleDistanceRightFoot = currentRightFootHeight < 0 ? 0 : widthPerRealHeightUnit;
 
-                float scaleHeightLeftFoot = currentLeftFootHeight < 0 ? 0 : heightPerRealHeightUnit;
-                float scaleHeightRightFoot = currentRightFootHeight < 0 ? 0 : heightPerRealHeightUnit;
+                float scaleHeightLeftFoot = currentLeftFootHeight < 0 ? 0 : risePerRealHeightUnit;
+                float scaleHeightRightFoot = currentRightFootHeight < 0 ? 0 : risePerRealHeightUnit;
+
+                Debug.Log("Left displacement: Rise = " + scaleHeightLeftFoot * deltaLeftFoot + ", Tread = " + scaleDistanceLeftFoot * deltaLeftFoot);
+                Debug.Log("Right displacement: Rise = " + scaleHeightRightFoot * deltaRightFoot + ", Tread = " + scaleDistanceRightFoot * deltaRightFoot);
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(initialLeftFootIKWorldPosition.x,
                                                                           initialLeftFootIKWorldPosition.y + scaleHeightLeftFoot * deltaLeftFoot,
@@ -139,6 +176,7 @@ public class StairLegAnimation : MonoBehaviour
                                                                            initialRightFootIKWorldPosition.z + scaleDistanceRightFoot * deltaRightFoot));
 
                 Vector3 currentLeftIK = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
+                Vector3 currentRightIK = animator.GetIKPosition(AvatarIKGoal.RightFoot);
                 //Debug.Log("Height: " + (currentLeftIK.y - initialLeftFootIKWorldPosition.y));
 
                 // Update IKRotation
@@ -151,6 +189,11 @@ public class StairLegAnimation : MonoBehaviour
                 // Set previous state as current state
                 previousLeftFootHeight = currentLeftFootHeight;
                 previousRightFootHeight = currentRightFootHeight;
+
+                initialIKSphere.transform.position = initialLeftFootIKWorldPosition;
+                currentLeftIKSphere.transform.position = currentLeftIK;
+                currentRightIKSphere.transform.position = currentRightIK;
+                Debug.Log("Initial IK: " + initialIKSphere.transform.position + "; Current IK: " + currentLeftIKSphere.transform.position);
 
             }
         }
