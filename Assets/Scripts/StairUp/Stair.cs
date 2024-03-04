@@ -19,6 +19,14 @@ public class Stair : MonoBehaviour
             stairStep.transform.position = stepPosition;
             stairStep.transform.localScale = new Vector3(1f, rise, treadWidth);
             stairStep.transform.parent = transform;
+            Color randomColor = new Color(
+                Random.Range(0f, 1f), // Red
+                Random.Range(0f, 1f), // Green
+                Random.Range(0f, 1f)  // Blue
+            );
+
+            // Change the color of the cube to the random color
+            stairStep.GetComponent<Renderer>().material.color = randomColor;
         }
     }
 

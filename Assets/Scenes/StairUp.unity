@@ -5192,6 +5192,8 @@ MonoBehaviour:
   stepWidth: 0.4
   stepRise: 0.25
   pedalLength: 0.2
+  curvePushFoot: 0.3333333
+  curveLiftFoot: 7
   stepRipple: {fileID: 341476698}
 --- !u!1 &646128365
 GameObject:

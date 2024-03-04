@@ -20,11 +20,19 @@ public class StairLegAnimation : MonoBehaviour
     private float pedalLength = 0.2f; // Distance from the origin of pedal to the sensor
 
     [SerializeField]
+    private float curvePushFoot = 1.0f / 7.0f; // Must be a positive number smaller than 1
+
+    [SerializeField]
+    private float curveLiftFoot = 7.0f; // Must be a number larger than 1 
+
+    [SerializeField]
     private ParticleSystem stepRipple;
 
     private float maxDiffFootHeight;
     private float risePerRealHeightUnit;
     private float widthPerRealHeightUnit;
+    private float curveLiftCoefficient;
+    private float curvePushCoefficient;
 
     private Animator animator;
     private DataManager dataManager;
@@ -54,16 +62,21 @@ public class StairLegAnimation : MonoBehaviour
         maxDiffFootHeight = maxFootHeight - minFootHeight;
         risePerRealHeightUnit = stepRise / maxDiffFootHeight;
         widthPerRealHeightUnit = stepWidth / maxDiffFootHeight;
+        curveLiftCoefficient = stepWidth / (float) Math.Pow(stepRise, curveLiftFoot);
+        curvePushCoefficient = stepWidth / (float) Math.Pow(stepRise, curvePushFoot);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float scaleDistanceLeftFoot = currentLeftDifftFootHeight <= 0 ? 0 : widthPerRealHeightUnit;
-        float scaleDistanceRightFoot = currentRightDiffFootHeight <= 0 ? 0 : widthPerRealHeightUnit;
-
         float scaleHeightLeftFoot = currentLeftDifftFootHeight <= 0 ? 0 : risePerRealHeightUnit;
         float scaleHeightRightFoot = currentRightDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
+
+        float deltaLeftHeight = scaleHeightLeftFoot * currentLeftDifftFootHeight;
+        float deltaLeftDistance = curvePushCoefficient * (float)Math.Pow(deltaLeftHeight, curvePushFoot);
+
+        float deltaRightHeight = scaleHeightRightFoot * currentRightDiffFootHeight;
+        float deltaRightDistance = curvePushCoefficient * (float)Math.Pow(deltaRightHeight, curvePushFoot);
 
         if (!isRightAbove && !isLeftAbove && currentLeftDifftFootHeight >= maxDiffFootHeight)
         {
@@ -91,16 +104,16 @@ public class StairLegAnimation : MonoBehaviour
             {
                 Vector3 currentAvatarPosition = transform.parent.parent.position;
                 Vector3 newAvatarPosition = new Vector3(destinationAvatarPosition.x,
-                                                        destinationAvatarPosition.y - scaleHeightLeftFoot * currentLeftDifftFootHeight,
-                                                        destinationAvatarPosition.z - scaleDistanceLeftFoot * currentLeftDifftFootHeight);
+                                                        destinationAvatarPosition.y - deltaLeftHeight,
+                                                        destinationAvatarPosition.z - deltaLeftDistance);
                 transform.parent.parent.position = newAvatarPosition;
             }
             else if (isRightAbove)
             {
                 Vector3 currentAvatarPosition = transform.parent.parent.position;
                 Vector3 newAvatarPosition = new Vector3(destinationAvatarPosition.x,
-                                                        destinationAvatarPosition.y - scaleHeightRightFoot * currentRightDiffFootHeight,
-                                                        destinationAvatarPosition.z - scaleDistanceRightFoot * currentRightDiffFootHeight);
+                                                        destinationAvatarPosition.y - deltaRightHeight,
+                                                        destinationAvatarPosition.z - deltaRightDistance);
                 transform.parent.parent.position = newAvatarPosition;
             }
             Debug.Log("Destination Position: " + destinationAvatarPosition + " current position: " + transform.parent.parent.position);
@@ -161,13 +174,37 @@ public class StairLegAnimation : MonoBehaviour
                 Debug.Log("Left displacement: Rise = " + scaleHeightLeftFoot * currentLeftDifftFootHeight + ", Tread = " + scaleDistanceLeftFoot * currentLeftDifftFootHeight);
                 Debug.Log("Right displacement: Rise = " + scaleHeightRightFoot * currentRightDiffFootHeight + ", Tread = " + scaleDistanceRightFoot * currentRightDiffFootHeight);
 
+                float deltaLeftHeight = scaleHeightLeftFoot * currentLeftDifftFootHeight;
+                float deltaLeftDistance = 0;
+
+                float deltaRightHeight = scaleHeightRightFoot * currentRightDiffFootHeight;
+                float deltaRightDistance = 0;
+
+                if (!isLeftAbove)
+                {
+                    deltaLeftDistance = curveLiftCoefficient * (float) Math.Pow(deltaLeftHeight, curveLiftFoot);
+                }
+                else
+                {
+                    deltaLeftDistance = curvePushCoefficient * (float) Math.Pow(deltaLeftHeight, curvePushFoot);
+                }
+
+                if (!isRightAbove)
+                {
+                    deltaRightDistance = curveLiftCoefficient * (float)Math.Pow(deltaRightHeight, curveLiftFoot);
+                }
+                else
+                {
+                    deltaRightDistance = curvePushCoefficient * (float)Math.Pow(deltaRightHeight, curvePushFoot);
+                }
+                
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, new Vector3(initialLeftFootIKWorldPosition.x,
-                                                                          initialLeftFootIKWorldPosition.y + scaleHeightLeftFoot * currentLeftDifftFootHeight,
-                                                                          initialLeftFootIKWorldPosition.z + scaleDistanceLeftFoot * currentLeftDifftFootHeight));
+                                                                          initialLeftFootIKWorldPosition.y + deltaLeftHeight,
+                                                                          initialLeftFootIKWorldPosition.z + deltaLeftDistance));
 
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, new Vector3(initialRightFootIKWorldPosition.x,
-                                                                           initialRightFootIKWorldPosition.y + scaleHeightRightFoot * currentRightDiffFootHeight,
-                                                                           initialRightFootIKWorldPosition.z + scaleDistanceRightFoot * currentRightDiffFootHeight));
+                                                                           initialRightFootIKWorldPosition.y + deltaRightHeight,
+                                                                           initialRightFootIKWorldPosition.z + deltaRightDistance));
 
                 currentLeftIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
                 currentRightIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
