@@ -70,7 +70,7 @@ public class LeanLegAnimation : MonoBehaviour
                 currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
                 currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
 
-                //Debug.Log("Current foot height: left: " + currentLeftFootHeight + " right: " + currentRightFootHeight);
+                //Debug.Log("Current foot height: left: " + currentLeftDifftFootHeight + " right: " + currentRightDiffFootHeight);
 
                 // Move forward
                 float deltaLeftFoot = currentLeftFootHeight - previousLeftFootHeight;
@@ -102,8 +102,8 @@ public class LeanLegAnimation : MonoBehaviour
 
                 // Inverse kinematics
                 // IKPosition
-                deltaLeftFoot = currentLeftFootHeight; // deltaLeftFoot > 0 ? currentLeftFootHeight : 0;
-                deltaRightFoot = currentRightFootHeight; // deltaRightFoot > 0 ? currentLeftFootHeight : 0;
+                deltaLeftFoot = currentLeftFootHeight; // deltaLeftFoot > 0 ? currentLeftDifftFootHeight : 0;
+                deltaRightFoot = currentRightFootHeight; // deltaRightFoot > 0 ? currentLeftDifftFootHeight : 0;
 
                 float scaleDistanceLeftFoot = currentLeftFootHeight < 0 ? 0 : scaleDistanceFootPosition;
                 float scaleDistanceRightFoot = currentRightFootHeight < 0 ? 0 : scaleDistanceFootPosition;
