@@ -177,9 +177,6 @@ public class StairLegAnimation : MonoBehaviour
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
 
-                float scaleDistanceLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : widthPerRealHeightUnit;
-                float scaleDistanceRightFoot = currentRightDiffFootHeight <= 0 ? 0 : widthPerRealHeightUnit;
-
                 float scaleHeightLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
                 float scaleHeightRightFoot = currentRightDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
 
@@ -211,15 +208,16 @@ public class StairLegAnimation : MonoBehaviour
                 Debug.Log("Left displacement: Rise = " + deltaLeftHeight + ", Tread = " + deltaLeftDistance);
                 Debug.Log("Right displacement: Rise = " + deltaRightHeight + ", Tread = " + deltaRightDistance);
 
-                Vector3 leftFootIKWorldPosition = new Vector3(initialLeftFootIKLocalPosition.x,
-                                                              initialLeftFootIKLocalPosition.y + deltaLeftHeight,
-                                                              initialLeftFootIKLocalPosition.z + deltaLeftDistance);
-                Vector3 rightFootIKWorldPosition = new Vector3(initialRightFootIKLocalPosition.x,
-                                                               initialRightFootIKLocalPosition.y + deltaRightHeight,
-                                                               initialRightFootIKLocalPosition.z + deltaRightDistance);
+                Vector3 leftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition); 
+                Vector3 rightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
 
-                leftFootIKWorldPosition = transform.TransformPoint(leftFootIKWorldPosition);
-                rightFootIKWorldPosition = transform.TransformPoint(rightFootIKWorldPosition);
+                leftFootIKWorldPosition = leftFootIKWorldPosition + 
+                                            transform.parent.parent.transform.forward * deltaLeftDistance +
+                                            transform.parent.parent.transform.up * deltaLeftHeight;
+
+                rightFootIKWorldPosition = rightFootIKWorldPosition +
+                                            transform.parent.parent.transform.forward * deltaRightDistance +
+                                            transform.parent.parent.transform.up * deltaRightHeight;
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, leftFootIKWorldPosition);
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, rightFootIKWorldPosition);
