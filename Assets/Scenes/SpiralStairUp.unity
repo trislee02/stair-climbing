@@ -154,6 +154,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1956814234}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &272952341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272952343}
+  - component: {fileID: 272952342}
+  m_Layer: 0
+  m_Name: SpiralStair
+  m_TagString: Walkable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &272952342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272952341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7574580cbbd53df4b8a6486e65b678c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfSteps: 1000
+  rise: 0.1
+  treadWidth: 0.35
+  treadLength: 5
+  startPosition: {x: 2.75, y: 0, z: 1}
+  angle: 5
+  pivotPoint: {x: 0, y: 0, z: 0}
+--- !u!4 &272952343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272952341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.82, y: 0.125, z: 2.78}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &341476696
 GameObject:
   m_ObjectHideFlags: 0
@@ -5146,6 +5197,10 @@ MonoBehaviour:
   curvePushFoot: 0.3333333
   curveLiftFoot: 7
   stepRipple: {fileID: 341476698}
+  avatarRotation: 5
+  pivotObject: {fileID: 272952341}
+  sensorAngle: 0
+  currentAvatarPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &646128365
 GameObject:
   m_ObjectHideFlags: 0
@@ -5193,7 +5248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &701674510
 Transform:
   m_ObjectHideFlags: 0
@@ -9852,6 +9907,10 @@ MonoBehaviour:
   curvePushFoot: 0.3333333
   curveLiftFoot: 7
   stepRipple: {fileID: 341476698}
+  avatarRotation: 5
+  pivotObject: {fileID: 272952341}
+  sensorAngle: 0
+  currentAvatarPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &5553708535250551608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12350,6 +12409,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 701674510}
+  - {fileID: 272952343}
   - {fileID: 1161899390}
   - {fileID: 1870371485}
   - {fileID: 2090968635}
