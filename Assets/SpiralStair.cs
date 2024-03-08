@@ -10,8 +10,10 @@ public class SpiralStair : MonoBehaviour
     public Transform startingPoint;
     public float treadWidth;
     public float angleTheta = 30;
+    public bool isWallVisible = true;
 
     private Vector3 pivotPoint;
+    private GameObject wall;
 
     // Start is called before the first frame update
     void Start()
@@ -53,11 +55,19 @@ public class SpiralStair : MonoBehaviour
             stairStep.transform.Rotate(stairStep.transform.up, angleTheta * i);
             stairStep.transform.parent = transform;
         }
+
+        float wallHeight = numberOfSteps * rise;
+        wall = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        wall.transform.position = new Vector3(pivotPoint.x, pivotPoint.y + wallHeight/2.0f, pivotPoint.z);
+        wall.transform.localScale = new Vector3(2*(radius - treadLength/2.0f), wallHeight/2, 2*(radius - treadLength / 2.0f));
+         
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.DrawRay(pivotPoint, Vector3.up * 10, Color.red);
+        wall.SetActive(isWallVisible);
     }
 }
