@@ -87,7 +87,7 @@ namespace OculusSampleFramework
 
         protected void RotateCarWheels()
         {
-            // divide by radius to get angle
+            // divide by radius to get angleTheta
             float angleOfRot = (Distance / WHEEL_RADIUS) % TWO_PI;
 
             foreach (var individualWheel in _individualWheels)

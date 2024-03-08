@@ -146,7 +146,7 @@ namespace OculusSampleFramework
                 return _currentIntersectingObjects;
             }
 
-            // if we already have focused on something, keep it until the angle between
+            // if we already have focused on something, keep it until the angleTheta between
             // our forward direction and object vector becomes too large
             if (_currInteractableCastedAgainst != null &&
                 HasRayReleasedInteractable(_currInteractableCastedAgainst))
@@ -277,7 +277,7 @@ namespace OculusSampleFramework
         /// <summary>
         /// If primary cast fails, try secondary test to see if we can target an interactable.
         /// This target has to be far enough and support our tool via appropriate
-        /// tags, and must be within a certain angle from our primary ray direction.
+        /// tags, and must be within a certain angleTheta from our primary ray direction.
         /// </summary>
         /// <param name="rayOrigin">Primary ray origin.</param>
         /// <param name="rayDirection">Primary ray direction.</param>
@@ -288,7 +288,7 @@ namespace OculusSampleFramework
 
             float minDistance = 0.0f;
             float minDotProductThreshold = Mathf.Cos(_coneAngleDegrees * Mathf.Deg2Rad);
-            // cone extends from center line, where angle is split between top and bottom half
+            // cone extends from center line, where angleTheta is split between top and bottom half
             float halfAngle = Mathf.Deg2Rad * _coneAngleDegrees * 0.5f;
             float coneRadius = Mathf.Tan(halfAngle) * _farFieldMaxDistance;
 

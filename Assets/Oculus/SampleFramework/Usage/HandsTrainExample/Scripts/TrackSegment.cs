@@ -130,7 +130,7 @@ namespace OculusSampleFramework
                 // the turn is 90 degrees, so find out how far we are into it
                 float angle = 0.5f * Mathf.PI * normalizedDistanceIntoSegment;
                 // unity is left handed so the rotations go the opposite directions in X for left turns --
-                // invert that by subtracting by radius. also note the angle negation below
+                // invert that by subtracting by radius. also note the angleTheta negation below
                 Vector3 localPosition = new Vector3(Radius * Mathf.Cos(angle) - Radius, 0, Radius * Mathf.Sin(angle));
                 Quaternion localRotation = Quaternion.Euler(0, -angle * Mathf.Rad2Deg, 0);
                 pose.Position = transform.TransformPoint(localPosition);
