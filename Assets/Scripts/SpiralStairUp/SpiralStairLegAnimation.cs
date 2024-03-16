@@ -59,8 +59,6 @@ public class SpiralStairLegAnimation : MonoBehaviour
     private Vector3 currentAvatarPosition;
     private float rotationAngle;
 
-    public float sensorAngle;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -135,6 +133,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
         if (isRightAbove && currentRightDiffFootHeight <= 0)
         {
             isRightAbove = false;
+            transform.parent.parent.Rotate(transform.parent.parent.up, rotationAngle);
         }
     }
 
@@ -148,7 +147,6 @@ public class SpiralStairLegAnimation : MonoBehaviour
             }
             else
             {
-                dataManager.accelerator.roll1 = sensorAngle;
                 currentLeftDiffFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
                 currentRightDiffFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
 
