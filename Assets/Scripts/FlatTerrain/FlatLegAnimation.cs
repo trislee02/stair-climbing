@@ -72,8 +72,8 @@ public class FlatLegAnimation : MonoBehaviour
 
                 Debug.Log("transformed point: " + previousLeftFootIKPosition + ", " + previousRightFootIKPosition);
 
-                currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
-                currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
+                currentLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
+                currentRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
                 Debug.Log("Current foot height: left: " + currentLeftFootHeight + " right: " + currentRightFootHeight);
 
@@ -96,8 +96,8 @@ public class FlatLegAnimation : MonoBehaviour
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
 
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.accelerator.roll1, transform.right));
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.accelerator.roll2, transform.right));
+                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right));
+                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right));
 
 
                 float distance = Math.Abs(currentLeftFootHeight - previousLeftFootHeight);

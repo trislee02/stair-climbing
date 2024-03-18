@@ -60,14 +60,14 @@
     <Analyzer Include="D:\Unity Editors\2022.3.14f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\API\Service\AppDictationExperience.cs" />
-    <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Bindings\Android\IServiceEvents.cs" />
     <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Bindings\Android\DictationConfigurationBinding.cs" />
     <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Bindings\Android\PlatformDictationImpl.cs" />
     <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Bindings\Android\PlatformDictationSession.cs" />
     <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Bindings\Android\PlatformDictationSDKBinding.cs" />
-    <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\API\Configuration\DictationConfiguration.cs" />
     <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Bindings\Android\DictationListenerBinding.cs" />
+    <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\API\Service\AppDictationExperience.cs" />
+    <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Bindings\Android\IServiceEvents.cs" />
+    <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\API\Configuration\DictationConfiguration.cs" />
     <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\API\Listeners\DictationListener.cs" />
     <Compile Include="Assets\Oculus\Voice\Features\Dictation\Scripts\Runtime\Data\WitDictationRuntimeConfiguration.cs" />
   </ItemGroup>
@@ -419,6 +419,14 @@
       <HintPath>D:\Unity Editors\2022.3.14f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.BodyTracking">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.Sensor">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
@@ -453,6 +461,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

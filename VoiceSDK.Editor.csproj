@@ -62,17 +62,17 @@
   <ItemGroup>
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Inspectors\AppVoiceExperienceWitConfigurationEditor.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\WelcomeWizard.cs" />
-    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\VoiceSDKWizardWindow.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Utility\VoiceSDKMenu.cs" />
+    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Utility\VoiceSDKStyles.cs" />
+    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\UnderstandingViewerWindow.cs" />
+    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Hub\VoiceSettings.cs" />
+    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Utility\VoiceSDKVersion.cs" />
+    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\VoiceSDKWizardWindow.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Upgrade\WitUpgrader.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\SettingsWindow.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\AboutWindow.cs" />
-    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Utility\VoiceSDKStyles.cs" />
-    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\UnderstandingViewerWindow.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Inspectors\AppVoiceExperienceEditor.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Windows\VoiceApplicationDetailProvider.cs" />
-    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Hub\VoiceSettings.cs" />
-    <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Utility\VoiceSDKVersion.cs" />
     <Compile Include="Assets\Oculus\Voice\Scripts\Editor\Data\VoiceSDKDataCreation.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -427,6 +427,14 @@
       <HintPath>D:\Unity Editors\2022.3.14f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.BodyTracking">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.Sensor">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
@@ -461,6 +469,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">

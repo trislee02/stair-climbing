@@ -23,8 +23,21 @@ public class Accelerator
 
 public class DataManager : MonoBehaviour
 {
-    public Accelerator accelerator = new Accelerator();
+    public static readonly int LEFT_LEG = 0;
+    public static readonly int RIGHT_LEG = 1;
 
+
+    [SerializeField]
+    private bool isFromKinect = false;
+
+    [SerializeField]
+    private float pedalLength = 0.2f;
+
+    [SerializeField]
+    private TrackerHandler kinectDevice;
+
+    private Accelerator accelerator = new Accelerator();
+    
     private Socket sock;
     //
     public const int BufferSize = 64;// Size of receive buffer
@@ -80,5 +93,32 @@ public class DataManager : MonoBehaviour
 
         // Continue receiving the data from the remote device.  
         sock.BeginReceive(this.buffer, 0, DataManager.BufferSize, 0, new AsyncCallback(ReceiveCallback), null);
+    }
+
+    public float getFootHeight(int leg)
+    {
+        if (!isFromKinect)
+        {
+            if (leg == LEFT_LEG)
+                return (float)Math.Sin((double)(accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
+
+            return (float)Math.Sin((double)(accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
+        }
+
+        float fDeltaHeight = kinectDevice.getFootDeltaHeight();
+        if (leg == LEFT_LEG)
+            return fDeltaHeight < 0 ? -fDeltaHeight : 0;
+
+        return fDeltaHeight > 0 ? fDeltaHeight : 0;
+    }
+
+    public float getFootAngle(int leg)
+    {
+        if (isFromKinect) return 0;
+
+        if (leg == LEFT_LEG)
+            return accelerator.roll1;
+
+        return accelerator.roll2;
     }
 }

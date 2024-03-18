@@ -62,83 +62,83 @@
   <ItemGroup>
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\HashSetConverter.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\IAudioSystem.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\JsonConverter.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\ITranscriptionRequestResults.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\DateTimeConverter.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\JsonPropertyAttribute.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\NLPRequest.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\ITranscriptionRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\IAudioClipStream.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\AssemblyInfo.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\IJsonSerializer.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\WitConstants.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\VoiceRequestEvents.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\IJsonDeserializer.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPAudioRequestResults.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\NLPAudioRequest.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitIntentInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\UnityAudioPlayer.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\JsonConvert.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\ComponentExtensions.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\IAudioPlayer.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitTraitInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\NLPAudioRequestEvents.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPRequestOptions.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\IVoiceRequestOptions.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\VoiceAudioInputState.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\IAudioSourceProvider.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitVersionTagInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitEntityRoleInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\TranscriptionRequestEvents.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\TypeExtensions.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\TranscriptionRequest.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\IVoiceRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\WitResponseNode.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\ThreadUtility.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\ColorConverter.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\VoiceRequestState.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\WitMessageVRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\WitTTSVRequest.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPTextRequestOptions.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitExportInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\AudioStreamHandler.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\VLog.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPAudioRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPRequestEvents.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\IVoiceRequestEvents.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPAudioRequestOptions.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Attributes\HideWhenSetAttribute.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\CoroutineUtility.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitContextMapInfo.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\IWitRequestConfiguration.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\WitVRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitAppInfo.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPRequestResults.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\UnityAudioSystem.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\IAudioClipProvider.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\AudioPlayer.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPTextRequestResults.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\VRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPTextRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\UnityObjectExtensions.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitTraitValueInfo.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitEntityKeywordInfo.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\JsonConverter.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\DateTimeConverter.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\JsonPropertyAttribute.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\ITranscriptionRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\IJsonSerializer.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPAudioRequestResults.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\NLPAudioRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitIntentInfo.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitTraitInfo.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPRequestOptions.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\IVoiceRequestOptions.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\VoiceAudioInputState.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\TypeExtensions.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\TranscriptionRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\IVoiceRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\ThreadUtility.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\WitMessageVRequest.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPTextRequestOptions.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitExportInfo.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\VLog.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPAudioRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\ITranscriptionRequestEvents.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\NLPRequestEvents.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitVoiceInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Json\JsonIgnoreAttribute.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Attributes\HideWhenSetAttribute.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPTextRequestEvents.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\CoroutineUtility.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitContextMapInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitEntityInfo.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\IWitRequestConfiguration.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\WitVRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\Transcription\ITranscriptionRequestOptions.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitAppInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Speech\ISpeechEventProvider.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPRequestResults.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\UnityAudioSystem.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\IAudioClipProvider.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\EnumerableExtensions.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\SimulatedResponse.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\AudioPlayer.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPTextRequestResults.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\UnityRequests\VRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\AudioClipStream.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPTextRequest.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\NLP\INLPAudioRequestEvents.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Utilities\UnityObjectExtensions.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitTraitValueInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Speech\VoiceSpeechEvents.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\IVoiceRequestResults.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Audio\UnityAudioClipStream.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Requests\VoiceRequest.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitEntityKeywordInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Wit\Runtime\Data\Info\WitConfigurationAssetData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -489,6 +489,14 @@
       <HintPath>D:\Unity Editors\2022.3.14f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.BodyTracking">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.Sensor">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
@@ -523,6 +531,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">

@@ -60,26 +60,26 @@
     <Analyzer Include="D:\Unity Editors\2022.3.14f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\PersistenceLayer.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IFileIo.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\Training\KeywordsDelta.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\Training\IProcessStep.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IParameterValidator.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\FileIo.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IAssemblyWalker.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IConduitAssembly.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\ConduitAssembly.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\AssemblyMiner.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\ManifestGenerator.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\Training\EnumCodeWrapper.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\PersistenceLayer.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\Training\KeywordsDelta.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IAssemblyWalker.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IPersistenceLayer.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\AssemblyWalker.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\SourceCodeMapper.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\ConduitStatistics.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\AssemblyInfo.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IAssemblyMiner.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\AssemblyMiner.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\ManifestGenerator.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\IParameterFilter.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\Training\EntitiesDelta.cs" />
-    <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\Training\EnumCodeWrapper.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\Wit.ai\Lib\Conduit\Editor\Training\EnumSynchronizer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -434,6 +434,14 @@
       <HintPath>D:\Unity Editors\2022.3.14f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.BodyTracking">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.BodyTracking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.Sensor">
+      <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
@@ -468,6 +476,10 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">
