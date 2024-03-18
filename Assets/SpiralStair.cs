@@ -43,6 +43,7 @@ public class SpiralStair : MonoBehaviour
             stairStep.transform.localScale = new Vector3(treadLength + 2 * supplementTreadLength, rise, treadWidth + 0.1f);
             stairStep.transform.Rotate(stairStep.transform.up, angleTheta * i);
             stairStep.transform.parent = transform;
+
         }
 
         float wallHeight = numberOfSteps * rise;
