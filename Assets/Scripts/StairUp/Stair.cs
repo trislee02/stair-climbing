@@ -18,9 +18,13 @@ public class Stair : MonoBehaviour
     public GameObject wallSample;
     public GameObject handrailSample;
 
+    public GameObject[] enviromentSamples;
+    public int enviromentSpawningStepDistance = 5;
+
     // Start is called before the first frame update
     void Start()
     {
+        int envSampleLen = enviromentSamples.Length;
         Vector2 stairTextureScale = new Vector2(Mathf.Ceil(treadLength*3), Mathf.Ceil(treadWidth*3));
         Vector2 wallTextureScale = new Vector2(Mathf.Ceil(treadWidth * wallStep), Mathf.Ceil(wallHeight));
 
@@ -39,9 +43,7 @@ public class Stair : MonoBehaviour
             stairStep.transform.localScale = new Vector3(treadLength, rise, treadWidth);
             stairStep.transform.parent = transform;
             stairStep.transform.localScale = new Vector3(treadLength, rise, treadWidth);
-            //stairStep.GetComponent<Renderer>().material = stairMaterial;
             stairStep.GetComponent<Renderer>().material.mainTextureScale = stairTextureScale;
-            //stairStep.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f));
 
             if (i % wallStep == 0)
             {
@@ -68,6 +70,14 @@ public class Stair : MonoBehaviour
                 handrailInstance.transform.position = new Vector3(startPosition.x - stairStep.transform.localScale.x / 2, startPosition.y + (i * rise) + (handrailHeight / 2), startPosition.z + (i * treadWidth) - (treadWidth / 4));
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, stairStep.transform.localScale.z);
                 handrailInstance.transform.parent = transform;
+            }
+
+            if (i % enviromentSpawningStepDistance == 0 && envSampleLen > 0)
+            {
+                int rdIndex = Mathf.FloorToInt(Random.Range(0f, 0.99f) * envSampleLen);
+                GameObject envObj = Instantiate(enviromentSamples[rdIndex]);
+                envObj.transform.position = new Vector3(startPosition.x - stairStep.transform.localScale.x / 2 - 6.5f, startPosition.y + (i * rise) - Random.Range(1f, 5f), startPosition.z + (i * treadWidth) - (treadWidth / 4));
+                envObj.transform.parent = transform;
             }
         }
     }
