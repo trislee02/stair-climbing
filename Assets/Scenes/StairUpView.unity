@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.25732678, g: 0.69084895, b: 0.81972224, a: 1}
+  m_IndirectSpecularColor: {r: 0.25810838, g: 0.6908126, b: 0.81899774, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5573,9 +5573,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f180b32e3698f3a4ab5e161b478bf583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSteps: 1000
-  rise: 0.2
-  treadWidth: 0.35
+  numberOfSteps: 500
+  rise: 0.1
+  treadWidth: 0.2
   treadLength: 4
   startPosition: {x: 1, y: 0, z: 1}
   wallHeight: 8
@@ -6143,7 +6143,7 @@ Transform:
   m_GameObject: {fileID: 1162260830}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.602, z: 0.8}
+  m_LocalPosition: {x: 1, y: 1.602, z: 0.912}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10736,7 +10736,7 @@ Transform:
   m_GameObject: {fileID: 5069202498189416847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.602, z: 0}
+  m_LocalPosition: {x: 0, y: -1.602, z: -0.15100002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10773,7 +10773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFootHeight: 0.035
   minFootHeight: 0.01
-  stepWidth: 0.35
+  stepWidth: 0.2
   stepRise: 0.1
   pedalLength: 0.2
   curvePushFoot: 0.3333333
