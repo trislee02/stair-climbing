@@ -20,7 +20,7 @@ public class KinectMain : MonoBehaviour
         {
             if (m_skeletalTrackingProvider.GetCurrentFrameData(ref m_lastFrameData))
             {
-                if (m_lastFrameData.NumOfBodies != 0)
+                if (m_lastFrameData.CouldHasData)
                 {
                     m_tracker.GetComponent<TrackerHandler>().updateTracker(m_lastFrameData);
                 }

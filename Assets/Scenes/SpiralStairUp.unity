@@ -2966,7 +2966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7780d6ddef98c94088817c772809d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFootHeight: 0.2
+  maxFootHeight: 0.1
   minFootHeight: 0.01
   stepWidth: 0.35
   stepRise: 0.1

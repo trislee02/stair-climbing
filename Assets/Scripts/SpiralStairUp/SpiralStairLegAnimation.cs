@@ -147,7 +147,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
                 currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
                 currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
-                Debug.Log("PreDiff Left height: " + currentLeftDiffFootHeight + "; PreDiff Right height: " + currentRightDiffFootHeight);
+                Debug.Log("Raw left height: " + currentLeftDiffFootHeight + "; Raw right height: " + currentRightDiffFootHeight);
 
                 // Clip foot height
                 currentLeftDiffFootHeight = currentLeftDiffFootHeight < maxFootHeight ? currentLeftDiffFootHeight : maxFootHeight;

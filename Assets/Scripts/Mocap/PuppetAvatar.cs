@@ -17,6 +17,6 @@ public class PuppetAvatar : MonoBehaviour
     private void LateUpdate()
     {
         float data = KinectDevice.getFootDeltaHeight();
-        print("Height: " + data);
+        //print("Height: " + data);
     }
 }
