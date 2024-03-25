@@ -60,17 +60,17 @@
     <Analyzer Include="D:\Unity Editors\2022.3.14f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationMaterial.cs" />
-    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPProfiler.cs" />
-    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPVersion.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scenes\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\helpers\ONSPReflectionZone.cs" />
-    <Compile Include="Assets\Oculus\Spatializer\scripts\OculusSpatializerUnity.cs" />
-    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPSettings.cs" />
-    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationInterface.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationGeometry.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPAudioSource.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPAmbisonicsNative.cs" />
+    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationMaterial.cs" />
+    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPProfiler.cs" />
+    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPVersion.cs" />
+    <Compile Include="Assets\Oculus\Spatializer\scripts\OculusSpatializerUnity.cs" />
+    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPSettings.cs" />
+    <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationInterface.cs" />
     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationSettings.cs" />
   </ItemGroup>
   <ItemGroup>

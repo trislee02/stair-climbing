@@ -62,6 +62,9 @@
   <ItemGroup>
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockDownloaderData.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\AssemblyInfo.cs" />
+    <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData\CameraRig\Scripts\CameraRigSetupRules.cs" />
+    <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData\VirtualKeyboard\Scripts\VirtualKeyboardBlockData.cs" />
+    <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlocksWindow.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData\HandTracking\Scripts\HandTrackingSetupRules.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\CustomHierarchyIcon.cs" />
@@ -71,9 +74,6 @@
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData\ControllerTracking\Scripts\ControllerTrackingBlockData.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockBaseData.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockCreationWindow.cs" />
-    <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData\CameraRig\Scripts\CameraRigSetupRules.cs" />
-    <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData\VirtualKeyboard\Scripts\VirtualKeyboardBlockData.cs" />
-    <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\BlockData\EyeGaze\Scripts\EyeGazeBlockData.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\SetupRules.cs" />
     <Compile Include="Assets\Oculus\VR\Editor\BuildingBlocks\Utils.cs" />

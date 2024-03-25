@@ -60,8 +60,8 @@
     <Analyzer Include="D:\Unity Editors\2022.3.14f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Oculus\Voice\Lib\PlatformCompatibility\Scripts\Editor\Utils\AssistantEditorUtils.cs" />
     <Compile Include="Assets\Oculus\Voice\Lib\PlatformCompatibility\Scripts\Editor\Drawers\ArrayElementTitleDrawer.cs" />
+    <Compile Include="Assets\Oculus\Voice\Lib\PlatformCompatibility\Scripts\Editor\Utils\AssistantEditorUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Oculus\Voice\Lib\PlatformCompatibility\Scripts\Editor\AssistantCoreSDKEditor.asmdef" />

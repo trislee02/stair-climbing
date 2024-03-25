@@ -62,14 +62,14 @@
   <ItemGroup>
     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncMicInput.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContext.cs" />
+    <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextTextureFlip.cs" />
+    <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\LipSyncDemo_SetCurrentTarget.cs" />
+    <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\LipSyncDemo_Control.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\Helpers\OVRLipSyncDebugConsole.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\EnableSwitch.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextMorphTarget.cs" />
-    <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextTextureFlip.cs" />
-    <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\LipSyncDemo_SetCurrentTarget.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextCanned.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\Helpers\OVRTouchpad.cs" />
-    <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\LipSyncDemo_Control.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\Helpers\OVRNamedArrayAttribute.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncSequence.cs" />
     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextBase.cs" />

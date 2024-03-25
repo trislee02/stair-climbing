@@ -60,15 +60,15 @@
     <Analyzer Include="D:\Unity Editors\2022.3.14f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerStatusLabel.cs" />
     <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\SimpleDropdownList.cs" />
-    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerVoiceSelect.cs" />
     <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerObserver.cs" />
-    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerInput.cs" />
     <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSStreamToggle.cs" />
+    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSErrorText.cs" />
+    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerStatusLabel.cs" />
+    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerVoiceSelect.cs" />
+    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerInput.cs" />
     <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSSpeakerEffectSelect.cs" />
     <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSFileToggle.cs" />
-    <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSErrorText.cs" />
     <Compile Include="Assets\Oculus\Voice\Samples\TTSVoices\Scripts\TTSCacheToggle.cs" />
   </ItemGroup>
   <ItemGroup>

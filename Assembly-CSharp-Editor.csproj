@@ -65,17 +65,17 @@
     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\Editor\TeleportTransitionWarpInspector.cs" />
     <Compile Include="Assets\Trees\Render Pipeline Support\Built-in RP\CTI Runtime Components\Scripts\Editor\CTI_DetailsEnum.cs" />
     <Compile Include="Assets\ALP_Assets\Big Oak Tree FREE\Core\Scripts\GUI\Editor\ALP8310_ShaderGUI.cs" />
-    <Compile Include="Assets\Oculus\SampleFramework\Editor\BuildAssetPackages.cs" />
     <Compile Include="Assets\Oculus\SampleFramework\Editor\BuildSamples.cs" />
     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Editor\MediaPlayerImageEditor.cs" />
     <Compile Include="Assets\Oculus\SampleFramework\Usage\OVROverlayCanvas\Editor\OVROverlayCanvasEditor.cs" />
-    <Compile Include="Assets\Oculus\SampleFramework\Core\Gradle\Editor\Utils.cs" />
     <Compile Include="Assets\Oculus\SampleFramework\Editor\OculusSampleFrameworkUtil.cs" />
     <Compile Include="Assets\Trees\Render Pipeline Support\Built-in RP\CTI Runtime Components\Scripts\Editor\CTI_ShaderGUI.cs" />
     <Compile Include="Assets\ALP_Assets\Big Oak Tree FREE\Core\Scripts\Global Lighting\Editor\ALP8310_LightsSettings.cs" />
+    <Compile Include="Assets\Oculus\SampleFramework\Core\Firebase\Editor\FirebaseEnabler.cs" />
+    <Compile Include="Assets\Oculus\SampleFramework\Editor\BuildAssetPackages.cs" />
+    <Compile Include="Assets\Oculus\SampleFramework\Core\Gradle\Editor\Utils.cs" />
     <Compile Include="Assets\ALP_Assets\Big Oak Tree FREE\Core\Scripts\GUI\Editor\ALP8310_ShaderDrawers.cs" />
     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Editor\AndroidVideoEditorUtil.cs" />
-    <Compile Include="Assets\Oculus\SampleFramework\Core\Firebase\Editor\FirebaseEnabler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1010,6 +1010,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1042,6 +1046,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1068,6 +1076,10 @@
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
@@ -1116,6 +1128,10 @@
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.Oculus">

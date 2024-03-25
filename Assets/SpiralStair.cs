@@ -15,6 +15,7 @@ public class SpiralStair : MonoBehaviour
     public GameObject wallCylinder;
     public GameObject stairStepObject;
     public GameObject handrail;
+    public GameObject centerTree;
 
     private Vector3 pivotPoint;
     private GameObject wall;
@@ -70,8 +71,10 @@ public class SpiralStair : MonoBehaviour
         else
             wall = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         
-        wall.transform.position = new Vector3(pivotPoint.x, pivotPoint.y + wallHeight/2.0f, pivotPoint.z);
-        wall.transform.localScale = new Vector3(2*(radius+treadLength/2), wallHeight/2, 2* (radius + treadLength / 2));
+        wall.transform.localScale = new Vector3(2*(radius+treadLength/2), wallHeight, 2* (radius + treadLength / 2));
+        wall.transform.position = new Vector3(pivotPoint.x + wall.transform.localScale.x/2, pivotPoint.y, pivotPoint.z + wall.transform.localScale.z/2);
+
+        centerTree.transform.position = pivotPoint;
     }
 
     // Update is called once per frame

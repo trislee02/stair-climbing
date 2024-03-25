@@ -61,22 +61,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRProjectSetupMovementSDKConfigurationTasks.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRUnityHumanoidSkeletonRetargeterEditor.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRPassthroughLayerEditor.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRSceneManagerEditor.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRMovementTool.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRProjectConfigEditor.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\AssemblyInfo.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRManagerEditor.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\MetaXRSimulatorEnabler.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRSkeletonEditor.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRCustomSkeletonEditor.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\Util\SampleMetadata\SampleMetadataInspector.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRCustomFaceEditor.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVREditorUIElements.cs" />
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVREditorUtil.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRProfilerDeprecated.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVROverlayEditor.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRUnityHumanoidSkeletonRetargeterEditor.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRPassthroughLayerEditor.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRMovementTool.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRProjectConfigEditor.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\AssemblyInfo.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRCustomSkeletonEditor.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRCustomFaceEditor.cs" />
+    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVREditorUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Oculus\VR\Scripts\Editor\Oculus.VR.Scripts.Editor.asmdef" />

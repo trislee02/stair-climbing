@@ -60,12 +60,12 @@
     <Analyzer Include="D:\Unity Editors\2022.3.14f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Oculus\Platform\Editor\MetaGraphVariablesParam.cs" />
     <Compile Include="Assets\Oculus\Platform\Editor\GUIHelper.cs" />
     <Compile Include="Assets\Oculus\Platform\Editor\HorizonProfileTokenResponse.cs" />
     <Compile Include="Assets\Oculus\Platform\Editor\OculusStandalonePlatformResponse.cs" />
     <Compile Include="Assets\Oculus\Platform\Editor\OculusPluginUpdaterStub.cs" />
     <Compile Include="Assets\Oculus\Platform\Editor\OculusPlatformSettingsEditor.cs" />
+    <Compile Include="Assets\Oculus\Platform\Editor\MetaGraphVariablesParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Oculus\Platform\Editor\Oculus.Platform.Editor.asmdef" />
