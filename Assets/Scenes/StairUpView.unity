@@ -5573,7 +5573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f180b32e3698f3a4ab5e161b478bf583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSteps: 500
+  numberOfSteps: 50
   rise: 0.1
   treadWidth: 0.2
   treadLength: 4

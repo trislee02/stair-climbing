@@ -9889,7 +9889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7574580cbbd53df4b8a6486e65b678c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSteps: 100
+  numberOfSteps: 50
   rise: 0.2
   treadLength: 1
   supplementTreadLength: 1
