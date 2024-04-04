@@ -67,8 +67,8 @@ public class LeanLegAnimation : MonoBehaviour
                 previousLeftFootIKPosition = transform.TransformPoint(initialLeftFootIKPosition);
                 previousRightFootIKPosition = transform.TransformPoint(initialRightFootIKPosition);
 
-                currentLeftFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0) * 30;
-                currentRightFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0) * 30;
+                currentLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
+                currentRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
                 //Debug.Log("Current foot height: left: " + currentLeftDiffFootHeight + " right: " + currentRightDiffFootHeight);
 
