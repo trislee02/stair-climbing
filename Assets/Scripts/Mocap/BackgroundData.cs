@@ -3,8 +3,8 @@ using System;
 
 public class BackgroundData
 {
-    public static readonly JointId LEFT_JOINT_ID = JointId.FootLeft;
-    public static readonly JointId RIGHT_JOINT_ID = JointId.FootRight;
+    public static readonly JointId LEFT_JOINT_ID = JointId.KneeLeft;
+    public static readonly JointId RIGHT_JOINT_ID = JointId.KneeRight;
     public static readonly int MAX_BODY_JOINT_SIZE = 100;
 
     public float Left { get; set; }

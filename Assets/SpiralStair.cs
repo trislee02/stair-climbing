@@ -16,9 +16,9 @@ public class SpiralStair : MonoBehaviour
     public GameObject stairStepObject;
     public GameObject handrail;
     public GameObject centerTree;
+    public GameObject wall;
 
     private Vector3 pivotPoint;
-    private GameObject wall;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +45,7 @@ public class SpiralStair : MonoBehaviour
             stepPosition = Quaternion.AngleAxis(angleTheta * i, startingPoint.up) * (stepPosition - pivotPoint) + pivotPoint;
             stairStep.SetActive(true);
             stairStep.transform.position = stepPosition;
-            stairStep.transform.localScale = new Vector3(treadLength + 2 * supplementTreadLength, 
+            stairStep.transform.localScale = new Vector3(treadLength,  //+ 2 * supplementTreadLength, 
                                                          rise, 
                                                          treadWidth + 0.1f); // +0.1f is the supplement width
 
@@ -66,13 +66,16 @@ public class SpiralStair : MonoBehaviour
         }
 
         float wallHeight = numberOfSteps * rise;
-        if (wallCylinder != null)
-            wall = wallCylinder;
-        else
-            wall = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        
-        wall.transform.localScale = new Vector3(2*(radius+treadLength/2), wallHeight, 2* (radius + treadLength / 2));
-        wall.transform.position = new Vector3(pivotPoint.x + wall.transform.localScale.x/2, pivotPoint.y, pivotPoint.z + wall.transform.localScale.z/2);
+        for (int i = 0; i < 360 / angleTheta; i++)
+        {
+            GameObject wallInstance = Instantiate(wall);
+            wallInstance.transform.position = new Vector3(startingPoint.position.x - treadLength / 2,
+                                                              startingPoint.position.y + (wallHeight / 2),
+                                                              startingPoint.position.z);
+            wallInstance.transform.localScale = new Vector3(0.1f, wallHeight, treadWidth + 0.1f);
+            wallInstance.transform.RotateAround(pivotPoint, wallInstance.transform.up, angleTheta * i);
+            wallInstance.transform.parent = transform;
+        }
 
         centerTree.transform.position = pivotPoint;
     }

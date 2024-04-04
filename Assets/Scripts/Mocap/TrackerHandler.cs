@@ -27,21 +27,21 @@ public class TrackerHandler : MonoBehaviour
             //updateBody(trackerFrameData.Left, trackerFrameData.Right);
             this.footHeightData = trackerFrameData.Left - trackerFrameData.Right;
 
-            if (fps < 0.00006)
-            {
-                startTick = DateTime.Now.Ticks;
-            }
-            //
-            fps += 1.0f;
-            TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
-            if (elapse.TotalSeconds > 10.0)
-            {
+            //if (fps < 0.00006)
+            //{
+            //    startTick = DateTime.Now.Ticks;
+            //}
+            ////
+            //fps += 1.0f;
+            //TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
+            //if (elapse.TotalSeconds > 10.0)
+            //{
 
-                fps = fps / (float)elapse.TotalSeconds;
-                Debug.Log("FPS Kinect: " + fps);
-                fps = 0;
-                startTick = DateTime.Now.Ticks;
-            }
+            //    fps = fps / (float)elapse.TotalSeconds;
+            //    Debug.Log("FPS Kinect: " + fps);
+            //    fps = 0;
+            //    startTick = DateTime.Now.Ticks;
+            //}
         }
     }
 

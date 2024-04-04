@@ -124,11 +124,13 @@ public class SpiralStairLegAnimation : MonoBehaviour
 
         if (isLeftAbove && currentLeftDiffFootHeight <= 0)
         {
+            Debug.Log("Rotate Left Foot");
             isLeftAbove = false;
             transform.parent.parent.Rotate(transform.parent.parent.up, rotationAngle);
         }
         if (isRightAbove && currentRightDiffFootHeight <= 0)
         {
+            Debug.Log("Rotate Right Foot");
             isRightAbove = false;
             transform.parent.parent.Rotate(transform.parent.parent.up, rotationAngle);
         }
