@@ -26,6 +26,7 @@ public class TrackerHandler : MonoBehaviour
         if (trackerFrameData.CouldHasData) {
             //updateBody(trackerFrameData.Left, trackerFrameData.Right);
             this.footHeightData = trackerFrameData.Left - trackerFrameData.Right;
+            Debug.Log("Y Left: " + trackerFrameData.Left + ", Y Right: " + trackerFrameData.Right);
 
             //if (fps < 0.00006)
             //{
