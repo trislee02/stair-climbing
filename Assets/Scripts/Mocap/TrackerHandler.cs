@@ -6,7 +6,8 @@ using System;
 
 public class TrackerHandler : MonoBehaviour
 {
-    private float footHeightData;
+    private float FootHeightDataLeft;
+    private float FootHeightDataRight;
 
     float fps = 0;
     long startTick;
@@ -24,9 +25,56 @@ public class TrackerHandler : MonoBehaviour
 
         // render the closest body
         if (trackerFrameData.CouldHasData) {
-            //updateBody(trackerFrameData.Left, trackerFrameData.Right);
-            this.footHeightData = trackerFrameData.Left - trackerFrameData.Right;
-            Debug.Log("Y Left: " + trackerFrameData.Left + ", Y Right: " + trackerFrameData.Right);
+
+
+            Vector3 hipLeftPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipLeft].X,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipLeft].Y,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipLeft].Z);
+
+            Vector3 hipRightPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipRight].X,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipRight].Y,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipRight].Z);
+
+            Vector3 kneeLeftPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeLeft].X,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeLeft].Y,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeLeft].Z);
+
+            Vector3 kneeRightPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeRight].X,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeRight].Y,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeRight].Z);
+
+            Vector3 ankleLeftPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleLeft].X,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleLeft].Y,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleLeft].Z);
+
+            Vector3 ankleRightPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleRight].X,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleRight].Y,
+                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleRight].Z);
+
+            // calculate bone length
+            float hipKneeBoneLeft = Vector3.Distance(hipLeftPosition, kneeLeftPosition);
+            float hipKneeBoneRight = Vector3.Distance(hipRightPosition, kneeRightPosition);
+            float kneeAnkleBoneLeft = Vector3.Distance(kneeLeftPosition, ankleLeftPosition);
+            float kneeAnkleBoneRight = Vector3.Distance(kneeRightPosition, ankleRightPosition);
+
+            Vector3 hipKneeLeft = hipLeftPosition - kneeLeftPosition;
+            Vector3 hipKneeRight = hipRightPosition - kneeRightPosition;
+            Vector3 kneeAnkleLeft = ankleLeftPosition - kneeLeftPosition;
+            Vector3 kneeAnkleRight = ankleRightPosition - kneeRightPosition;
+
+            float angleLeft = Vector3.Angle(hipKneeLeft, kneeAnkleLeft);
+            float angleRight = Vector3.Angle(hipKneeRight, kneeAnkleRight);
+
+            // cal
+            float opAngleLeft = 180f - angleLeft;
+            float opAngleRight = 180f - angleRight;
+            float tmpSegmentLeft = Mathf.Cos(opAngleLeft / 180f * Mathf.PI) * hipKneeBoneLeft;
+            float tmpSegmentRight = Mathf.Cos(opAngleRight / 180f * Mathf.PI) * hipKneeBoneRight;
+            this.FootHeightDataLeft = hipKneeBoneLeft - tmpSegmentLeft;
+            this.FootHeightDataRight = hipKneeBoneRight - tmpSegmentRight;
+
+            // Debug.Log("Angle left: " + angleLeft + ", Angle right: " + angleRight);
+            // Debug.Log("Computed height left: " + heightLeft + ", Height right: " + heightRight);
 
             //if (fps < 0.00006)
             //{
@@ -64,9 +112,18 @@ public class TrackerHandler : MonoBehaviour
     //    return closestBody;
     //}
 
-    public float getFootDeltaHeight()
+    public float getFootHeightLeft()
     {
-        return this.footHeightData;
+        return this.FootHeightDataLeft;
+    }
+
+    public float getFootHeightRight()
+    {
+        return this.FootHeightDataRight;
+    }
+
+    public float getFootDeltaHeight() {
+        return this.FootHeightDataRight - this.FootHeightDataLeft;
     }
 
     //public void updateBody(float left, float right)

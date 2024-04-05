@@ -27,7 +27,6 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
 
             // Buffer allocations.
             BackgroundData currentFrameData = new BackgroundData();
-            Body currentBody = new Body(BackgroundData.MAX_BODY_JOINT_SIZE);
             // Open device.
             using (Device device = Device.Open(id))
             {
@@ -69,63 +68,7 @@ public class SkeletalTrackingProvider : BackgroundDataProvider
                                     // Get number of bodies in the current frame.
                                     currentFrameData.CouldHasData = true;// frame.NumberOfBodies;
                                     // Copy bodies.
-                                    currentBody.CopyFromBodyTrackingSdk(frame.GetBody(0), deviceCalibration);
-                                    currentFrameData.Left = currentBody.JointPositions3D[(int)BackgroundData.LEFT_JOINT_ID].Y;
-                                    currentFrameData.Right = currentBody.JointPositions3D[(int)BackgroundData.RIGHT_JOINT_ID].Y;
-
-                                    //Debug.Log("Euler angle: " + currentBody.JointRotations[(int)JointId.KneeLeft]);
-
-                                    Vector3 hipLeftPosition = new Vector3(currentBody.JointPositions3D[(int)JointId.HipLeft].X,
-                                                                            currentBody.JointPositions3D[(int)JointId.HipLeft].Y,
-                                                                            currentBody.JointPositions3D[(int)JointId.HipLeft].Z);
-
-                                    Vector3 hipRightPosition = new Vector3(currentBody.JointPositions3D[(int)JointId.HipRight].X,
-                                                                            currentBody.JointPositions3D[(int)JointId.HipRight].Y,
-                                                                            currentBody.JointPositions3D[(int)JointId.HipRight].Z);
-
-                                    Vector3 kneeLeftPosition = new Vector3(currentBody.JointPositions3D[(int)JointId.KneeLeft].X,
-                                                                            currentBody.JointPositions3D[(int)JointId.KneeLeft].Y,
-                                                                            currentBody.JointPositions3D[(int)JointId.KneeLeft].Z);
-
-                                    Vector3 kneeRightPosition = new Vector3(currentBody.JointPositions3D[(int)JointId.KneeRight].X,
-                                                                            currentBody.JointPositions3D[(int)JointId.KneeRight].Y,
-                                                                            currentBody.JointPositions3D[(int)JointId.KneeRight].Z);
-
-                                    Vector3 ankleLeftPosition = new Vector3(currentBody.JointPositions3D[(int)JointId.AnkleLeft].X,
-                                                                            currentBody.JointPositions3D[(int)JointId.AnkleLeft].Y,
-                                                                            currentBody.JointPositions3D[(int)JointId.AnkleLeft].Z);
-
-                                    Vector3 ankleRightPosition = new Vector3(currentBody.JointPositions3D[(int)JointId.AnkleRight].X,
-                                                                            currentBody.JointPositions3D[(int)JointId.AnkleRight].Y,
-                                                                            currentBody.JointPositions3D[(int)JointId.AnkleRight].Z);
-
-                                    // calculate bone length
-                                    float hipKneeBoneLeft = Vector3.Distance(hipLeftPosition, kneeLeftPosition);
-                                    float hipKneeBoneRight = Vector3.Distance(hipRightPosition, kneeRightPosition);
-                                    float kneeAnkleBoneLeft = Vector3.Distance(kneeLeftPosition, ankleLeftPosition);
-                                    float kneeAnkleBoneRight = Vector3.Distance(kneeRightPosition, ankleRightPosition);
-
-                                    Vector3 hipKneeLeft = hipLeftPosition - kneeLeftPosition;
-                                    Vector3 hipKneeRight = hipRightPosition - kneeRightPosition;
-                                    Vector3 kneeAnkleLeft = ankleLeftPosition - kneeLeftPosition;
-                                    Vector3 kneeAnkleRight = ankleRightPosition - kneeRightPosition;
-
-                                    float angleLeft = Vector3.Angle(hipKneeLeft, kneeAnkleLeft);
-                                    float angleRight = Vector3.Angle(hipKneeRight, kneeAnkleRight);
-
-                                    // cal
-                                    float opAngleLeft = 180f - angleLeft;
-                                    float opAngleRight = 180f - angleRight;
-                                    float tmpSegmentLeft = Mathf.Cos(opAngleLeft / 180f * Mathf.PI) * hipKneeBoneLeft;
-                                    float tmpSegmentRight = Mathf.Cos(opAngleRight / 180f * Mathf.PI) * hipKneeBoneRight;
-                                    float heightLeft = hipKneeBoneLeft - tmpSegmentLeft;
-                                    float heightRight = hipKneeBoneRight - tmpSegmentRight;
-
-                                    Debug.Log("Angle left: " + angleLeft + ", Angle right: " + angleRight);
-                                    Debug.Log("Computed height left: " + heightLeft + ", Height right: " + heightRight);
-
-                                    //currentFrameData.Left = frame.GetBody(0).Skeleton.GetJoint(BackgroundData.LEFT_JOINT_ID).Position.Y;
-                                    //currentFrameData.Right = frame.GetBody(0).Skeleton.GetJoint(BackgroundData.RIGHT_JOINT_ID).Position.Y;
+                                    currentFrameData.CurrentBody.CopyFromBodyTrackingSdk(frame.GetBody(0), deviceCalibration);
                                 }
                                 else
                                 {

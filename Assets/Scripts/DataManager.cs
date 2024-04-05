@@ -105,6 +105,7 @@ public class DataManager : MonoBehaviour
             return (float)Math.Sin((double)(accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
         }
 
+        // maybe using getFootHeightLeft and getFootHeightRight
         float fDeltaHeight = kinectDevice.getFootDeltaHeight();
         if (leg == LEFT_LEG)
             return fDeltaHeight < 0 ? -fDeltaHeight : 0;
