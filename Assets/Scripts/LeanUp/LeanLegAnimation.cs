@@ -34,6 +34,10 @@ public class LeanLegAnimation : MonoBehaviour
     private float curveLiftCoefficient;
     private float curvePushCoefficient;
 
+    private bool isRightFootRotationFixed = true;
+    private bool isLeftFootRotationFixed = true;
+    private float footAngle;
+
     private Animator animator;
     private DataManager dataManager;
 
@@ -66,6 +70,8 @@ public class LeanLegAnimation : MonoBehaviour
         widthPerRealHeightUnit = stepWidth / maxDiffFootHeight;
         curveLiftCoefficient = stepWidth / (float)Math.Pow(stepRise, curveLiftFoot);
         curvePushCoefficient = stepWidth / (float)Math.Pow(stepRise, curvePushFoot);
+
+        footAngle = 90 - (float)Math.Atan(stepWidth / stepRise) * 180 / (float)Math.PI;
     }
 
     // Update is called once per frame
@@ -119,13 +125,33 @@ public class LeanLegAnimation : MonoBehaviour
             transform.parent.parent.position = newAvatarPosition;
         }
 
-        if (isLeftAbove && currentLeftDiffFootHeight <= 0)
+        //if (isLeftAbove && currentLeftDiffFootHeight <= 0)
+        //{
+        //    isLeftAbove = false;
+        //}
+        //if (isRightAbove && currentRightDiffFootHeight <= 0)
+        //{
+        //    isRightAbove = false;
+        //}
+        isLeftFootRotationFixed = true;
+        isRightFootRotationFixed = true;
+
+        if (currentLeftDiffFootHeight <= 0)
         {
             isLeftAbove = false;
         }
-        if (isRightAbove && currentRightDiffFootHeight <= 0)
+        else if (!isLeftAbove)
+        {
+            isLeftFootRotationFixed = false;
+        }
+
+        if (currentRightDiffFootHeight <= 0)
         {
             isRightAbove = false;
+        }
+        else if (!isRightAbove)
+        {
+            isRightFootRotationFixed = false;
         }
     }
 
@@ -219,8 +245,24 @@ public class LeanLegAnimation : MonoBehaviour
                 Quaternion currentLeftFootRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
                 Quaternion currentRightFootRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
 
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right) * currentLeftFootRotation);
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right) * currentRightFootRotation);
+                if (isLeftFootRotationFixed)
+                {
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentLeftFootRotation);
+                }
+                else
+                {
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right) * currentLeftFootRotation);
+                }
+
+                if (isRightFootRotationFixed)
+                {
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentRightFootRotation);
+                }
+                else
+                {
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right) * currentRightFootRotation);
+                }
+                
 
                 //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + initialLeftFootIKWorldPosition);
             }

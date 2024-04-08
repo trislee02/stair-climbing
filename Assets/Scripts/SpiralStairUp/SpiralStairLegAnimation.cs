@@ -28,6 +28,9 @@ public class SpiralStairLegAnimation : MonoBehaviour
     [SerializeField]
     private SpiralStair spiralStair;
 
+    [SerializeField]
+    private GameObject VRCamera;
+
     private float maxDiffFootHeight;
     private float risePerRealHeightUnit;
     private float widthPerRealHeightUnit;
