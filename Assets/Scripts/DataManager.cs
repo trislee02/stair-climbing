@@ -106,11 +106,15 @@ public class DataManager : MonoBehaviour
         }
 
         // maybe using getFootHeightLeft and getFootHeightRight
-        float fDeltaHeight = kinectDevice.getFootDeltaHeight();
-        if (leg == LEFT_LEG)
-            return fDeltaHeight < 0 ? -fDeltaHeight : 0;
+        //float fDeltaHeight = kinectDevice.getFootDeltaHeight();
+        //if (leg == LEFT_LEG)
+        //    return fDeltaHeight < 0 ? -fDeltaHeight : 0;
 
-        return fDeltaHeight > 0 ? fDeltaHeight : 0;
+        //return fDeltaHeight > 0 ? fDeltaHeight : 0;
+        if (leg == LEFT_LEG)
+            return kinectDevice.getFootHeightLeft();
+        else
+            return kinectDevice.getFootHeightRight();
     }
 
     public float getFootAngle(int leg)

@@ -27,29 +27,29 @@ public class TrackerHandler : MonoBehaviour
         if (trackerFrameData.CouldHasData) {
 
 
-            Vector3 hipLeftPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipLeft].X,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipLeft].Y,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipLeft].Z);
+            Vector3 hipLeftPosition = new Vector3(trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.HipLeft].X,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.HipLeft].Y,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.HipLeft].Z);
 
-            Vector3 hipRightPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipRight].X,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipRight].Y,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.HipRight].Z);
+            Vector3 hipRightPosition = new Vector3(trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.HipRight].X,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.HipRight].Y,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.HipRight].Z);
 
-            Vector3 kneeLeftPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeLeft].X,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeLeft].Y,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeLeft].Z);
+            Vector3 kneeLeftPosition = new Vector3(trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.KneeLeft].X,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.KneeLeft].Y,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.KneeLeft].Z);
 
-            Vector3 kneeRightPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeRight].X,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeRight].Y,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.KneeRight].Z);
+            Vector3 kneeRightPosition = new Vector3(trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.KneeRight].X,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.KneeRight].Y,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.KneeRight].Z);
 
-            Vector3 ankleLeftPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleLeft].X,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleLeft].Y,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleLeft].Z);
+            Vector3 ankleLeftPosition = new Vector3(trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.AnkleLeft].X,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.AnkleLeft].Y,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.AnkleLeft].Z);
 
-            Vector3 ankleRightPosition = new Vector3(trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleRight].X,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleRight].Y,
-                                                    trackerFrameData.currentBody.JointPositions3D[(int)JointId.AnkleRight].Z);
+            Vector3 ankleRightPosition = new Vector3(trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.AnkleRight].X,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.AnkleRight].Y,
+                                                    trackerFrameData.CurrentBody.JointPositions3D[(int)JointId.AnkleRight].Z);
 
             // calculate bone length
             float hipKneeBoneLeft = Vector3.Distance(hipLeftPosition, kneeLeftPosition);
