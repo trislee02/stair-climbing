@@ -28,8 +28,12 @@ public class SpiralStairLegAnimation : MonoBehaviour
     [SerializeField]
     private SpiralStair spiralStair;
 
+    [Range(0.01f, 0.035f)]
     [SerializeField]
-    private GameObject VRCamera;
+    private float footHeightDebug;
+
+    [SerializeField]
+    private OVRCameraRig ovrCameraRig;
 
     private float maxDiffFootHeight;
     private float risePerRealHeightUnit;
@@ -56,8 +60,12 @@ public class SpiralStairLegAnimation : MonoBehaviour
 
     private Vector3 destinationAvatarPosition;
 
-    private Vector3 currentAvatarPosition;
+    private Vector3 avatarStartingPosition;
     private float rotationAngle;
+
+    private Quaternion lastVRCameraRotation;
+    private Quaternion destinationVRCameraRotation;
+    private Quaternion startingVRCameraRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +80,8 @@ public class SpiralStairLegAnimation : MonoBehaviour
         curvePushCoefficient = stepWidth / (float) Math.Pow(stepRise, curvePushFoot);
 
         rotationAngle = spiralStair.angleTheta;
+
+        lastVRCameraRotation = transform.parent.localRotation * transform.localRotation * ovrCameraRig.transform.localRotation;
     }
 
     // Update is called once per frame
@@ -101,43 +111,70 @@ public class SpiralStairLegAnimation : MonoBehaviour
             if (isLeftAbove || isRightAbove)
             {
                 stepRipple.Play();
-                currentAvatarPosition = transform.parent.parent.position;
+                avatarStartingPosition = transform.parent.position;
+                startingVRCameraRotation = ovrCameraRig.transform.rotation;
+                destinationVRCameraRotation = Quaternion.AngleAxis(rotationAngle, ovrCameraRig.transform.up) * startingVRCameraRotation;
+                //transform.parent.Find("CenterEyeAnchor").transform.rotation = destinationVRCameraRotation;
             }
         }
 
-        Vector3 destinationAvatarPosition = currentAvatarPosition
-                                        + transform.parent.parent.transform.forward * stepWidth
-                                        + transform.parent.parent.transform.up * stepRise;
-        // Move the character when a leg is pushing down
+        Vector3 destinationAvatarPosition = avatarStartingPosition
+                                        + transform.parent.forward * stepWidth
+                                        + transform.parent.up * stepRise;
+        
+        // Move the character when a foot is pushing down, i.e. one foot is above the stair
         if (isLeftAbove || isRightAbove)
         {
-            Vector3 newAvatarPosition = new Vector3();
+            Vector3 newAvatarPosition;
             if (isLeftAbove)
             {
-                newAvatarPosition = destinationAvatarPosition - transform.parent.parent.transform.forward * deltaLeftDistance
-                                                              - transform.parent.parent.transform.up * deltaLeftHeight;
+                newAvatarPosition = destinationAvatarPosition - transform.parent.forward * deltaLeftDistance
+                                                              - transform.parent.up * deltaLeftHeight;
             }
             else
             {
-                newAvatarPosition = destinationAvatarPosition - transform.parent.parent.transform.forward * deltaRightDistance
-                                                              - transform.parent.parent.transform.up * deltaRightHeight;
+                newAvatarPosition = destinationAvatarPosition - transform.parent.forward * deltaRightDistance
+                                                              - transform.parent.up * deltaRightHeight;
             }
-            transform.parent.parent.position = newAvatarPosition;
+            transform.parent.position = newAvatarPosition;
+            
+            // Ratio between the current position and the destination position
+            float rotationStep = (transform.parent.position - avatarStartingPosition).magnitude / (destinationAvatarPosition - avatarStartingPosition).magnitude;
+            ovrCameraRig.transform.rotation = Quaternion.Lerp(startingVRCameraRotation, destinationVRCameraRotation, rotationStep);
+
         }
 
+        // Update the last VR camera's rotation
+        lastVRCameraRotation = transform.parent.localRotation * transform.localRotation * ovrCameraRig.transform.localRotation;
+        
         if (isLeftAbove && currentLeftDiffFootHeight <= 0)
         {
             Debug.Log("Rotate Left Foot");
             isLeftAbove = false;
-            transform.parent.parent.Rotate(transform.parent.parent.up, rotationAngle);
+
+            transform.parent.Rotate(transform.parent.up, rotationAngle);
+            // Keep the VR camera's rotation unchanged
+            ovrCameraRig.transform.localRotation = Quaternion.Inverse(transform.parent.localRotation * transform.localRotation) * lastVRCameraRotation;
         }
         if (isRightAbove && currentRightDiffFootHeight <= 0)
         {
             Debug.Log("Rotate Right Foot");
             isRightAbove = false;
-            transform.parent.parent.Rotate(transform.parent.parent.up, rotationAngle);
+
+            transform.parent.Rotate(transform.parent.up, rotationAngle);
+            // Keep the VR camera's rotation unchanged
+            ovrCameraRig.transform.localRotation = Quaternion.Inverse(transform.parent.localRotation * transform.localRotation) * lastVRCameraRotation;
         }
+
+        //Debug.DrawRay(transform.parent.Find("CenterEyeAnchor").transform.position, transform.parent.Find("CenterEyeAnchor").transform.forward * 10, Color.red);
+
+        Debug.DrawRay(ovrCameraRig.centerEyeAnchor.position, ovrCameraRig.centerEyeAnchor.forward * 10, Color.red);
+        Debug.DrawRay(ovrCameraRig.transform.position, ovrCameraRig.transform.forward * 10, Color.yellow);
+        //Debug.Log("CenterEyeAnchor rotation: " + ovrCameraRig.centerEyeAnchor.localRotation);
+
+
     }
+
 
     private void OnAnimatorIK(int layerIndex)
     {
@@ -208,12 +245,12 @@ public class SpiralStairLegAnimation : MonoBehaviour
                 Vector3 initialLeftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition);
                 Vector3 initialRightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
                 initialLeftFootIKWorldPosition = initialLeftFootIKWorldPosition +
-                                                 transform.parent.parent.transform.forward * deltaLeftDistance +
-                                                 transform.parent.parent.transform.up * deltaLeftHeight;
+                                                 transform.parent.forward * deltaLeftDistance +
+                                                 transform.parent.up * deltaLeftHeight;
 
                 initialRightFootIKWorldPosition = initialRightFootIKWorldPosition +
-                                                  transform.parent.parent.transform.forward * deltaRightDistance +
-                                                  transform.parent.parent.transform.up * deltaRightHeight;
+                                                  transform.parent.forward * deltaRightDistance +
+                                                  transform.parent.up * deltaRightHeight;
 
                 animator.SetIKPosition(AvatarIKGoal.LeftFoot, initialLeftFootIKWorldPosition);
                 animator.SetIKPosition(AvatarIKGoal.RightFoot, initialRightFootIKWorldPosition);
