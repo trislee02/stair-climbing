@@ -34,7 +34,7 @@ public class HandIKVRMap : MonoBehaviour
         animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHand.position);
         animator.SetIKPosition(AvatarIKGoal.RightHand, rightHand.position);
 
-        animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHand.rotation);
-        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHand.rotation);
+        animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHand.rotation * Quaternion.Euler(0, 0, 90));
+        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHand.rotation * Quaternion.Euler(0, 0, -90));
     }
 }

@@ -139,8 +139,8 @@ public class StairLegAnimation : MonoBehaviour
             }
             else
             {
-                currentLeftDiffFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
-                currentRightDiffFootHeight = (float)Math.Sin((double)(dataManager.accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
+                currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
+                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
                 Debug.Log("PreDiff Left height: " + currentLeftDiffFootHeight + "; PreDiff Right height: " + currentRightDiffFootHeight);
 
@@ -219,8 +219,8 @@ public class StairLegAnimation : MonoBehaviour
                 Quaternion currentLeftFootRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
                 Quaternion currentRightFootRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
 
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.accelerator.roll1, transform.right) * currentLeftFootRotation);
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.accelerator.roll2, transform.right) * currentRightFootRotation);
+                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right) * currentLeftFootRotation);
+                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right) * currentRightFootRotation);
 
                 //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + initialLeftFootIKWorldPosition);
             }

@@ -23,8 +23,21 @@ public class Accelerator
 
 public class DataManager : MonoBehaviour
 {
-    public Accelerator accelerator = new Accelerator();
+    public static readonly int LEFT_LEG = 0;
+    public static readonly int RIGHT_LEG = 1;
 
+
+    [SerializeField]
+    private bool isFromKinect = false;
+
+    [SerializeField]
+    private float pedalLength = 0.2f;
+
+    [SerializeField]
+    private TrackerHandler kinectDevice;
+
+    private Accelerator accelerator = new Accelerator();
+    
     private Socket sock;
     //
     public const int BufferSize = 64;// Size of receive buffer
@@ -33,7 +46,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        sock.Connect(IPAddress.Parse("192.168.137.71"), 4210);
+        sock.Connect(IPAddress.Parse("192.168.137.126"), 4210);
 
         Debug.Log("Started socket");
         Debug.Log("Send pin-code");
@@ -80,5 +93,37 @@ public class DataManager : MonoBehaviour
 
         // Continue receiving the data from the remote device.  
         sock.BeginReceive(this.buffer, 0, DataManager.BufferSize, 0, new AsyncCallback(ReceiveCallback), null);
+    }
+
+    public float getFootHeight(int leg)
+    {
+        if (!isFromKinect)
+        {
+            if (leg == LEFT_LEG)
+                return (float)Math.Sin((double)(accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
+
+            return (float)Math.Sin((double)(accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
+        }
+
+        // maybe using getFootHeightLeft and getFootHeightRight
+        //float fDeltaHeight = kinectDevice.getFootDeltaHeight();
+        //if (leg == LEFT_LEG)
+        //    return fDeltaHeight < 0 ? -fDeltaHeight : 0;
+
+        //return fDeltaHeight > 0 ? fDeltaHeight : 0;
+        if (leg == LEFT_LEG)
+            return kinectDevice.getFootHeightLeft();
+        else
+            return kinectDevice.getFootHeightRight();
+    }
+
+    public float getFootAngle(int leg)
+    {
+        if (isFromKinect) return 0;
+
+        if (leg == LEFT_LEG)
+            return accelerator.roll1;
+
+        return accelerator.roll2;
     }
 }
