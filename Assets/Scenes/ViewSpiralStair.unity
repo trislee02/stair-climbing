@@ -10000,7 +10000,7 @@ MonoBehaviour:
   treadLength: 2
   supplementTreadLength: 1
   startingPoint: {fileID: 1870371485}
-  treadWidth: 0.35
+  treadWidth: 0.2
   angleTheta: 5
   isWallVisible: 0
   wallCylinder: {fileID: 1971600968}
@@ -57804,7 +57804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFootHeight: 0.035
   minFootHeight: 0.01
-  stepWidth: 0.35
+  stepWidth: 0.2
   stepRise: 0.1
   curvePushFoot: 0.3333333
   curveLiftFoot: 7

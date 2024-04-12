@@ -58,14 +58,15 @@ public class SpiralStairLegAnimation : MonoBehaviour
     private Vector3 currentLeftIKPosition;
     private Vector3 currentRightIKPosition;
 
-    private Vector3 destinationAvatarPosition;
-
     private Vector3 avatarStartingPosition;
     private float rotationAngle;
 
     private Quaternion lastVRCameraRotation;
+    private Quaternion lastBodyRotation;
     private Quaternion destinationVRCameraRotation;
+    private Quaternion destinationBodyRotation;
     private Quaternion startingVRCameraRotation;
+    private Quaternion startingBodyRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +83,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
         rotationAngle = spiralStair.angleTheta;
 
         lastVRCameraRotation = transform.parent.localRotation * transform.localRotation * ovrCameraRig.transform.localRotation;
+        lastBodyRotation = transform.parent.localRotation * transform.localRotation;
     }
 
     // Update is called once per frame
@@ -113,8 +115,9 @@ public class SpiralStairLegAnimation : MonoBehaviour
                 stepRipple.Play();
                 avatarStartingPosition = transform.parent.position;
                 startingVRCameraRotation = ovrCameraRig.transform.rotation;
+                
                 destinationVRCameraRotation = Quaternion.AngleAxis(rotationAngle, ovrCameraRig.transform.up) * startingVRCameraRotation;
-                //transform.parent.Find("CenterEyeAnchor").transform.rotation = destinationVRCameraRotation;
+                destinationBodyRotation = Quaternion.AngleAxis(rotationAngle, transform.up) * startingBodyRotation;
             }
         }
 
@@ -140,12 +143,13 @@ public class SpiralStairLegAnimation : MonoBehaviour
             
             // Ratio between the current position and the destination position
             float rotationStep = (transform.parent.position - avatarStartingPosition).magnitude / (destinationAvatarPosition - avatarStartingPosition).magnitude;
-            ovrCameraRig.transform.rotation = Quaternion.Lerp(startingVRCameraRotation, destinationVRCameraRotation, rotationStep);
-
+            ovrCameraRig.transform.rotation = Quaternion.Slerp(startingVRCameraRotation, destinationVRCameraRotation, rotationStep);
+            //transform.rotation = Quaternion.Slerp(lastBodyRotation, destinationBodyRotation, rotationStep);
         }
 
         // Update the last VR camera's rotation
         lastVRCameraRotation = transform.parent.localRotation * transform.localRotation * ovrCameraRig.transform.localRotation;
+        lastBodyRotation = transform.parent.localRotation * transform.localRotation;
         
         if (isLeftAbove && currentLeftDiffFootHeight <= 0)
         {
@@ -155,6 +159,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
             transform.parent.Rotate(transform.parent.up, rotationAngle);
             // Keep the VR camera's rotation unchanged
             ovrCameraRig.transform.localRotation = Quaternion.Inverse(transform.parent.localRotation * transform.localRotation) * lastVRCameraRotation;
+            //transform.rotation = Quaternion.Inverse(transform.parent.localRotation) * lastBodyRotation;
         }
         if (isRightAbove && currentRightDiffFootHeight <= 0)
         {
@@ -164,6 +169,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
             transform.parent.Rotate(transform.parent.up, rotationAngle);
             // Keep the VR camera's rotation unchanged
             ovrCameraRig.transform.localRotation = Quaternion.Inverse(transform.parent.localRotation * transform.localRotation) * lastVRCameraRotation;
+            //transform.rotation = Quaternion.Inverse(transform.parent.localRotation) * lastBodyRotation;
         }
 
         //Debug.DrawRay(transform.parent.Find("CenterEyeAnchor").transform.position, transform.parent.Find("CenterEyeAnchor").transform.forward * 10, Color.red);
