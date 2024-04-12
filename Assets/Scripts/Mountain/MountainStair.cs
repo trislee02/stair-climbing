@@ -18,7 +18,7 @@ public class MountainStair : MonoBehaviour
         if (stairSamples.Length == 0) return;
         for (int i = 1; i <= numberOfSteps; i++)
         {
-            Vector3 stepPosition = new Vector3(startPosition.x, startPosition.y + (i * rise) - (rise / 2), startPosition.z + (i * treadWidth) - (treadWidth / 4));
+            Vector3 stepPosition = new Vector3(startPosition.x, startPosition.y + (i * rise) - (rise / 2) - (0.24f - rise)/2, startPosition.z + (i * treadWidth) + (0.7f - treadWidth) / 2);
             int rdIndex = Mathf.FloorToInt(Random.Range(0, stairSamples.Length-0.001f));
             GameObject stairStep = Instantiate(stairSamples[rdIndex]);
             stairStep.transform.position = stepPosition;
