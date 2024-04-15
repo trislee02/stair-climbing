@@ -115,6 +115,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
                 stepRipple.Play();
                 avatarStartingPosition = transform.parent.position;
                 startingVRCameraRotation = ovrCameraRig.transform.rotation;
+                startingBodyRotation = transform.rotation;
                 
                 destinationVRCameraRotation = Quaternion.AngleAxis(rotationAngle, ovrCameraRig.transform.up) * startingVRCameraRotation;
                 destinationBodyRotation = Quaternion.AngleAxis(rotationAngle, transform.up) * startingBodyRotation;
@@ -144,7 +145,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
             // Ratio between the current position and the destination position
             float rotationStep = (transform.parent.position - avatarStartingPosition).magnitude / (destinationAvatarPosition - avatarStartingPosition).magnitude;
             ovrCameraRig.transform.rotation = Quaternion.Slerp(startingVRCameraRotation, destinationVRCameraRotation, rotationStep);
-            //transform.rotation = Quaternion.Slerp(lastBodyRotation, destinationBodyRotation, rotationStep);
+            transform.rotation = Quaternion.Slerp(startingBodyRotation, destinationBodyRotation, rotationStep);
         }
 
         // Update the last VR camera's rotation
@@ -159,7 +160,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
             transform.parent.Rotate(transform.parent.up, rotationAngle);
             // Keep the VR camera's rotation unchanged
             ovrCameraRig.transform.localRotation = Quaternion.Inverse(transform.parent.localRotation * transform.localRotation) * lastVRCameraRotation;
-            //transform.rotation = Quaternion.Inverse(transform.parent.localRotation) * lastBodyRotation;
+            transform.localRotation = Quaternion.Inverse(transform.parent.localRotation) * lastBodyRotation;
         }
         if (isRightAbove && currentRightDiffFootHeight <= 0)
         {
@@ -169,13 +170,14 @@ public class SpiralStairLegAnimation : MonoBehaviour
             transform.parent.Rotate(transform.parent.up, rotationAngle);
             // Keep the VR camera's rotation unchanged
             ovrCameraRig.transform.localRotation = Quaternion.Inverse(transform.parent.localRotation * transform.localRotation) * lastVRCameraRotation;
-            //transform.rotation = Quaternion.Inverse(transform.parent.localRotation) * lastBodyRotation;
+            transform.localRotation = Quaternion.Inverse(transform.parent.localRotation) * lastBodyRotation;
         }
 
         //Debug.DrawRay(transform.parent.Find("CenterEyeAnchor").transform.position, transform.parent.Find("CenterEyeAnchor").transform.forward * 10, Color.red);
 
-        Debug.DrawRay(ovrCameraRig.centerEyeAnchor.position, ovrCameraRig.centerEyeAnchor.forward * 10, Color.red);
         Debug.DrawRay(ovrCameraRig.transform.position, ovrCameraRig.transform.forward * 10, Color.yellow);
+        Debug.DrawRay(transform.parent.position, transform.parent.forward * 10, Color.green);
+        Debug.DrawRay(transform.parent.position, transform.parent.up * 10, Color.blue);
         //Debug.Log("CenterEyeAnchor rotation: " + ovrCameraRig.centerEyeAnchor.localRotation);
 
 
@@ -193,7 +195,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
             else
             {
                 currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                currentRightDiffFootHeight = footHeightDebug; //dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
                 Debug.Log("Raw left height: " + currentLeftDiffFootHeight + "; Raw right height: " + currentRightDiffFootHeight);
 
@@ -248,22 +250,22 @@ public class SpiralStairLegAnimation : MonoBehaviour
                 //Debug.Log("Left displacement: Rise = " + deltaLeftHeight + ", Tread = " + deltaLeftDistance);
                 //Debug.Log("Right displacement: Rise = " + deltaRightHeight + ", Tread = " + deltaRightDistance);
 
-                Vector3 initialLeftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition);
-                Vector3 initialRightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
-                initialLeftFootIKWorldPosition = initialLeftFootIKWorldPosition +
+                Vector3 leftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition);
+                Vector3 rightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
+                leftFootIKWorldPosition = leftFootIKWorldPosition +
                                                  transform.parent.forward * deltaLeftDistance +
                                                  transform.parent.up * deltaLeftHeight;
 
-                initialRightFootIKWorldPosition = initialRightFootIKWorldPosition +
+                rightFootIKWorldPosition = rightFootIKWorldPosition +
                                                   transform.parent.forward * deltaRightDistance +
                                                   transform.parent.up * deltaRightHeight;
 
-                animator.SetIKPosition(AvatarIKGoal.LeftFoot, initialLeftFootIKWorldPosition);
-                animator.SetIKPosition(AvatarIKGoal.RightFoot, initialRightFootIKWorldPosition);
+                animator.SetIKPosition(AvatarIKGoal.LeftFoot, leftFootIKWorldPosition);
+                animator.SetIKPosition(AvatarIKGoal.RightFoot, rightFootIKWorldPosition);
 
                 currentLeftIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
                 currentRightIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
-                //Debug.Log("Height: " + (currentLeftIKPosition.y - initialLeftFootIKWorldPosition.y));
+                //Debug.Log("Height: " + (currentLeftIKPosition.y - leftFootIKWorldPosition.y));
 
                 // Update IKRotation
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
@@ -275,7 +277,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
                 animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right) * currentLeftFootRotation);
                 animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right) * currentRightFootRotation);
 
-                //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + initialLeftFootIKWorldPosition);
+                //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + leftFootIKWorldPosition);
             }
         }
     }

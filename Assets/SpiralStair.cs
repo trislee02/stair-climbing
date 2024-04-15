@@ -23,13 +23,14 @@ public class SpiralStair : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Move starting point forward in order to keep place for foot
         float radius = (treadWidth / 2.0f) / Mathf.Sin(angleTheta/2.0f * Mathf.Deg2Rad);
         float alpha = (180.0f - angleTheta) / 2.0f;
         pivotPoint = startingPoint.forward * radius;
-        pivotPoint = Quaternion.AngleAxis(alpha, startingPoint.up) * pivotPoint + startingPoint.position;
+        pivotPoint = Quaternion.AngleAxis(alpha, startingPoint.up) * pivotPoint;
         Debug.DrawRay(pivotPoint, Vector3.up * 10, Color.red);
         
-        Vector3 initialPosition = new Vector3(startingPoint.position.x, startingPoint.position.y, pivotPoint.z);
+        Vector3 initialPosition = new Vector3(startingPoint.position.x, 0, pivotPoint.z);
         for (int i = 1; i <= numberOfSteps; i++)
         {
             GameObject stairStep;
@@ -41,8 +42,8 @@ public class SpiralStair : MonoBehaviour
             Vector3 stepPosition = new Vector3(initialPosition.x, 
                                                initialPosition.y + (i * rise) - (rise / 2), 
                                                initialPosition.z);
-
-            stepPosition = Quaternion.AngleAxis(angleTheta * i, startingPoint.up) * (stepPosition - pivotPoint) + pivotPoint;
+                                                    // Add the angle to position the stair step back to keep place for foot
+            stepPosition = Quaternion.AngleAxis(angleTheta * i + 2f, startingPoint.up) * (stepPosition - pivotPoint) + pivotPoint;
             stairStep.SetActive(true);
             stairStep.transform.position = stepPosition;
             stairStep.transform.localScale = new Vector3(treadLength,  //+ 2 * supplementTreadLength, 
@@ -57,7 +58,7 @@ public class SpiralStair : MonoBehaviour
                 float handrailHeight = 1.0f;
                 GameObject handrailInstance = Instantiate(handrail);
                 handrailInstance.transform.position = new Vector3(startingPoint.position.x + stairStep.transform.localScale.x / 2,
-                                                                  startingPoint.position.y + (i * rise) + (handrailHeight / 2),
+                                                                  0 + (i * rise) + (handrailHeight / 2),
                                                                   startingPoint.position.z);
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, stairStep.transform.localScale.z);
                 handrailInstance.transform.RotateAround(pivotPoint, handrailInstance.transform.up, angleTheta * i);
@@ -70,7 +71,7 @@ public class SpiralStair : MonoBehaviour
         {
             GameObject wallInstance = Instantiate(wall);
             wallInstance.transform.position = new Vector3(startingPoint.position.x - treadLength / 2,
-                                                              startingPoint.position.y + (wallHeight / 2),
+                                                              0 + (wallHeight / 2),
                                                               startingPoint.position.z);
             wallInstance.transform.localScale = new Vector3(0.1f, wallHeight, treadWidth + 0.1f);
             wallInstance.transform.RotateAround(pivotPoint, wallInstance.transform.up, angleTheta * i);
