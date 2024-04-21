@@ -23,6 +23,12 @@ public class NewStairLegAnimation : MonoBehaviour
     private float bodyLiftingSpeed = 1.0f; // Speed of lifting the body when a leg is pushing down
 
     [SerializeField]
+    private float moveBackwardLegSpeed = 0.5f;
+
+    [SerializeField]
+    private float moveUpwardLegSpeed = 1f;
+
+    [SerializeField]
     private float curveLiftFoot = 7.0f; // Must be a number larger than 1 
 
     [SerializeField]
@@ -150,7 +156,7 @@ public class NewStairLegAnimation : MonoBehaviour
             else
             {
                 currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                currentRightDiffFootHeight = footHeightDebug; //dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
                 Debug.Log("PreDiff Left height: " + currentLeftDiffFootHeight + "; PreDiff Right height: " + currentRightDiffFootHeight);
 
@@ -194,30 +200,35 @@ public class NewStairLegAnimation : MonoBehaviour
                     if (isLeftAbove)
                     {
                         deltaLeftHeight = bodyLiftingSpeed * deltaLeftHeight + bodyLiftingConstant;
+                        deltaLeftHeight = deltaLeftHeight < 0 ? 0 : deltaLeftHeight;
+                        deltaLeftDistance = stepWidth / stepRise * deltaLeftHeight;
+
                         if (deltaLeftHeight > 0)
                         {
-                            deltaRightDistance = deltaLeftHeight - stepRise;
+                            deltaRightDistance = 0.5f * (deltaLeftDistance - stepWidth);
+                            deltaRightHeight = stepRise - deltaLeftHeight;
                         }
                         else
                         {
                             deltaRightDistance = -(deltaLeftHeight + stepRise);
                         }
-                        deltaLeftHeight = deltaLeftHeight < 0 ? 0 : deltaLeftHeight;
-                        deltaLeftDistance = stepWidth / stepRise * deltaLeftHeight;
                     }
                     else
                     {
                         deltaRightHeight = bodyLiftingSpeed * deltaRightHeight + bodyLiftingConstant;
-                        if (deltaRightHeight > 0)
+                        deltaRightHeight = deltaRightHeight < 0 ? 0 : deltaRightHeight;
+                        deltaRightDistance = stepWidth / stepRise * deltaRightHeight;
+                        
+                        if (deltaRightHeight > stepRise / 2.0f)
                         {
-                            deltaLeftDistance = deltaRightHeight - stepRise;
+                            deltaLeftDistance = moveBackwardLegSpeed * (deltaRightDistance - stepWidth);
+                            deltaLeftHeight = moveUpwardLegSpeed * (stepRise - deltaRightHeight);
                         }
                         else
                         {
-                            deltaLeftDistance = -(deltaRightHeight + stepRise);
+                            deltaLeftDistance = -moveBackwardLegSpeed * deltaRightDistance;
+                            deltaLeftHeight = moveUpwardLegSpeed * deltaRightHeight;
                         }
-                        deltaRightHeight = deltaRightHeight < 0 ? 0 : deltaRightHeight;
-                        deltaRightDistance = stepWidth / stepRise * deltaRightHeight;
                     }
                 }
 
