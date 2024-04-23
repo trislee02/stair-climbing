@@ -85,16 +85,19 @@ public class StairLegAnimation : MonoBehaviour
             if (currentLeftDiffFootHeight >= maxDiffFootHeight)
             {
                 isLeftAbove = true;
-                stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
+                if (stepRipple)
+                    stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
             }
             else if (currentRightDiffFootHeight >= maxDiffFootHeight)
             {
                 isRightAbove = true;
-                stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
+                if (stepRipple)
+                    stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
             }
             if (isLeftAbove || isRightAbove)
             {
-                stepRipple.Play();
+                if (stepRipple)
+                    stepRipple.Play();
                 currentAvatarPosition = transform.parent.parent.position;
             }
         }
