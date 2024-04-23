@@ -17,7 +17,16 @@ public class SpiralStairLegAnimation : MonoBehaviour
     private float stepRise;
 
     [SerializeField]
-    private float curvePushFoot = 1.0f / 7.0f; // Must be a positive number smaller than 1
+    private float pedalLength = 0.2f; // Distance from the origin of pedal to the sensor
+
+    [SerializeField]
+    private float bodyLiftingSpeed = 1.0f; // Speed of lifting the body when a leg is pushing down
+
+    [SerializeField]
+    private float moveBackwardLegSpeed = 0.5f;
+
+    [SerializeField]
+    private float moveUpwardLegSpeed = 1f;
 
     [SerializeField]
     private float curveLiftFoot = 7.0f; // Must be a number larger than 1 
@@ -39,7 +48,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
     private float risePerRealHeightUnit;
     private float widthPerRealHeightUnit;
     private float curveLiftCoefficient;
-    private float curvePushCoefficient;
+    private float bodyLiftingConstant;
 
     private Animator animator;
     private DataManager dataManager;
@@ -78,7 +87,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
         risePerRealHeightUnit = stepRise / maxDiffFootHeight;
         widthPerRealHeightUnit = stepWidth / maxDiffFootHeight;
         curveLiftCoefficient = stepWidth / (float) Math.Pow(stepRise, curveLiftFoot);
-        curvePushCoefficient = stepWidth / (float) Math.Pow(stepRise, curvePushFoot);
+        bodyLiftingConstant = stepRise - bodyLiftingSpeed * stepRise;
 
         rotationAngle = spiralStair.angleTheta;
 
@@ -89,15 +98,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float scaleHeightLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
-        float scaleHeightRightFoot = currentRightDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
-
-        float deltaLeftHeight = scaleHeightLeftFoot * currentLeftDiffFootHeight;
-        float deltaLeftDistance = curvePushCoefficient * (float)Math.Pow(deltaLeftHeight, curvePushFoot);
-
-        float deltaRightHeight = scaleHeightRightFoot * currentRightDiffFootHeight;
-        float deltaRightDistance = curvePushCoefficient * (float)Math.Pow(deltaRightHeight, curvePushFoot);
-
+        // Play ripple effect when a foot is above a step
         if (!isRightAbove && !isLeftAbove)
         {
             if (currentLeftDiffFootHeight >= maxDiffFootHeight)
@@ -129,6 +130,20 @@ public class SpiralStairLegAnimation : MonoBehaviour
         // Move the character when a foot is pushing down, i.e. one foot is above the stair
         if (isLeftAbove || isRightAbove)
         {
+            float scaleHeightLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
+            float scaleHeightRightFoot = currentRightDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
+
+            float deltaLeftHeight = scaleHeightLeftFoot * currentLeftDiffFootHeight;
+            deltaLeftHeight = bodyLiftingSpeed * deltaLeftHeight + bodyLiftingConstant;
+            deltaLeftHeight = deltaLeftHeight < 0 ? 0 : deltaLeftHeight;
+            float deltaLeftDistance = stepWidth / stepRise * deltaLeftHeight;
+
+            float deltaRightHeight = scaleHeightRightFoot * currentRightDiffFootHeight;
+            deltaRightHeight = bodyLiftingSpeed * deltaRightHeight + bodyLiftingConstant;
+            deltaRightHeight = deltaRightHeight < 0 ? 0 : deltaRightHeight;
+            float deltaRightDistance = stepWidth / stepRise * deltaRightHeight;
+
+
             Vector3 newAvatarPosition;
             if (isLeftAbove)
             {
@@ -175,9 +190,9 @@ public class SpiralStairLegAnimation : MonoBehaviour
 
         //Debug.DrawRay(transform.parent.Find("CenterEyeAnchor").transform.position, transform.parent.Find("CenterEyeAnchor").transform.forward * 10, Color.red);
 
-        Debug.DrawRay(ovrCameraRig.transform.position, ovrCameraRig.transform.forward * 10, Color.yellow);
-        Debug.DrawRay(transform.parent.position, transform.parent.forward * 10, Color.green);
-        Debug.DrawRay(transform.parent.position, transform.parent.up * 10, Color.blue);
+        //Debug.DrawRay(ovrCameraRig.transform.position, ovrCameraRig.transform.forward * 10, Color.yellow);
+        //Debug.DrawRay(transform.parent.position, transform.parent.forward * 10, Color.green);
+        //Debug.DrawRay(transform.parent.position, transform.parent.up * 10, Color.blue);
         //Debug.Log("CenterEyeAnchor rotation: " + ovrCameraRig.centerEyeAnchor.localRotation);
 
 
@@ -195,7 +210,7 @@ public class SpiralStairLegAnimation : MonoBehaviour
             else
             {
                 currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                currentRightDiffFootHeight = footHeightDebug; //dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
                 Debug.Log("Raw left height: " + currentLeftDiffFootHeight + "; Raw right height: " + currentRightDiffFootHeight);
 
@@ -229,22 +244,48 @@ public class SpiralStairLegAnimation : MonoBehaviour
                 float deltaRightHeight = scaleHeightRightFoot * currentRightDiffFootHeight;
                 float deltaRightDistance = 0;
 
-                if (!isLeftAbove)
+                if (!isLeftAbove && !isRightAbove)
                 {
-                    deltaLeftDistance = curveLiftCoefficient * (float) Math.Pow(deltaLeftHeight, curveLiftFoot);
-                }
-                else
-                {
-                    deltaLeftDistance = curvePushCoefficient * (float) Math.Pow(deltaLeftHeight, curvePushFoot);
-                }
-
-                if (!isRightAbove)
-                {
+                    deltaLeftDistance = curveLiftCoefficient * (float)Math.Pow(deltaLeftHeight, curveLiftFoot);
                     deltaRightDistance = curveLiftCoefficient * (float)Math.Pow(deltaRightHeight, curveLiftFoot);
                 }
                 else
                 {
-                    deltaRightDistance = curvePushCoefficient * (float)Math.Pow(deltaRightHeight, curvePushFoot);
+                    // Push down the leg to lift the body
+                    if (isLeftAbove)
+                    {
+                        deltaLeftHeight = bodyLiftingSpeed * deltaLeftHeight + bodyLiftingConstant;
+                        deltaLeftHeight = deltaLeftHeight < 0 ? 0 : deltaLeftHeight;
+                        deltaLeftDistance = stepWidth / stepRise * deltaLeftHeight;
+
+                        if (deltaLeftHeight > stepRise / 2.0f)
+                        {
+                            deltaRightDistance = moveBackwardLegSpeed * (deltaLeftDistance - stepWidth);
+                            deltaRightHeight = moveUpwardLegSpeed * (stepRise - deltaLeftHeight);
+                        }
+                        else
+                        {
+                            deltaRightDistance = -moveBackwardLegSpeed * deltaLeftDistance;
+                            deltaRightHeight = moveUpwardLegSpeed * deltaLeftHeight;
+                        }
+                    }
+                    else
+                    {
+                        deltaRightHeight = bodyLiftingSpeed * deltaRightHeight + bodyLiftingConstant;
+                        deltaRightHeight = deltaRightHeight < 0 ? 0 : deltaRightHeight;
+                        deltaRightDistance = stepWidth / stepRise * deltaRightHeight;
+
+                        if (deltaRightHeight > stepRise / 2.0f)
+                        {
+                            deltaLeftDistance = moveBackwardLegSpeed * (deltaRightDistance - stepWidth);
+                            deltaLeftHeight = moveUpwardLegSpeed * (stepRise - deltaRightHeight);
+                        }
+                        else
+                        {
+                            deltaLeftDistance = -moveBackwardLegSpeed * deltaRightDistance;
+                            deltaLeftHeight = moveUpwardLegSpeed * deltaRightHeight;
+                        }
+                    }
                 }
 
                 //Debug.Log("Left displacement: Rise = " + deltaLeftHeight + ", Tread = " + deltaLeftDistance);

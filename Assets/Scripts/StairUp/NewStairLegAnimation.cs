@@ -144,7 +144,7 @@ public class NewStairLegAnimation : MonoBehaviour
             isRightAbove = false;
         }
     }
-
+    float prevLeftHeight = -100.0f;
     private void OnAnimatorIK(int layerIndex)
     {
         if (animator)
@@ -155,8 +155,20 @@ public class NewStairLegAnimation : MonoBehaviour
             }
             else
             {
+                
                 currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                currentRightDiffFootHeight = footHeightDebug; //dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                if (prevLeftHeight < -10.0f)
+                {
+                    prevLeftHeight = currentLeftDiffFootHeight;
+                }
+
+                if (currentLeftDiffFootHeight - prevLeftHeight > 0.03f)
+                {
+                    Debug.Log("Move too fast! " + (currentLeftDiffFootHeight - prevLeftHeight));
+                }
+                prevLeftHeight = currentLeftDiffFootHeight;
+
 
                 Debug.Log("PreDiff Left height: " + currentLeftDiffFootHeight + "; PreDiff Right height: " + currentRightDiffFootHeight);
 
@@ -203,14 +215,15 @@ public class NewStairLegAnimation : MonoBehaviour
                         deltaLeftHeight = deltaLeftHeight < 0 ? 0 : deltaLeftHeight;
                         deltaLeftDistance = stepWidth / stepRise * deltaLeftHeight;
 
-                        if (deltaLeftHeight > 0)
+                        if (deltaLeftHeight > stepRise / 2.0f)
                         {
-                            deltaRightDistance = 0.5f * (deltaLeftDistance - stepWidth);
-                            deltaRightHeight = stepRise - deltaLeftHeight;
+                            deltaRightDistance = moveBackwardLegSpeed * (deltaLeftDistance - stepWidth);
+                            deltaRightHeight = moveUpwardLegSpeed * (stepRise - deltaLeftHeight);
                         }
                         else
                         {
-                            deltaRightDistance = -(deltaLeftHeight + stepRise);
+                            deltaRightDistance = -moveBackwardLegSpeed * deltaLeftDistance;
+                            deltaRightHeight = moveUpwardLegSpeed * deltaLeftHeight;
                         }
                     }
                     else
