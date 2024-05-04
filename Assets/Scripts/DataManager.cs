@@ -7,6 +7,7 @@ using System.Net.Sockets;
 
 using System;
 using System.Text;
+using Microsoft.Azure.Kinect.Sensor;
 
 [Serializable]
 public class Accelerator
@@ -26,6 +27,8 @@ public class DataManager : MonoBehaviour
     public static readonly int LEFT_LEG = 0;
     public static readonly int RIGHT_LEG = 1;
 
+    [SerializeField]
+    private string sensorLoggerPath;
 
     [SerializeField]
     private bool isFromKinect = false;
@@ -43,6 +46,8 @@ public class DataManager : MonoBehaviour
     public const int BufferSize = 64;// Size of receive buffer
     private byte[] buffer = new byte[BufferSize];// Receive buffer
 
+    private MyLogger sensorLogger;
+
     private void Start()
     {
         sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -54,6 +59,14 @@ public class DataManager : MonoBehaviour
 
         // Begin receiving the data from the remote device.  
         sock.BeginReceive(this.buffer, 0, DataManager.BufferSize, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
+
+        sensorLogger = new MyLogger(sensorLoggerPath, -1);
+        sensorLogger.Start();
+    }
+
+    void OnApplicationQuit()
+    {
+        sensorLogger.Save();
     }
 
     private void OnDestroy()
@@ -74,6 +87,10 @@ public class DataManager : MonoBehaviour
 
         //Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
         //Debug.Log("Data received: " + receivedMessage.ToString());
+
+        // Add to log
+        List<float> nums = new List<float> { accelerator.roll1, accelerator.roll2 };
+        sensorLogger.Push(nums);
 
         if (fps < 0.00006)
         {
