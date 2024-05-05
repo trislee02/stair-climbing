@@ -20,7 +20,8 @@ public class PositionTracking : MonoBehaviour
     void Update()
     {
         Vector3 pos = transform.position;
-        List<float> nums = new List<float> { pos.x, pos.y, pos.z };
+        Quaternion quat = transform.rotation;
+        List<float> nums = new List<float> { pos.x, pos.y, pos.z, quat.x, quat.y, quat.z, quat.w };
         logger.Push(nums);
     }
 

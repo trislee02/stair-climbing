@@ -45,7 +45,7 @@ public class MyLogger
         startTicks = DateTime.Now.Ticks;
 
         Thread writingThread = new Thread(() => {
-            FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
+            FileStream fileStream = new FileStream(filePath, FileMode.Create);
             StreamWriter fileWriter = new StreamWriter(fileStream);
             using (StreamWriter writer = new StreamWriter(fileStream))
             {
@@ -80,8 +80,10 @@ public class MyLogger
     public void Push(List<float> nums)
     {
         if (saved) { return ; }
-        TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTicks);
-        NumbersLog log = new NumbersLog(nums, (long)Math.Floor(elapse.TotalMilliseconds));
+        //TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTicks);
+        //long timestamp = (long)Math.Floor(elapse.TotalMilliseconds);
+        long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        NumbersLog log = new NumbersLog(nums, timestamp);
         logsQueue.Enqueue(log);
     }
 

@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
 
 public class StairLegAnimation : MonoBehaviour
 {
+    [SerializeField]
+    private string sensorLoggerPath;
+
     [SerializeField]
     private float maxFootHeight;
 
@@ -55,6 +59,8 @@ public class StairLegAnimation : MonoBehaviour
 
     private Vector3 currentAvatarPosition;
 
+    private MyLogger sensorLogger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +72,9 @@ public class StairLegAnimation : MonoBehaviour
         widthPerRealHeightUnit = stepWidth / maxDiffFootHeight;
         curveLiftCoefficient = stepWidth / (float) Math.Pow(stepRise, curveLiftFoot);
         curvePushCoefficient = stepWidth / (float) Math.Pow(stepRise, curvePushFoot);
+
+        sensorLogger = new MyLogger(sensorLoggerPath, -1);
+        sensorLogger.Start();
     }
 
     // Update is called once per frame
@@ -132,6 +141,11 @@ public class StairLegAnimation : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        sensorLogger.Save();
+    }
+
     private void OnAnimatorIK(int layerIndex)
     {
         if (animator)
@@ -142,8 +156,14 @@ public class StairLegAnimation : MonoBehaviour
             }
             else
             {
-                currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                float roll1Logging = 0;
+                float roll2Logging = 0;
+                currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
+
+                // Add to log
+                List<float> nums = new List<float> { roll1Logging, currentLeftDiffFootHeight, roll2Logging, currentRightDiffFootHeight };
+                sensorLogger.Push(nums);
 
                 Debug.Log("PreDiff Left height: " + currentLeftDiffFootHeight + "; PreDiff Right height: " + currentRightDiffFootHeight);
 
