@@ -25875,6 +25875,7 @@ GameObject:
   - component: {fileID: 1161899384}
   - component: {fileID: 1161604954}
   - component: {fileID: 1163403938}
+  - component: {fileID: 1163403939}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -25986,6 +25987,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1163403939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162260824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85960d9d41d8bc449b1ec7579f3e672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggerPath: ./log/head.csv
 --- !u!114 &1173013680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57139,6 +57153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7638268505628424943}
+  - component: {fileID: 7638268505628424944}
   m_Layer: 0
   m_Name: mixamorig:LeftFoot
   m_TagString: Untagged
@@ -57488,6 +57503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4821442509554434722}
+  - component: {fileID: 4821442509554434723}
   m_Layer: 0
   m_Name: mixamorig:RightFoot
   m_TagString: Untagged
@@ -57588,6 +57604,19 @@ Transform:
   - {fileID: 7125179215751967350}
   m_Father: {fileID: 475937670131968516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4821442509554434723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542510639340285005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85960d9d41d8bc449b1ec7579f3e672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggerPath: ./log/right_foot.csv
 --- !u!1 &4860884733284158514
 GameObject:
   m_ObjectHideFlags: 0
@@ -57961,6 +57990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4029fb45cdfed046914d8010f8344eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensorLoggerPath: ./log/sensor.csv
   maxFootHeight: 0.05
   minFootHeight: 0.016
   stepWidth: 0.2
@@ -57968,7 +57998,7 @@ MonoBehaviour:
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0.5
   moveUpwardLegSpeed: 1
-  curveLiftFoot: 2
+  curveLiftFoot: 5
   stepRipple: {fileID: 341476698}
   spiralStair: {fileID: 272952342}
   footHeightDebug: 0
@@ -58719,6 +58749,19 @@ Transform:
   - {fileID: 1374891157393921136}
   m_Father: {fileID: 3001270389672755715}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7638268505628424944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2993002398983348330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85960d9d41d8bc449b1ec7579f3e672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggerPath: ./log/left_foot.csv
 --- !u!4 &7659559706738296068
 Transform:
   m_ObjectHideFlags: 0

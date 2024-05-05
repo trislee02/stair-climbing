@@ -39,7 +39,7 @@ public class Slope : MonoBehaviour
         }
         else
         {
-            slopeObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            slopeObj = GameObject.CreatePrimitive(PrimitiveType.Cube); 
         }
         slopeObj.transform.position = slopePosition;
         slopeObj.transform.Rotate(-alpha/Mathf.PI*180f, 0, 0);

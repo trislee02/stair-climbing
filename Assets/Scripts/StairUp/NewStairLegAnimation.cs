@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
 
 public class NewStairLegAnimation : MonoBehaviour
 {
+    [SerializeField]
+    private string sensorLoggerPath;
+
     [SerializeField]
     private float maxFootHeight;
 
@@ -63,6 +67,8 @@ public class NewStairLegAnimation : MonoBehaviour
 
     private Vector3 currentAvatarPosition;
 
+    private MyLogger sensorLogger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +80,9 @@ public class NewStairLegAnimation : MonoBehaviour
         widthPerRealHeightUnit = stepWidth / maxDiffFootHeight;
         curveLiftCoefficient = stepWidth / (float) Math.Pow(stepRise, curveLiftFoot);
         bodyLiftingConstant = stepRise - bodyLiftingSpeed * stepRise;
-        
+
+        sensorLogger = new MyLogger(sensorLoggerPath, -1);
+        sensorLogger.Start();
     }
 
     // Update is called once per frame
@@ -148,6 +156,11 @@ public class NewStairLegAnimation : MonoBehaviour
     }
     float prevLeftHeight = -100.0f;
     float prevRightHeight = -100.0f;
+    private void OnApplicationQuit()
+    {
+        sensorLogger.Save();
+    }
+
     private void OnAnimatorIK(int layerIndex)
     {
         if (animator)
@@ -158,8 +171,14 @@ public class NewStairLegAnimation : MonoBehaviour
             }
             else
             {
-                float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                float roll1Logging = 0;
+                float roll2Logging = 0;
+                float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
+
+                // Add to log
+                List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight };
+                sensorLogger.Push(nums);
 
                 Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);
 

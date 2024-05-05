@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
 
 public class NewSpiralStairLegAnimation : MonoBehaviour
 {
+    [SerializeField]
+    private string sensorLoggerPath;
+
     [SerializeField]
     private float maxFootHeight;
 
@@ -74,6 +78,8 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
     private Quaternion startingVRCameraRotation;
     private Quaternion startingBodyRotation;
 
+    private MyLogger sensorLogger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +96,9 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
 
         lastVRCameraRotation = transform.parent.localRotation * transform.localRotation * ovrCameraRig.transform.localRotation;
         lastBodyRotation = transform.parent.localRotation * transform.localRotation;
+
+        sensorLogger = new MyLogger(sensorLoggerPath, -1);
+        sensorLogger.Start();
     }
 
     // Update is called once per frame
@@ -196,6 +205,11 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
     }
 
 
+
+    private void OnApplicationQuit()
+    {
+        sensorLogger.Save();
+    }
     private void OnAnimatorIK(int layerIndex)
     {
         if (animator)
@@ -206,8 +220,14 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
             }
             else
             {
-                float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
+                float roll1Logging = 0;
+                float roll2Logging = 0;
+                float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
+
+                // Add to log
+                List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight };
+                sensorLogger.Push(nums);
 
                 Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);
 

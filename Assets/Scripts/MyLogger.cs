@@ -27,7 +27,7 @@ public class MyLogger
     //
     private bool saved;
     //
-    private string filePath;
+    private string baseFilePath;
     //
     private ConcurrentQueue<NumbersLog> logsQueue = new ConcurrentQueue<NumbersLog>();
 
@@ -37,12 +37,15 @@ public class MyLogger
         logCount = 0;
         autoSaveAfterLogAmount = _autoSaveAfterLogAmount;
         saved = false;
-        filePath = _filePath;
+        baseFilePath = _filePath;
     }
 
     public void Start()
     {
         startTicks = DateTime.Now.Ticks;
+
+        string formattedDatTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        string filePath = baseFilePath + "." + formattedDatTime + ".csv";
 
         Thread writingThread = new Thread(() => {
             FileStream fileStream = new FileStream(filePath, FileMode.Create);

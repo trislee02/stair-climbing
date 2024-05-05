@@ -5589,6 +5589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53897af7093a158479f1b62b3e25906b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensorLoggerPath: 
   maxFootHeight: 0.035
   minFootHeight: 0.01
   stepWidth: 0.35
@@ -5739,7 +5740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79148503efbaa1468b7ca99d24c997e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepWidth: 0.35
+  stepWidth: 0.2
   stepRise: 0.1
   length: 20
   width: 4
@@ -6354,7 +6355,7 @@ Transform:
   m_GameObject: {fileID: 1162260830}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.575, z: 0.8}
+  m_LocalPosition: {x: 1, y: 1.66, z: 0.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6436,6 +6437,7 @@ GameObject:
   - component: {fileID: 1161899384}
   - component: {fileID: 1161604954}
   - component: {fileID: 1163403938}
+  - component: {fileID: 1163403939}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -6547,6 +6549,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1163403939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162260824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85960d9d41d8bc449b1ec7579f3e672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggerPath: ./log/head.csv
 --- !u!114 &1173013680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9440,6 +9455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7638268505628424943}
+  - component: {fileID: 7638268505628424944}
   m_Layer: 0
   m_Name: mixamorig:LeftFoot
   m_TagString: Untagged
@@ -10266,6 +10282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4821442509554434722}
+  - component: {fileID: 4821442509554434723}
   m_Layer: 0
   m_Name: mixamorig:RightFoot
   m_TagString: Untagged
@@ -10445,6 +10462,19 @@ Transform:
   - {fileID: 7125179215751967350}
   m_Father: {fileID: 475937670131968516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4821442509554434723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542510639340285005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85960d9d41d8bc449b1ec7579f3e672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggerPath: ./log/right_foot.csv
 --- !u!1 &4890665111568677795
 GameObject:
   m_ObjectHideFlags: 0
@@ -10921,7 +10951,7 @@ Transform:
   m_GameObject: {fileID: 5069202498189416847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.602, z: -0.15100002}
+  m_LocalPosition: {x: 0, y: -1.665, z: -0.15100002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10971,12 +11001,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7fee6e30c25264cb1dcac5ff0fbcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensorLoggerPath: ./log/sensor.csv
   maxFootHeight: 0.05
   minFootHeight: 0.018
-  stepWidth: 0.35
+  stepWidth: 0.2
   stepRise: 0.1
   bodyLiftingSpeed: 1
-  moveBackwardLegSpeed: 0.5
+  moveBackwardLegSpeed: 0
   moveUpwardLegSpeed: 1
   curveLiftFoot: 7
   stepRipple: {fileID: 341476698}
@@ -12245,6 +12276,19 @@ Transform:
   - {fileID: 1374891157393921136}
   m_Father: {fileID: 3001270389672755715}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7638268505628424944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2993002398983348330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85960d9d41d8bc449b1ec7579f3e672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loggerPath: ./log/left_foot.csv
 --- !u!4 &7659559706738296068
 Transform:
   m_ObjectHideFlags: 0
