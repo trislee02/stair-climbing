@@ -5589,6 +5589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53897af7093a158479f1b62b3e25906b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensorLoggerPath: 
   maxFootHeight: 0.035
   minFootHeight: 0.01
   stepWidth: 0.35
@@ -5739,7 +5740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79148503efbaa1468b7ca99d24c997e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepWidth: 0.35
+  stepWidth: 0.2
   stepRise: 0.1
   length: 20
   width: 4
@@ -6354,7 +6355,7 @@ Transform:
   m_GameObject: {fileID: 1162260830}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.7, z: 0.8}
+  m_LocalPosition: {x: 1, y: 1.575, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10921,7 +10922,7 @@ Transform:
   m_GameObject: {fileID: 5069202498189416847}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.7, z: 0}
+  m_LocalPosition: {x: 0, y: -1.602, z: -0.15100002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10957,7 +10958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFromKinect: 0
-  pedalLength: 0.2
+  pedalLength: 0.37
   kinectDevice: {fileID: 924191716}
 --- !u!114 &5553708535250551609
 MonoBehaviour:
@@ -10968,17 +10969,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 5069202498189416847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb2e6d3d684b78d459e98e0de18da62b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a7fee6e30c25264cb1dcac5ff0fbcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFootHeight: 0.035
-  minFootHeight: 0.01
-  stepWidth: 0.35
+  maxFootHeight: 0.05
+  minFootHeight: 0.018
+  stepWidth: 0.2
   stepRise: 0.1
-  pedalLength: 0.2
-  curvePushFoot: 0.33333334
+  bodyLiftingSpeed: 1
+  moveBackwardLegSpeed: 0.5
+  moveUpwardLegSpeed: 1
   curveLiftFoot: 7
   stepRipple: {fileID: 341476698}
+  maxDiffFootHeight: 0
+  risePerRealHeightUnit: 0
+  widthPerRealHeightUnit: 0
+  curveLiftCoefficient: 0
+  bodyLiftingConstant: 0
+  isRightFootRotationFixed: 1
+  isLeftFootRotationFixed: 1
+  footAngle: 0
+  animator: {fileID: 0}
+  dataManager: {fileID: 0}
+  initialLeftFootIKLocalPosition: {x: -0.085, y: 0.1, z: -0.004}
+  initialRightFootIKLocalPosition: {x: 0.085, y: 0.1, z: -0.004}
+  isInitFootHeight: 1
+  currentLeftDiffFootHeight: 0
+  currentRightDiffFootHeight: 0
+  isLeftAbove: 0
+  isRightAbove: 0
+  currentLeftIKPosition: {x: 0, y: 0, z: 0}
+  currentRightIKPosition: {x: 0, y: 0, z: 0}
+  destinationAvatarPosition: {x: 0, y: 0, z: 0}
+  currentAvatarPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &5680486696846944310
 GameObject:
   m_ObjectHideFlags: 0
