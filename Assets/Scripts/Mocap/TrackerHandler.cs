@@ -76,21 +76,21 @@ public class TrackerHandler : MonoBehaviour
             // Debug.Log("Angle left: " + angleLeft + ", Angle right: " + angleRight);
             // Debug.Log("Computed height left: " + heightLeft + ", Height right: " + heightRight);
 
-            //if (fps < 0.00006)
-            //{
-            //    startTick = DateTime.Now.Ticks;
-            //}
-            ////
-            //fps += 1.0f;
-            //TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
-            //if (elapse.TotalSeconds > 10.0)
-            //{
+            if (fps < 0.00006)
+            {
+                startTick = DateTime.Now.Ticks;
+            }
+            //
+            fps += 1.0f;
+            TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTick);
+            if (elapse.TotalSeconds > 10.0)
+            {
 
-            //    fps = fps / (float)elapse.TotalSeconds;
-            //    Debug.Log("FPS Kinect: " + fps);
-            //    fps = 0;
-            //    startTick = DateTime.Now.Ticks;
-            //}
+                fps = fps / (float)elapse.TotalSeconds;
+                Debug.Log("FPS Kinect: " + fps);
+                fps = 0;
+                startTick = DateTime.Now.Ticks;
+            }
         }
     }
 
