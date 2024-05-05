@@ -125,14 +125,6 @@ public class LeanLegAnimation : MonoBehaviour
             transform.parent.parent.position = newAvatarPosition;
         }
 
-        //if (isLeftAbove && currentLeftDiffFootHeight <= 0)
-        //{
-        //    isLeftAbove = false;
-        //}
-        //if (isRightAbove && currentRightDiffFootHeight <= 0)
-        //{
-        //    isRightAbove = false;
-        //}
         isLeftFootRotationFixed = true;
         isRightFootRotationFixed = true;
 

@@ -46,7 +46,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        sock.Connect(IPAddress.Parse("192.168.137.254"), 4210);
+        sock.Connect(IPAddress.Parse("192.168.137.107"), 4210);
 
         Debug.Log("Started socket");
         Debug.Log("Send pin-code");
@@ -72,8 +72,8 @@ public class DataManager : MonoBehaviour
         accelerator.roll1 = float.Parse(rolls[0]);
         accelerator.roll2 = float.Parse(rolls[1]);
 
-        //Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
-        //Debug.Log("Data received: " + receivedMessage.ToString());
+        Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
+        Debug.Log("Data received: " + receivedMessage.ToString());
 
         if (fps < 0.00006)
         {
@@ -97,6 +97,7 @@ public class DataManager : MonoBehaviour
 
     public float getFootHeight(int leg)
     {
+        Debug.Log("Roll 1: " + accelerator.roll1 + "; Roll 2: " + accelerator.roll2);
         if (!isFromKinect)
         {
             if (leg == LEFT_LEG)

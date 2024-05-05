@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Specialized;
 using UnityEngine;
 
@@ -17,9 +18,6 @@ public class NewStairLegAnimation : MonoBehaviour
     private float stepRise;
 
     [SerializeField]
-    private float pedalLength = 0.2f; // Distance from the origin of pedal to the sensor
-
-    [SerializeField]
     private float bodyLiftingSpeed = 1.0f; // Speed of lifting the body when a leg is pushing down
 
     [SerializeField]
@@ -34,10 +32,9 @@ public class NewStairLegAnimation : MonoBehaviour
     [SerializeField]
     private ParticleSystem stepRipple;
 
-    [Range(0.01f, 0.035f)]
+    [Range(0.01f, 0.05f)]
     [SerializeField]
     private float footHeightDebug;
-
 
     private float maxDiffFootHeight;
     private float risePerRealHeightUnit;
@@ -53,8 +50,8 @@ public class NewStairLegAnimation : MonoBehaviour
 
     private bool isInitFootHeight = true;
 
-    private float currentLeftDiffFootHeight; // Real height
-    private float currentRightDiffFootHeight; // Real height
+    private float currentLeftDiffFootHeight = 0; 
+    private float currentRightDiffFootHeight = 0; 
 
     private bool isLeftAbove;
     private bool isRightAbove;
@@ -77,27 +74,32 @@ public class NewStairLegAnimation : MonoBehaviour
         widthPerRealHeightUnit = stepWidth / maxDiffFootHeight;
         curveLiftCoefficient = stepWidth / (float) Math.Pow(stepRise, curveLiftFoot);
         bodyLiftingConstant = stepRise - bodyLiftingSpeed * stepRise;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Curve lift coefficient: " + (stepWidth / (float)Math.Pow(stepRise, curveLiftFoot)) + "; body lifting constant: " + bodyLiftingConstant);
         // Play ripple effect when a foot is above a step
         if (!isRightAbove && !isLeftAbove)
         {
             if (currentLeftDiffFootHeight >= maxDiffFootHeight)
             {
                 isLeftAbove = true;
-                stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
+                if (stepRipple)
+                    stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
             }
             else if (currentRightDiffFootHeight >= maxDiffFootHeight)
             {
                 isRightAbove = true;
-                stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
+                if (stepRipple)
+                    stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
             }
             if (isLeftAbove || isRightAbove)
             {
-                stepRipple.Play();
+                if (stepRipple)
+                    stepRipple.Play();
                 currentAvatarPosition = transform.parent.parent.position;
             }
         }
@@ -145,6 +147,7 @@ public class NewStairLegAnimation : MonoBehaviour
         }
     }
     float prevLeftHeight = -100.0f;
+    float prevRightHeight = -100.0f;
     private void OnAnimatorIK(int layerIndex)
     {
         if (animator)
@@ -155,42 +158,24 @@ public class NewStairLegAnimation : MonoBehaviour
             }
             else
             {
-                
-                currentLeftDiffFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
-                currentRightDiffFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
-                if (prevLeftHeight < -10.0f)
-                {
-                    prevLeftHeight = currentLeftDiffFootHeight;
-                }
+                float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG);
+                float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG);
 
-                if (currentLeftDiffFootHeight - prevLeftHeight > 0.03f)
-                {
-                    Debug.Log("Move too fast! " + (currentLeftDiffFootHeight - prevLeftHeight));
-                }
-                prevLeftHeight = currentLeftDiffFootHeight;
-
-
-                Debug.Log("PreDiff Left height: " + currentLeftDiffFootHeight + "; PreDiff Right height: " + currentRightDiffFootHeight);
+                Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);
 
                 // Clip foot height
-                currentLeftDiffFootHeight = currentLeftDiffFootHeight < maxFootHeight ? currentLeftDiffFootHeight : maxFootHeight;
-                currentRightDiffFootHeight = currentRightDiffFootHeight < maxFootHeight ? currentRightDiffFootHeight : maxFootHeight;
-
-                currentLeftDiffFootHeight = currentLeftDiffFootHeight < minFootHeight ? minFootHeight : currentLeftDiffFootHeight;
-                currentRightDiffFootHeight = currentRightDiffFootHeight < minFootHeight ? minFootHeight : currentRightDiffFootHeight;   
+                currentLeftDiffFootHeight = Mathf.Clamp(dataLeftFootHeight, minFootHeight, maxFootHeight);
+                currentRightDiffFootHeight = Mathf.Clamp(dataRightFootHeight, minFootHeight, maxFootHeight);
                 
                 currentLeftDiffFootHeight -= minFootHeight;
                 currentRightDiffFootHeight -= minFootHeight;
 
-                Debug.Log("Diff Left height: " + currentLeftDiffFootHeight + "; Diff Right height: " + currentRightDiffFootHeight);
+                //Debug.Log("Diff Left height: " + currentLeftDiffFootHeight + "; Diff Right height: " + currentRightDiffFootHeight);
 
                 // Inverse kinematics
                 // Update IKPosition
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-
-                float scaleDistanceLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : widthPerRealHeightUnit;
-                float scaleDistanceRightFoot = currentRightDiffFootHeight <= 0 ? 0 : widthPerRealHeightUnit;
 
                 float scaleHeightLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
                 float scaleHeightRightFoot = currentRightDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
@@ -205,6 +190,7 @@ public class NewStairLegAnimation : MonoBehaviour
                 {
                     deltaLeftDistance = curveLiftCoefficient * (float)Math.Pow(deltaLeftHeight, curveLiftFoot);
                     deltaRightDistance = curveLiftCoefficient * (float)Math.Pow(deltaRightHeight, curveLiftFoot);
+                    //Debug.Log("Delta left distance: " + deltaLeftDistance + "; Delta right distance: " + deltaRightDistance);
                 }
                 else
                 {
@@ -245,8 +231,8 @@ public class NewStairLegAnimation : MonoBehaviour
                     }
                 }
 
-                Debug.Log("Left displacement: Rise = " + deltaLeftHeight + ", Tread = " + deltaLeftDistance);
-                Debug.Log("Right displacement: Rise = " + deltaRightHeight + ", Tread = " + deltaRightDistance);
+                //Debug.Log("Left displacement: Rise = " + deltaLeftHeight + ", Tread = " + deltaLeftDistance);
+                //Debug.Log("Right displacement: Rise = " + deltaRightHeight + ", Tread = " + deltaRightDistance);
 
                 Vector3 initialLeftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition);
                 Vector3 initialRightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
