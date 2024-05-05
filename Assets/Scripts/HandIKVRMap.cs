@@ -30,6 +30,7 @@ public class HandIKVRMap : MonoBehaviour
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
         animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
         animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+        
 
         animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHand.position);
         animator.SetIKPosition(AvatarIKGoal.RightHand, rightHand.position);
