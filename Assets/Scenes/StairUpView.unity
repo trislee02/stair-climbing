@@ -5581,7 +5581,7 @@ MonoBehaviour:
   rise: 0.1
   treadWidth: 0.2
   treadLength: 4
-  startPosition: {x: 1, y: 0, z: 1}
+  startPosition: {x: 1.1, y: 0, z: 1}
   wallHeight: 8
   isWallVisible: 1
   wallStep: 4
@@ -10942,7 +10942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a46a77ef8ae30341965a325cc53f28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFromKinect: 1
+  isFromKinect: 0
   pedalLength: 0.37
   kinectDevice: {fileID: 921941432}
 --- !u!114 &5553708535250551609
@@ -10958,7 +10958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
-  maxFootHeight: 0.25
+  maxFootHeight: 0.05
   minFootHeight: 0.016
   stepWidth: 0.2
   stepRise: 0.1

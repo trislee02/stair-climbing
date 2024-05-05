@@ -6,7 +6,7 @@ public class Slope : MonoBehaviour
 {
     public float stepWidth;
     public float stepRise;
-    public float length;
+    public float numberOfStep;
     public float width;
     public Vector3 startPosition;
     public float wallHeight;
@@ -24,6 +24,8 @@ public class Slope : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        float ch = Mathf.Sqrt(stepWidth * stepWidth + stepRise * stepRise);
+        float length = numberOfStep * ch + 0.1f;
         int envSampleLen = enviromentSamples.Length;
         Vector2 wallTextureScale = new Vector2(Mathf.Ceil(width * wallStep), Mathf.Ceil(wallHeight));
         Vector2 slopeTextureScale = new Vector2(Mathf.Ceil(width), Mathf.Ceil(length));
