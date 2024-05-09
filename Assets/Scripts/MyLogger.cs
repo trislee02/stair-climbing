@@ -62,17 +62,17 @@ public class MyLogger
 
         Thread writingThread = new Thread(() => {
             FileStream fileStream = new FileStream(filePath, FileMode.Create);
-            StreamWriter fileWriter = new StreamWriter(fileStream);
             using (StreamWriter writer = new StreamWriter(fileStream))
             {
                 // set headers
-                string headerLine = "";
+                string headerLine = "Timestamp";
                 for (int i = 0; i < headers.Length; i++)
                 {
-                    if (i > 0) headerLine += ",";
+                    headerLine += ",";
                     headerLine += headers[i];
                 }
                 writer.WriteLine(headerLine);
+                Debug.Log(headerLine);
 
                 while (!saved)
                 {
@@ -87,7 +87,7 @@ public class MyLogger
                             numberLine += log.numbers[i];
                         }
                         // Debug.Log("logger: " + log.timestamp + " " + numberLine);
-                        fileWriter.WriteLine(numberLine);
+                        writer.WriteLine(numberLine);
                         logCount++;
                         if (autoSaveAfterLogAmount > 0 && logCount > autoSaveAfterLogAmount)
                         {
