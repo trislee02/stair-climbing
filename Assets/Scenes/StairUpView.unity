@@ -5795,9 +5795,9 @@ MonoBehaviour:
   wallHeight: 8
   isWallVisible: 1
   wallStep: 4
-  stairSample: {fileID: 1631713380590545584}
-  wallSample: {fileID: 86051176}
-  handrailSample: {fileID: 321797017}
+  stairSample: {fileID: 1508513393}
+  wallSample: {fileID: 564429673}
+  handrailSample: {fileID: 1593657168}
   enviromentSamples:
   - {fileID: 1008539219}
   - {fileID: 799526779}
@@ -6868,6 +6868,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b306587968769e44a866d43df5bcfe1d, type: 3}
+--- !u!1 &1508513393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5713734241094700937, guid: b306587968769e44a866d43df5bcfe1d, type: 3}
+  m_PrefabInstance: {fileID: 1480776239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1518811424
 GameObject:
   m_ObjectHideFlags: 0

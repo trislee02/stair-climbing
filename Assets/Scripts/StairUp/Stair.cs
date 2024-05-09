@@ -25,9 +25,9 @@ public class Stair : MonoBehaviour
     void Start()
     {
         int envSampleLen = enviromentSamples.Length;
-        Vector2 stairTextureScale = new Vector2(Mathf.Ceil(treadLength * 3), Mathf.Ceil(treadWidth * 3));
-        Vector2 wallTextureScale = new Vector2(Mathf.Ceil(treadWidth * wallStep), Mathf.Ceil(wallHeight));
-        Vector2 handrailTextureScale = new Vector2(2, 2);
+        //Vector2 stairTextureScale = new Vector2(Mathf.Ceil(treadLength * 6), Mathf.Ceil(treadWidth * 3));
+        Vector2 wallTextureScale = new Vector2(Mathf.Ceil(treadWidth * wallStep * 2.6f), Mathf.Ceil(wallHeight * 2.8f));
+        Vector2 handrailTextureScale = new Vector2(2f, 4f);
 
         stairWalls = new GameObject("StairWalls");
         for (int i = 1; i <= numberOfSteps; i++)
