@@ -13,7 +13,7 @@ public class PositionTracking : MonoBehaviour
     void Start()
     {
         logger = new MyLogger(loggerPath, -1);
-        logger.Start();
+        logger.Start(new string[] { "PosX", "PosY", "PosZ", "QuaX", "QuaY", "QuaZ", "QuaW" });
     }
 
     // Update is called once per frame

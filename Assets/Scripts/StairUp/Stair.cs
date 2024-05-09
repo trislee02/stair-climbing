@@ -27,6 +27,7 @@ public class Stair : MonoBehaviour
         int envSampleLen = enviromentSamples.Length;
         Vector2 stairTextureScale = new Vector2(Mathf.Ceil(treadLength * 3), Mathf.Ceil(treadWidth * 3));
         Vector2 wallTextureScale = new Vector2(Mathf.Ceil(treadWidth * wallStep), Mathf.Ceil(wallHeight));
+        Vector2 handrailTextureScale = new Vector2(2, 2);
 
         stairWalls = new GameObject("StairWalls");
         for (int i = 1; i <= numberOfSteps; i++)
@@ -45,7 +46,7 @@ public class Stair : MonoBehaviour
             stairStep.transform.localScale = new Vector3(treadLength, rise, treadWidth);
             stairStep.transform.parent = transform;
             stairStep.transform.localScale = new Vector3(treadLength, rise, treadWidth);
-            stairStep.GetComponent<Renderer>().material.mainTextureScale = stairTextureScale;
+            //stairStep.GetComponent<Renderer>().material.mainTextureScale = stairTextureScale;
 
             if (i % wallStep == 0)
             {
@@ -73,6 +74,7 @@ public class Stair : MonoBehaviour
                 handrailInstance.transform.position = new Vector3(startPosition.x - stairStep.transform.localScale.x / 2, startPosition.y + (i * rise) + (handrailHeight / 2), startPosition.z + (i * treadWidth) - (treadWidth / 4));
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, stairStep.transform.localScale.z);
                 handrailInstance.transform.parent = transform;
+                handrailInstance.GetComponent<Renderer>().material.mainTextureScale = handrailTextureScale;
             }
 
             if (i % enviromentSpawningStepDistance == 0 && envSampleLen > 0)

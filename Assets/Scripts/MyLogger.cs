@@ -40,18 +40,40 @@ public class MyLogger
         baseFilePath = _filePath;
     }
 
-    public void Start()
+    public void Start(string[] headers)
     {
+        GameObject configGameObject = GameObject.Find("MyLoggerConfig");
+        MyLoggerConfig config = configGameObject != null ? configGameObject.GetComponent<MyLoggerConfig>() : null;
+
         startTicks = DateTime.Now.Ticks;
 
-        string formattedDatTime = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-        string filePath = baseFilePath + "." + formattedDatTime + ".csv";
+        // Study_Condition_NămThángNgày_GiờPhút_IDParticipant_Group_FootLog_Left.csv
+        string study = config != null ? config.study : "study";
+        string condition = config != null ? config.condition : "condition";
+        string participantID = config != null ? config.participantID : "pid";
+        string group = config != null ? config.group : "group";
+        string formattedDatTime = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+        //
+        string[] baseFilePathSplt = baseFilePath.Split('/');
+        string fileName = baseFilePathSplt[baseFilePathSplt.Length - 1];
+        string directory = baseFilePath.Replace(fileName, "");
+        //
+        string filePath = (directory + study + "_" + condition + "_" + formattedDatTime + "_" + participantID + "_" + group + "_" + fileName);
 
         Thread writingThread = new Thread(() => {
             FileStream fileStream = new FileStream(filePath, FileMode.Create);
             StreamWriter fileWriter = new StreamWriter(fileStream);
             using (StreamWriter writer = new StreamWriter(fileStream))
             {
+                // set headers
+                string headerLine = "";
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    if (i > 0) headerLine += ",";
+                    headerLine += headers[i];
+                }
+                writer.WriteLine(headerLine);
+
                 while (!saved)
                 {
                     if (logsQueue.IsEmpty) continue;

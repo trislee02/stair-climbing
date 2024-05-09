@@ -98,7 +98,7 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
         lastBodyRotation = transform.parent.localRotation * transform.localRotation;
 
         sensorLogger = new MyLogger(sensorLoggerPath, -1);
-        sensorLogger.Start();
+        sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight" });
     }
 
     // Update is called once per frame

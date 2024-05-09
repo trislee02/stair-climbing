@@ -83,7 +83,7 @@ public class NewLeanLegAnimation : MonoBehaviour
         footAngle = 90 - (float)Math.Atan(stepWidth / stepRise) * 180 / (float)Math.PI;
 
         sensorLogger = new MyLogger(sensorLoggerPath, -1);
-        sensorLogger.Start();
+        sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight" });
     }
 
     // Update is called once per frame

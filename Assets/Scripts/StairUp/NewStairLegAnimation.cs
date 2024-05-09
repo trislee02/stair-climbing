@@ -82,7 +82,7 @@ public class NewStairLegAnimation : MonoBehaviour
         bodyLiftingConstant = stepRise - bodyLiftingSpeed * stepRise;
 
         sensorLogger = new MyLogger(sensorLoggerPath, -1);
-        sensorLogger.Start();
+        sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight" });
     }
 
     // Update is called once per frame
