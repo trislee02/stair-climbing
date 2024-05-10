@@ -11756,7 +11756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
   maxFootHeight: 0.2
-  minFootHeight: 0.016
+  minFootHeight: 0.02
   stepWidth: 0.2
   stepRise: 0.1
   bodyLiftingSpeed: 1
