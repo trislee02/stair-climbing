@@ -71,6 +71,8 @@ public class NewStairLegAnimation : MonoBehaviour
 
     private int countFootAboveStep = 0;
     private int countFootStep = 0;
+    [SerializeField]
+    private TMPro.TMP_Text counter;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +96,7 @@ public class NewStairLegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        counter.text = "Step: " + countFootAboveStep;
         //Debug.Log("Curve lift coefficient: " + (stepWidth / (float)Math.Pow(stepRise, curveLiftFoot)) + "; body lifting constant: " + bodyLiftingConstant);
         // Play ripple effect when a foot is above a step
         if (!isRightAbove && !isLeftAbove)
