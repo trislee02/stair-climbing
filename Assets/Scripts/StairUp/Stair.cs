@@ -10,6 +10,7 @@ public class Stair : MonoBehaviour
     public float treadLength;
     public Vector3 startPosition;
     private GameObject stairWalls;
+    private GameObject handrails;
     public float wallHeight;
     public bool isWallVisible = true;
 
@@ -30,6 +31,7 @@ public class Stair : MonoBehaviour
         Vector2 handrailTextureScale = new Vector2(2f, 4f);
 
         stairWalls = new GameObject("StairWalls");
+        handrails = new GameObject("Handrails");
         for (int i = 1; i <= numberOfSteps; i++)
         {
             Vector3 stepPosition = new Vector3(startPosition.x, startPosition.y + (i * rise) - (rise / 2), startPosition.z + (i * treadWidth) - (treadWidth / 4));
@@ -73,7 +75,7 @@ public class Stair : MonoBehaviour
                 GameObject handrailInstance = Instantiate(handrailSample);
                 handrailInstance.transform.position = new Vector3(startPosition.x - stairStep.transform.localScale.x / 2, startPosition.y + (i * rise) + (handrailHeight / 2), startPosition.z + (i * treadWidth) - (treadWidth / 4));
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, stairStep.transform.localScale.z);
-                handrailInstance.transform.parent = transform;
+                handrailInstance.transform.parent = handrails.transform;
                 handrailInstance.GetComponent<Renderer>().material.mainTextureScale = handrailTextureScale;
             }
 

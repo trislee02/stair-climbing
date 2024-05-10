@@ -69,6 +69,9 @@ public class NewStairLegAnimation : MonoBehaviour
 
     private MyLogger sensorLogger;
 
+    private int countFootAboveStep = 0;
+    private int countFootStep = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,8 +84,11 @@ public class NewStairLegAnimation : MonoBehaviour
         curveLiftCoefficient = stepWidth / (float) Math.Pow(stepRise, curveLiftFoot);
         bodyLiftingConstant = stepRise - bodyLiftingSpeed * stepRise;
 
+        countFootAboveStep = 0;
+        countFootStep = 0;
+
         sensorLogger = new MyLogger(sensorLoggerPath, -1);
-        sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight" });
+        sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight", "CntFtAboveStep", "CntFtStep" });
     }
 
     // Update is called once per frame
@@ -95,12 +101,14 @@ public class NewStairLegAnimation : MonoBehaviour
             if (currentLeftDiffFootHeight >= maxDiffFootHeight)
             {
                 isLeftAbove = true;
+                countFootAboveStep++;
                 if (stepRipple)
                     stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
             }
             else if (currentRightDiffFootHeight >= maxDiffFootHeight)
             {
                 isRightAbove = true;
+                countFootAboveStep++;
                 if (stepRipple)
                     stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
             }
@@ -148,10 +156,12 @@ public class NewStairLegAnimation : MonoBehaviour
         if (isLeftAbove && currentLeftDiffFootHeight <= 0)
         {
             isLeftAbove = false;
+            countFootStep++;
         }
         if (isRightAbove && currentRightDiffFootHeight <= 0)
         {
             isRightAbove = false;
+            countFootStep++;
         }
     }
     float prevLeftHeight = -100.0f;
@@ -177,7 +187,7 @@ public class NewStairLegAnimation : MonoBehaviour
                 float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
 
                 // Add to log
-                List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight };
+                List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight, countFootAboveStep, countFootStep };
                 sensorLogger.Push(nums);
 
                 Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);

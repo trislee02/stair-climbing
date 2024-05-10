@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
+using UnityEngine.UIElements;
 
 public class PositionTracking : MonoBehaviour
 {
@@ -13,7 +16,7 @@ public class PositionTracking : MonoBehaviour
     void Start()
     {
         logger = new MyLogger(loggerPath, -1);
-        logger.Start(new string[] { "PosX", "PosY", "PosZ", "QuaX", "QuaY", "QuaZ", "QuaW" });
+        logger.Start(new string[] { "PosX", "PosY", "PosZ", "QuaX", "QuaY", "QuaZ", "QuaW" }); 
     }
 
     // Update is called once per frame
@@ -23,6 +26,9 @@ public class PositionTracking : MonoBehaviour
         Quaternion quat = transform.rotation;
         List<float> nums = new List<float> { pos.x, pos.y, pos.z, quat.x, quat.y, quat.z, quat.w };
         logger.Push(nums);
+        GameObject headPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        headPoint.transform.position = pos;
+        headPoint.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
     }
 
     void OnApplicationQuit()
