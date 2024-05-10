@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.25732678, g: 0.69084895, b: 0.81972224, a: 1}
+  m_IndirectSpecularColor: {r: 0.25810838, g: 0.6908126, b: 0.81899774, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7584,7 +7584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1949438592
 Transform:
   m_ObjectHideFlags: 0
@@ -7613,7 +7613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointSize: 0.075
-  fileName: log_tri/A03/head
+  fileName: log_tri/A04/head
   color: {r: 1, g: 0, b: 0, a: 1}
   drawRay: 1
 --- !u!114 &1949438594
@@ -7629,7 +7629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointSize: 0.075
-  fileName: log_tri/A03/left
+  fileName: log_tri/A04/left
   color: {r: 0, g: 0.7584905, b: 0.16163827, a: 1}
   drawRay: 0
 --- !u!114 &1949438595
@@ -7645,7 +7645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointSize: 0.075
-  fileName: log_tri/A03/right
+  fileName: log_tri/A04/right
   color: {r: 0, g: 0.22452068, b: 1, a: 1}
   drawRay: 0
 --- !u!1 &1956814233
@@ -11739,7 +11739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a46a77ef8ae30341965a325cc53f28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFromKinect: 0
+  isFromKinect: 1
   pedalLength: 0.37
   kinectDevice: {fileID: 921941432}
 --- !u!114 &5553708535250551609
@@ -11755,7 +11755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
-  maxFootHeight: 0.05
+  maxFootHeight: 0.2
   minFootHeight: 0.016
   stepWidth: 0.2
   stepRise: 0.1

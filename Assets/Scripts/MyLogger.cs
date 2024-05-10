@@ -104,6 +104,7 @@ public class MyLogger
 
     public void Push(List<float> nums)
     {
+
         if (saved) { return ; }
         //TimeSpan elapse = new TimeSpan(DateTime.Now.Ticks - startTicks);
         //long timestamp = (long)Math.Floor(elapse.TotalMilliseconds);

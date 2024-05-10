@@ -94,7 +94,7 @@ public class NewStairLegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Curve lift coefficient: " + (stepWidth / (float)Math.Pow(stepRise, curveLiftFoot)) + "; body lifting constant: " + bodyLiftingConstant);
+        //Debug.Log("Curve lift coefficient: " + (stepWidth / (float)Math.Pow(stepRise, curveLiftFoot)) + "; body lifting constant: " + bodyLiftingConstant);
         // Play ripple effect when a foot is above a step
         if (!isRightAbove && !isLeftAbove)
         {
@@ -183,14 +183,14 @@ public class NewStairLegAnimation : MonoBehaviour
             {
                 float roll1Logging = 0;
                 float roll2Logging = 0;
-                float dataLeftFootHeight = footHeightDebug;//dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
                 float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
 
                 // Add to log
                 List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight, countFootAboveStep, countFootStep };
                 sensorLogger.Push(nums);
 
-                Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);
+                Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight + "; CntFtAboveStep: " + countFootAboveStep + "; CntFtStep: " + countFootStep);
 
                 // Clip foot height
                 currentLeftDiffFootHeight = Mathf.Clamp(dataLeftFootHeight, minFootHeight, maxFootHeight);

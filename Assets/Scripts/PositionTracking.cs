@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 using UnityEngine.UIElements;
 
 public class PositionTracking : MonoBehaviour
@@ -36,12 +35,12 @@ public class PositionTracking : MonoBehaviour
         Quaternion quat = transform.rotation;
         List<float> nums = new List<float> { pos.x, pos.y, pos.z, quat.x, quat.y, quat.z, quat.w };
         logger.Push(nums);
-        GameObject headPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        headPoint.transform.position = pos;
-        headPoint.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-        System.Random rnd = new System.Random();
-        int index = rnd.Next(COLORS.Length);
-        headPoint.GetComponent<Renderer>().material.color = COLORS[index];
+        //GameObject headPoint = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //headPoint.transform.position = pos;
+        //headPoint.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        //System.Random rnd = new System.Random();
+        //int index = rnd.Next(COLORS.Length);
+        //headPoint.GetComponent<Renderer>().material.color = COLORS[index];
     }
 
     void OnApplicationQuit()
