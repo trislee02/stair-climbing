@@ -73,8 +73,12 @@ public class SpiralStair : MonoBehaviour
                 {
                     int index = Random.Range(0, details.Count - 1);
                     GameObject handrailObj = Instantiate(details[index]);
-                    handrailObj.transform.position = new Vector3(handrailInstance.transform.position.x, handrailInstance.transform.position.y + handrailHeight / 2 + handrailObj.transform.localScale.y / 2, handrailInstance.transform.position.z - stairStep.transform.localScale.z / 2);
-                    handrailObj.transform.parent = transform;
+
+                    // Get the handrailObj size
+                    //Vector3 size = handrailObj.GetComponent<Renderer>().bounds.size;
+                    handrailObj.transform.position = new Vector3(handrailInstance.transform.position.x,
+                                                                 handrailInstance.transform.position.y + handrailHeight / 2,
+                                                                 handrailInstance.transform.position.z);
                 }
             }
         }

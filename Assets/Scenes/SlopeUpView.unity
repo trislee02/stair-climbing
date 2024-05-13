@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.25732678, g: 0.69084895, b: 0.81972224, a: 1}
+  m_IndirectSpecularColor: {r: 0.25810838, g: 0.6908126, b: 0.81899774, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5740,9 +5740,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79148503efbaa1468b7ca99d24c997e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepWidth: 0.2
-  stepRise: 0.1
-  numberOfStep: 104
+  stepWidth: 0.3
+  stepRise: 0.16
+  numberOfStep: 500
   width: 4
   startPosition: {x: -0.2, y: 0, z: 0}
   wallHeight: 4
@@ -6800,7 +6800,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ef200aad536019b499b40a14da8d597c, type: 2}
+  - {fileID: 2100000, guid: b767f61ded22e3a48a7888c969b8a8c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6839,7 +6839,7 @@ Transform:
   m_GameObject: {fileID: 1512213566}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.254, y: -7.27, z: -69.9}
+  m_LocalPosition: {x: -3.984, y: -7.27, z: -69.9}
   m_LocalScale: {x: 0.1, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11245,7 +11245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFromKinect: 0
-  pedalLength: 0.37
+  pedalLength: 0.25
   kinectDevice: {fileID: 924191716}
 --- !u!114 &5553708535250551609
 MonoBehaviour:
@@ -11260,14 +11260,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
-  maxFootHeight: 0.05
-  minFootHeight: 0.018
-  stepWidth: 0.2
-  stepRise: 0.1
+  maxFootHeight: 0.042
+  minFootHeight: 0.03
+  stepWidth: 0.3
+  stepRise: 0.16
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0
   moveUpwardLegSpeed: 1
-  curveLiftFoot: 7
+  curveLiftFoot: 3
   stepRipple: {fileID: 341476698}
 --- !u!1 &5680486696846944310
 GameObject:

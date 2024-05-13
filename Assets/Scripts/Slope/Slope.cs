@@ -24,11 +24,13 @@ public class Slope : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        System.Random rd = new System.Random();
+
         float ch = Mathf.Sqrt(stepWidth * stepWidth + stepRise * stepRise);
         float length = numberOfStep * ch + 0.1f;
         int envSampleLen = enviromentSamples.Length;
-        Vector2 wallTextureScale = new Vector2(Mathf.Ceil(width * wallStep), Mathf.Ceil(wallHeight));
-        Vector2 slopeTextureScale = new Vector2(Mathf.Ceil(width), Mathf.Ceil(length));
+        Vector2 wallTextureScale = new Vector2(Mathf.Ceil(width * wallStep)*0.9f, Mathf.Ceil(wallHeight)*3f);
+        Vector2 slopeTextureScale = new Vector2(Mathf.Ceil(width) * 1.8f, Mathf.Ceil(length) * 1.8f);
         float alpha = Mathf.Atan(stepRise / stepWidth);
         float sinAlpha = Mathf.Sin(alpha);
         float cosAlpha = Mathf.Cos(alpha);
@@ -66,6 +68,7 @@ public class Slope : MonoBehaviour
                 stairWall.transform.parent = transform;
                 //
                 stairWall.GetComponent<Renderer>().material.mainTextureScale = wallTextureScale;
+                stairWall.GetComponent<Renderer>().material.mainTextureOffset = new Vector2((float)rd.NextDouble(), (float)rd.NextDouble());
             }
 
             if (handrailSample != null)
@@ -74,6 +77,7 @@ public class Slope : MonoBehaviour
                 handrailInstance.transform.position = new Vector3(startPosition.x - width / 2f, startPosition.y + handrailHeight / 2 + sinAlpha * (i - 1) - stepRise, startPosition.z + cosAlpha * (i));
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, cosAlpha * wallStep);
                 handrailInstance.transform.parent = transform;
+                handrailInstance.GetComponent<Renderer>().material.mainTextureOffset = new Vector2((float)rd.NextDouble(), (float)rd.NextDouble());
             }
 
             if (i % enviromentSpawningStepDistance == 0 && envSampleLen > 0)
