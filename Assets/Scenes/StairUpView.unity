@@ -5995,8 +5995,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfSteps: 500
-  rise: 0.1
-  treadWidth: 0.2
+  rise: 0.16
+  treadWidth: 0.3
   treadLength: 4
   startPosition: {x: 1.1, y: 0, z: 1}
   wallHeight: 8
@@ -6734,7 +6734,7 @@ Transform:
   m_GameObject: {fileID: 1162260830}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.602, z: 0.912}
+  m_LocalPosition: {x: 1, y: 1.602, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7203,8 +7203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   study: stairup
   condition: device
-  participantID: 03
-  group: A
+  participantID: 24
+  group: B
 --- !u!4 &1290694695
 Transform:
   m_ObjectHideFlags: 0
@@ -7888,7 +7888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1949438592
 Transform:
   m_ObjectHideFlags: 0
@@ -11672,6 +11672,7 @@ GameObject:
   - component: {fileID: 5553708535250551608}
   - component: {fileID: 5553708535250551606}
   - component: {fileID: 5553708535250551609}
+  - component: {fileID: 5553708535250551610}
   m_Layer: 0
   m_Name: Y Bot
   m_TagString: Untagged
@@ -12044,7 +12045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFromKinect: 0
-  pedalLength: 0.37
+  pedalLength: 0.25
   kinectDevice: {fileID: 921941432}
 --- !u!114 &5553708535250551609
 MonoBehaviour:
@@ -12061,15 +12062,28 @@ MonoBehaviour:
   sensorLoggerPath: ./log/sensor.csv
   maxFootHeight: 0.045
   minFootHeight: 0.028
-  stepWidth: 0.2
-  stepRise: 0.1
+  stepWidth: 0.3
+  stepRise: 0.16
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0.5
   moveUpwardLegSpeed: 1
-  curveLiftFoot: 5
+  curveLiftFoot: 3
   stepRipple: {fileID: 341476698}
   footHeightDebug: 0
   counter: {fileID: 1235523975}
+--- !u!114 &5553708535250551610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5069202498189416847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2967e9d0b1a822d43828583c269a6cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1163403938}
 --- !u!1 &5680486696846944310
 GameObject:
   m_ObjectHideFlags: 0

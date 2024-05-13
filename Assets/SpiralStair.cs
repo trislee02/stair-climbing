@@ -17,6 +17,9 @@ public class SpiralStair : MonoBehaviour
     public GameObject handrail;
     public GameObject centerTree;
     public GameObject wall;
+    //
+    public List<GameObject> details;
+    public int detailRange = 5;
 
     private Vector3 pivotPoint;
 
@@ -27,6 +30,7 @@ public class SpiralStair : MonoBehaviour
         float radius = (treadWidth / 2.0f) / Mathf.Sin(angleTheta/2.0f * Mathf.Deg2Rad);
         float alpha = (180.0f - angleTheta) / 2.0f;
         pivotPoint = startingPoint.forward * radius;
+
         pivotPoint = Quaternion.AngleAxis(alpha, startingPoint.up) * pivotPoint;
         Debug.DrawRay(pivotPoint, Vector3.up * 10, Color.red);
         
@@ -43,7 +47,7 @@ public class SpiralStair : MonoBehaviour
                                                initialPosition.y + (i * rise) - (rise / 2), 
                                                initialPosition.z);
                                                     // Add the angle to position the stair step back to keep place for foot
-            stepPosition = Quaternion.AngleAxis(angleTheta * i + 2f, startingPoint.up) * (stepPosition - pivotPoint) + pivotPoint;
+            stepPosition = Quaternion.AngleAxis(angleTheta * i - 0.25f, startingPoint.up) * (stepPosition - pivotPoint) + pivotPoint;
             stairStep.SetActive(true);
             stairStep.transform.position = stepPosition;
             stairStep.transform.localScale = new Vector3(treadLength,  //+ 2 * supplementTreadLength, 
@@ -63,6 +67,15 @@ public class SpiralStair : MonoBehaviour
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, stairStep.transform.localScale.z);
                 handrailInstance.transform.RotateAround(pivotPoint, handrailInstance.transform.up, angleTheta * i);
                 handrailInstance.transform.parent = transform;
+
+                // Detail
+                if (i % detailRange == 0 && details.Count > 0)
+                {
+                    int index = Random.Range(0, details.Count - 1);
+                    GameObject handrailObj = Instantiate(details[index]);
+                    handrailObj.transform.position = new Vector3(handrailInstance.transform.position.x, handrailInstance.transform.position.y + handrailHeight / 2 + handrailObj.transform.localScale.y / 2, handrailInstance.transform.position.z);
+                    handrailInstance.transform.parent = transform;
+                }
             }
         }
 
