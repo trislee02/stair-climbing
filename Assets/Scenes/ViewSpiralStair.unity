@@ -10546,12 +10546,11 @@ MonoBehaviour:
   centerTree: {fileID: 919132149124155749}
   wall: {fileID: 748013485}
   details:
-  - {fileID: 2039076017}
-  - {fileID: 33326603}
+  - {fileID: 1734818132}
+  - {fileID: 83982627}
   - {fileID: 655834149}
   - {fileID: 253866710}
   detailRange: 5
-  handrailObjectOffsetY: 0.2
 --- !u!4 &272952343
 Transform:
   m_ObjectHideFlags: 0
