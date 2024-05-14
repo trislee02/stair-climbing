@@ -71,14 +71,14 @@ public class SpiralStair : MonoBehaviour
                 // Detail
                 if (i % detailRange == 0 && details.Count > 0)
                 {
-                    int index = Random.Range(0, details.Count - 1);
+                    int index = Random.Range(0, details.Count);
+                    //if (index == details.Count) index = 0;
                     GameObject handrailObj = Instantiate(details[index]);
-
-                    // Get the handrailObj size
-                    //Vector3 size = handrailObj.GetComponent<Renderer>().bounds.size;
+                    handrailObj.transform.RotateAround(pivotPoint, handrailObj.transform.up, angleTheta * i);
                     handrailObj.transform.position = new Vector3(handrailInstance.transform.position.x,
-                                                                 handrailInstance.transform.position.y + handrailHeight / 2,
+                                                                 handrailInstance.transform.position.y + handrailHeight / 2 + handrailObj.transform.localScale.y / 2,
                                                                  handrailInstance.transform.position.z);
+                    handrailObj.transform.parent = transform;
                 }
             }
         }
