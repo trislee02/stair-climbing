@@ -33,7 +33,17 @@ public class NewLeanLegAnimation : MonoBehaviour
     private float curveLiftFoot = 7.0f; // Must be a number larger than 1 
 
     [SerializeField]
+    private float maxFootRotateAngle = 10f;
+
+    [SerializeField]
     private ParticleSystem stepRipple;
+
+    [SerializeField]
+    private TMPro.TMP_Text counter;
+
+    [Range(0.01f, 0.05f)]
+    [SerializeField]
+    private float footHeightDebug;
 
     private float maxDiffFootHeight;
     private float risePerRealHeightUnit;
@@ -41,9 +51,9 @@ public class NewLeanLegAnimation : MonoBehaviour
     private float curveLiftCoefficient;
     private float bodyLiftingConstant;
 
-    private bool isRightFootRotationFixed = true;
-    private bool isLeftFootRotationFixed = true;
     private float footAngle;
+    private float footRotateCoffA;
+    private float footRotateCoffB;
 
     private Animator animator;
     private DataManager dataManager;
@@ -68,6 +78,9 @@ public class NewLeanLegAnimation : MonoBehaviour
 
     private MyLogger sensorLogger;
 
+    private int countFootAboveStep = 0;
+    private int countFootStep = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,6 +95,13 @@ public class NewLeanLegAnimation : MonoBehaviour
 
         footAngle = 90 - (float)Math.Atan(stepWidth / stepRise) * 180 / (float)Math.PI;
 
+        countFootAboveStep = 0;
+        countFootStep = 0;
+
+        // Calculate the coefficients for foot rotation to follow the parabolic curve with max is the maxFootRotateAngle and min is 0, at the middle of the maxDiffFootHeight
+        footRotateCoffA = - maxFootRotateAngle / (maxDiffFootHeight * maxDiffFootHeight / 4.0f);
+        footRotateCoffB = - footRotateCoffA * maxDiffFootHeight;
+
         sensorLogger = new MyLogger(sensorLoggerPath, -1);
         sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight" });
     }
@@ -89,17 +109,20 @@ public class NewLeanLegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        counter.text = "Step: " + countFootAboveStep;
         if (!isRightAbove && !isLeftAbove)
         {
             if (currentLeftDiffFootHeight >= maxDiffFootHeight)
             {
                 isLeftAbove = true;
+                countFootAboveStep++;
                 if (stepRipple)
                     stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
             }
             else if (currentRightDiffFootHeight >= maxDiffFootHeight)
             {
                 isRightAbove = true;
+                countFootAboveStep++;
                 if (stepRipple)
                     stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
             }
@@ -145,25 +168,16 @@ public class NewLeanLegAnimation : MonoBehaviour
             transform.parent.parent.position = newAvatarPosition;
         }
 
-        isLeftFootRotationFixed = true;
-        isRightFootRotationFixed = true;
-
         if (currentLeftDiffFootHeight <= 0)
         {
             isLeftAbove = false;
-        }
-        else if (!isLeftAbove)
-        {
-            isLeftFootRotationFixed = false;
+            countFootStep++;
         }
 
         if (currentRightDiffFootHeight <= 0)
         {
             isRightAbove = false;
-        }
-        else if (!isRightAbove)
-        {
-            isRightFootRotationFixed = false;
+            countFootStep++;
         }
     }
 
@@ -186,13 +200,13 @@ public class NewLeanLegAnimation : MonoBehaviour
                 float roll1Logging = 0;
                 float roll2Logging = 0;
                 float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
-                float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
+                float dataRightFootHeight = footHeightDebug; //dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
 
+                Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);
+                
                 // Add to log
                 List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight };
                 sensorLogger.Push(nums);
-
-                Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);
 
                 // Clip foot height
                 currentLeftDiffFootHeight = Mathf.Clamp(dataLeftFootHeight, minFootHeight, maxFootHeight);
@@ -289,26 +303,34 @@ public class NewLeanLegAnimation : MonoBehaviour
                 Quaternion currentLeftFootRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
                 Quaternion currentRightFootRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
 
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentLeftFootRotation);
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentRightFootRotation);
+                float leftFootRotateAngle = footAngle - (footRotateCoffA * currentLeftDiffFootHeight * currentLeftDiffFootHeight + footRotateCoffB * currentLeftDiffFootHeight);
+                float rightFootRotateAngle = footAngle - (footRotateCoffA * currentRightDiffFootHeight * currentRightDiffFootHeight + footRotateCoffB * currentRightDiffFootHeight);
+                
+                if (isLeftAbove)
+                {
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentLeftFootRotation);
+                }
+                else if (isRightAbove)
+                {
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(-rightFootRotateAngle, transform.right) * currentLeftFootRotation);
+                }
+                else
+                {
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(-leftFootRotateAngle, transform.right) * currentLeftFootRotation);
+                }
 
-                //if (isLeftFootRotationFixed)
-                //{
-                //    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentLeftFootRotation);
-                //}
-                //else
-                //{
-                //    //animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right) * currentLeftFootRotation);
-                //}
-
-                //if (isRightFootRotationFixed)
-                //{
-                //    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentRightFootRotation);
-                //}
-                //else
-                //{
-                //    //animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right) * currentRightFootRotation);
-                //}
+                if (isRightAbove)
+                {
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(-footAngle, transform.right) * currentRightFootRotation);
+                }
+                else if (isLeftAbove)
+                {
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(-leftFootRotateAngle, transform.right) * currentRightFootRotation);
+                }
+                else
+                {
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(-rightFootRotateAngle, transform.right) * currentRightFootRotation);
+                }
 
 
                 //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + initialLeftFootIKWorldPosition);
