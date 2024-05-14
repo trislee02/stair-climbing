@@ -332,8 +332,6 @@ public class NewLeanLegAnimation : MonoBehaviour
                     animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(-rightFootRotateAngle, transform.right) * currentRightFootRotation);
                 }
 
-
-                //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + initialLeftFootIKWorldPosition);
             }
         }
     }
