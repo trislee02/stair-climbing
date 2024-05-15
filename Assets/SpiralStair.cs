@@ -19,10 +19,21 @@ public class SpiralStair : MonoBehaviour
     public GameObject wall;
 
     private Vector3 pivotPoint;
+    private GameObject steps;
+    private GameObject handrails;
+    private GameObject walls;
 
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< Updated upstream
+=======
+        steps = new GameObject("Steps");
+        handrails = new GameObject("Handrails");
+        walls = new GameObject("Walls");
+
+        // Move starting point forward in order to keep place for foot
+>>>>>>> Stashed changes
         float radius = (treadWidth / 2.0f) / Mathf.Sin(angleTheta/2.0f * Mathf.Deg2Rad);
         float alpha = (180.0f - angleTheta) / 2.0f;
         pivotPoint = startingPoint.forward * radius;
@@ -50,7 +61,7 @@ public class SpiralStair : MonoBehaviour
                                                          treadWidth + 0.2f); // +0.1f is the supplement width
 
             stairStep.transform.Rotate(stairStep.transform.up, angleTheta * i);
-            stairStep.transform.parent = transform;
+            stairStep.transform.parent = steps.transform;
 
             if (handrail != null)
             {
@@ -61,7 +72,24 @@ public class SpiralStair : MonoBehaviour
                                                                   startingPoint.position.z);
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, stairStep.transform.localScale.z);
                 handrailInstance.transform.RotateAround(pivotPoint, handrailInstance.transform.up, angleTheta * i);
+<<<<<<< Updated upstream
                 handrailInstance.transform.parent = transform;
+=======
+                handrailInstance.transform.parent = handrails.transform;
+
+                // Detail
+                if (i % detailRange == 0 && details.Count > 0)
+                {
+                    int index = Random.Range(0, details.Count);
+                    //if (index == details.Count) index = 0;
+                    GameObject handrailObj = Instantiate(details[index]);
+                    handrailObj.transform.RotateAround(pivotPoint, handrailObj.transform.up, angleTheta * i);
+                    handrailObj.transform.position = new Vector3(handrailInstance.transform.position.x,
+                                                                 handrailInstance.transform.position.y + handrailHeight / 2 + handrailObj.transform.localScale.y / 2,
+                                                                 handrailInstance.transform.position.z);
+                    handrailObj.transform.parent = handrailInstance.transform;
+                }
+>>>>>>> Stashed changes
             }
         }
 
@@ -74,7 +102,7 @@ public class SpiralStair : MonoBehaviour
                                                               startingPoint.position.z);
             wallInstance.transform.localScale = new Vector3(0.1f, wallHeight, treadWidth + 0.1f);
             wallInstance.transform.RotateAround(pivotPoint, wallInstance.transform.up, angleTheta * i);
-            wallInstance.transform.parent = transform;
+            wallInstance.transform.parent = walls.transform;
         }
 
         centerTree.transform.position = pivotPoint;
