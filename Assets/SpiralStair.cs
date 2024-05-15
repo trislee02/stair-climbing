@@ -26,14 +26,11 @@ public class SpiralStair : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-<<<<<<< Updated upstream
-=======
         steps = new GameObject("Steps");
         handrails = new GameObject("Handrails");
         walls = new GameObject("Walls");
 
         // Move starting point forward in order to keep place for foot
->>>>>>> Stashed changes
         float radius = (treadWidth / 2.0f) / Mathf.Sin(angleTheta/2.0f * Mathf.Deg2Rad);
         float alpha = (180.0f - angleTheta) / 2.0f;
         pivotPoint = startingPoint.forward * radius;
@@ -72,9 +69,6 @@ public class SpiralStair : MonoBehaviour
                                                                   startingPoint.position.z);
                 handrailInstance.transform.localScale = new Vector3(0.1f, handrailHeight, stairStep.transform.localScale.z);
                 handrailInstance.transform.RotateAround(pivotPoint, handrailInstance.transform.up, angleTheta * i);
-<<<<<<< Updated upstream
-                handrailInstance.transform.parent = transform;
-=======
                 handrailInstance.transform.parent = handrails.transform;
 
                 // Detail
@@ -89,7 +83,6 @@ public class SpiralStair : MonoBehaviour
                                                                  handrailInstance.transform.position.z);
                     handrailObj.transform.parent = handrailInstance.transform;
                 }
->>>>>>> Stashed changes
             }
         }
 

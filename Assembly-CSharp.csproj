@@ -213,11 +213,8 @@
     <Compile Include="Assets\Oculus\SampleFramework\Usage\OVROverlay\Scripts\OVROverlaySample.cs" />
     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\InteractableRegistry.cs" />
     <Compile Include="Assets\Scripts\AvatarMovement.cs" />
-<<<<<<< Updated upstream
-=======
     <Compile Include="Assets\AurynSky\Gems Ultimate Pack\Scripts\AnimationScript.cs" />
     <Compile Include="Assets\NewSpiralLegAnimation.cs" />
->>>>>>> Stashed changes
     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\ColliderZone.cs" />
     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTransitionWarp.cs" />
     <Compile Include="Assets\Scripts\HeadIK.cs" />
@@ -284,11 +281,7 @@
     <None Include="Assets\ALP_Assets\Big Oak Tree FREE\Shaders\ALP Water Gestner Waves.shader" />
     <None Include="Assets\Trees\Render Pipeline Support\Built-in RP\CTI Runtime Components\Shaders\CTI_LOD_Leaves_301.shader" />
     <None Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Shaders\OculusSampleAlphaHandOutline.shader" />
-<<<<<<< Updated upstream
-=======
-    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Nice Materials Pack 2\Shaders\Processed Leather.shader" />
->>>>>>> Stashed changes
     <None Include="Assets\Oculus\SampleFramework\Usage\Passthrough\Materials\GlowEffect.shader" />
     <None Include="Assets\Oculus\Voice\Features\Telemetry\Plugins\SDKTelemetry.dll" />
     <None Include="Assets\ALP_Assets\Big Oak Tree FREE\Shaders\ALP Surface Detail Wind.shader" />
@@ -312,11 +305,7 @@
     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Shaders\Hands_02.shader" />
     <None Include="Assets\Oculus\SampleFramework\Usage\SceneManager\Shaders\GlassMask.shader" />
     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Materials\Hands_DiffBump.shader" />
-<<<<<<< Updated upstream
-=======
-    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Nice Materials Pack 2\Shaders\Stained Leather.shader" />
->>>>>>> Stashed changes
     <None Include="Assets\Oculus\SampleFramework\license.txt" />
   </ItemGroup>
   <ItemGroup>
