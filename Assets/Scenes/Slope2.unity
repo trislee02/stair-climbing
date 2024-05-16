@@ -15941,7 +15941,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1261.2, y: -10.98, z: -1085.3545}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1693527247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25861,7 +25861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e666e6e523445534eb7106a7f78135f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -880.8197
+      value: -935
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e666e6e523445534eb7106a7f78135f1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25869,7 +25869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e666e6e523445534eb7106a7f78135f1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 544.6455
+      value: 640
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e666e6e523445534eb7106a7f78135f1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48096,8 +48096,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   study: slope
-  condition: kinect
-  participantID: 01
+  condition: device
+  participantID: 33
   group: A
 --- !u!4 &1294565547
 Transform:
