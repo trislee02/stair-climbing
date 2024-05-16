@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.25732678, g: 0.69084895, b: 0.81972224, a: 1}
+  m_IndirectSpecularColor: {r: 0.25810838, g: 0.6908126, b: 0.81899774, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15939,7 +15939,7 @@ Transform:
   m_GameObject: {fileID: 366672453}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1261.8197, y: -10.98, z: -1085.3545}
+  m_LocalPosition: {x: -1261.2, y: -10.98, z: -1085.3545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42777,7 +42777,7 @@ Transform:
   m_GameObject: {fileID: 1162260830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.24, z: 0}
+  m_LocalPosition: {x: 0, y: 1.315, z: 0.064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78789,9 +78789,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
   maxFootHeight: 0.042
-  minFootHeight: 0.03
-  stepWidth: 0.45
-  stepRise: 0.24
+  minFootHeight: 0.028
+  stepWidth: 0.3
+  stepRise: 0.08
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0
   moveUpwardLegSpeed: 1
