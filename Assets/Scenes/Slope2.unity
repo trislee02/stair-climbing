@@ -26784,7 +26784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &701674510
 Transform:
   m_ObjectHideFlags: 0
@@ -26813,7 +26813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79148503efbaa1468b7ca99d24c997e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepWidth: 0.6
+  stepWidth: 0.4
   stepRise: 0.16
   numberOfStep: 770
   width: 4
@@ -27566,7 +27566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &717739144
 Transform:
   m_ObjectHideFlags: 0
@@ -78788,10 +78788,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
-  maxFootHeight: 0.042
+  maxFootHeight: 0.048
   minFootHeight: 0.028
-  stepWidth: 0.3
-  stepRise: 0.08
+  stepWidth: 0.4
+  stepRise: 0.16
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0
   moveUpwardLegSpeed: 1
