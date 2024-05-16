@@ -38,12 +38,18 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
     [SerializeField]
     private SpiralStair spiralStair;
 
+    [SerializeField]
+    private bool isDebug;
+
     [Range(0.01f, 0.05f)]
     [SerializeField]
     private float footHeightDebug;
 
     [SerializeField]
     private OVRCameraRig ovrCameraRig;
+
+    [SerializeField]
+    private TMPro.TMP_Text counter;
 
     private float maxDiffFootHeight;
     private float risePerRealHeightUnit;
@@ -80,6 +86,9 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
 
     private MyLogger sensorLogger;
 
+    private int countFootAboveStep = 0;
+    private int countFootStep = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +106,9 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
         lastVRCameraRotation = transform.parent.localRotation * transform.localRotation * ovrCameraRig.transform.localRotation;
         lastBodyRotation = transform.parent.localRotation * transform.localRotation;
 
+        countFootAboveStep = 0;
+        countFootStep = 0;
+
         sensorLogger = new MyLogger(sensorLoggerPath, -1);
         sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight" });
     }
@@ -104,17 +116,21 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        counter.text = "Step: " + countFootAboveStep;
+        Debug.Log("Step: " + countFootAboveStep + "; Rotate: " + countFootStep);
         // Play ripple effect when a foot is above a step
         if (!isRightAbove && !isLeftAbove)
         {
             if (currentLeftDiffFootHeight >= maxDiffFootHeight)
             {
                 isLeftAbove = true;
+                countFootAboveStep++;
                 stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
             }
             else if (currentRightDiffFootHeight >= maxDiffFootHeight)
             {
                 isRightAbove = true;
+                countFootAboveStep++;
                 stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
             }
             if (isLeftAbove || isRightAbove)
@@ -175,8 +191,9 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
 
         if (isLeftAbove && currentLeftDiffFootHeight <= 0)
         {
-            Debug.Log("Rotate Left Foot");
+            //Debug.Log("Rotate Left Foot");
             isLeftAbove = false;
+            countFootStep++;
 
             transform.parent.Rotate(transform.parent.up, rotationAngle);
             // Keep the VR camera's rotation unchanged
@@ -185,8 +202,9 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
         }
         if (isRightAbove && currentRightDiffFootHeight <= 0)
         {
-            Debug.Log("Rotate Right Foot");
+            //Debug.Log("Rotate Right Foot");
             isRightAbove = false;
+            countFootStep++;
 
             transform.parent.Rotate(transform.parent.up, rotationAngle);
             // Keep the VR camera's rotation unchanged
@@ -224,6 +242,10 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
                 float roll2Logging = 0;
                 float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
                 float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
+                if (isDebug)
+                {
+                    dataRightFootHeight = footHeightDebug;
+                }
 
                 // Add to log
                 List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight };
@@ -238,7 +260,7 @@ public class NewSpiralStairLegAnimation : MonoBehaviour
                 currentLeftDiffFootHeight -= minFootHeight;
                 currentRightDiffFootHeight -= minFootHeight;
 
-                Debug.Log("Diff Left height: " + currentLeftDiffFootHeight + "; Diff Right height: " + currentRightDiffFootHeight);
+                //Debug.Log("Diff Left height: " + currentLeftDiffFootHeight + "; Diff Right height: " + currentRightDiffFootHeight);
 
                 // Inverse kinematics
                 // Update IKPosition
