@@ -29,7 +29,7 @@ public class Slope : MonoBehaviour
         float ch = Mathf.Sqrt(stepWidth * stepWidth + stepRise * stepRise);
         float length = numberOfStep * ch + 0.1f;
         int envSampleLen = enviromentSamples.Length;
-        Vector2 wallTextureScale = new Vector2(Mathf.Ceil(width * wallStep)*1f, Mathf.Ceil(wallHeight)*1f);
+        Vector2 wallTextureScale = new Vector2(Mathf.Ceil(width * wallStep)*1.4f, Mathf.Ceil(wallHeight)*1.4f);
         Vector2 slopeTextureScale = new Vector2(Mathf.Ceil(width) * 1.2f, Mathf.Ceil(length) * 1.2f);
         float alpha = Mathf.Atan(stepRise / stepWidth);
         Debug.Log("Alpha: " + alpha + " " + alpha / Mathf.PI * 180f);

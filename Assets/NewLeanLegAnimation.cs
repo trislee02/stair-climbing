@@ -45,6 +45,9 @@ public class NewLeanLegAnimation : MonoBehaviour
     [SerializeField]
     private float footHeightDebug;
 
+    [SerializeField]
+    private bool isDebug = false;
+
     private float maxDiffFootHeight;
     private float risePerRealHeightUnit;
     private float widthPerRealHeightUnit;
@@ -201,6 +204,10 @@ public class NewLeanLegAnimation : MonoBehaviour
                 float roll2Logging = 0;
                 float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
                 float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
+                if (isDebug)
+                {
+                    dataRightFootHeight = footHeightDebug;
+                }
 
                 Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight);
                 
