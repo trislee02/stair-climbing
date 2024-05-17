@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.97713304, g: 0.8940202, b: 0.7809123, a: 1}
+  m_IndirectSpecularColor: {r: 0.97695535, g: 0.89392376, b: 0.78153735, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -42516,7 +42516,7 @@ Transform:
   m_GameObject: {fileID: 1162260830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.316, z: 0.069}
+  m_LocalPosition: {x: 1.05, y: 1.316, z: 0.069}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47835,8 +47835,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   study: slope
-  condition: kinect
-  participantID: 01
+  condition: device
+  participantID: 36
   group: A
 --- !u!4 &1294565547
 Transform:
@@ -78585,8 +78585,8 @@ MonoBehaviour:
   sensorLoggerPath: ./log/sensor.csv
   maxFootHeight: 0.042
   minFootHeight: 0.028
-  stepWidth: 0.45
-  stepRise: 0.24
+  stepWidth: 0.375
+  stepRise: 0.2
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0
   moveUpwardLegSpeed: 1
