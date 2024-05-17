@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.97713304, g: 0.8940202, b: 0.7809123, a: 1}
+  m_IndirectSpecularColor: {r: 0.97695535, g: 0.89392376, b: 0.78153735, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4857,6 +4857,88 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1286e3a745458f4438fb05c8ad88add5, type: 3}
+--- !u!1 &164277134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 164277138}
+  - component: {fileID: 164277137}
+  - component: {fileID: 164277136}
+  - component: {fileID: 164277135}
+  m_Layer: 0
+  m_Name: VisualTrajectory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &164277135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b746f69954569ef4285802780f046ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSize: 0.075
+  fileName: log_tri/A04/left
+  color: {r: 0, g: 0.7584905, b: 0.16163827, a: 1}
+  drawRay: 0
+--- !u!114 &164277136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b746f69954569ef4285802780f046ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSize: 0.075
+  fileName: log_tri/A04/right
+  color: {r: 0, g: 0.22452068, b: 1, a: 1}
+  drawRay: 0
+--- !u!114 &164277137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b746f69954569ef4285802780f046ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSize: 0.075
+  fileName: log_tri/A04/head
+  color: {r: 1, g: 0, b: 0, a: 1}
+  drawRay: 1
+--- !u!4 &164277138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &164770584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1374818551041490338, guid: 1286e3a745458f4438fb05c8ad88add5, type: 3}
@@ -28331,7 +28413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 268, y: 169.61578}
+  m_AnchoredPosition: {x: 828, y: 508}
   m_SizeDelta: {x: 95.8622, y: 16.7684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &748207868
@@ -42516,7 +42598,7 @@ Transform:
   m_GameObject: {fileID: 1162260830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.316, z: 0.069}
+  m_LocalPosition: {x: 1.05, y: 1.316, z: 0.069}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47835,8 +47917,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   study: slope
+<<<<<<< HEAD
+  condition: device
+=======
   condition: kinect
-  participantID: 01
+>>>>>>> 004d45d7737d4f638e7d17bb786c90f0f2784745
+  participantID: 36
   group: A
 --- !u!4 &1294565547
 Transform:
@@ -72426,10 +72512,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -78567,7 +78653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a46a77ef8ae30341965a325cc53f28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFromKinect: 0
+  isFromKinect: 1
   pedalLength: 0.25
   kinectDevice: {fileID: 924191716}
 --- !u!114 &5553708535250551609
@@ -78583,10 +78669,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
+<<<<<<< HEAD
   maxFootHeight: 0.042
   minFootHeight: 0.028
-  stepWidth: 0.45
-  stepRise: 0.24
+=======
+  maxFootHeight: 0.25
+  minFootHeight: 0.1
+>>>>>>> 004d45d7737d4f638e7d17bb786c90f0f2784745
+  stepWidth: 0.375
+  stepRise: 0.2
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0
   moveUpwardLegSpeed: 1
@@ -81219,3 +81310,4 @@ SceneRoots:
   - {fileID: 1336467143}
   - {fileID: 1693527247}
   - {fileID: 968845684}
+  - {fileID: 164277138}
