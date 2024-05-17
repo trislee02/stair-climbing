@@ -4857,6 +4857,88 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1286e3a745458f4438fb05c8ad88add5, type: 3}
+--- !u!1 &164277134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 164277138}
+  - component: {fileID: 164277137}
+  - component: {fileID: 164277136}
+  - component: {fileID: 164277135}
+  m_Layer: 0
+  m_Name: VisualTrajectory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &164277135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b746f69954569ef4285802780f046ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSize: 0.075
+  fileName: log_tri/A04/left
+  color: {r: 0, g: 0.7584905, b: 0.16163827, a: 1}
+  drawRay: 0
+--- !u!114 &164277136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b746f69954569ef4285802780f046ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSize: 0.075
+  fileName: log_tri/A04/right
+  color: {r: 0, g: 0.22452068, b: 1, a: 1}
+  drawRay: 0
+--- !u!114 &164277137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b746f69954569ef4285802780f046ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSize: 0.075
+  fileName: log_tri/A04/head
+  color: {r: 1, g: 0, b: 0, a: 1}
+  drawRay: 1
+--- !u!4 &164277138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164277134}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &164770584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1374818551041490338, guid: 1286e3a745458f4438fb05c8ad88add5, type: 3}
@@ -47836,7 +47918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   study: slope
   condition: kinect
-  participantID: 01
+  participantID: 36
   group: A
 --- !u!4 &1294565547
 Transform:
@@ -78585,8 +78667,8 @@ MonoBehaviour:
   sensorLoggerPath: ./log/sensor.csv
   maxFootHeight: 0.25
   minFootHeight: 0.1
-  stepWidth: 0.45
-  stepRise: 0.24
+  stepWidth: 0.375
+  stepRise: 0.2
   bodyLiftingSpeed: 1
   moveBackwardLegSpeed: 0
   moveUpwardLegSpeed: 1
@@ -81219,3 +81301,4 @@ SceneRoots:
   - {fileID: 1336467143}
   - {fileID: 1693527247}
   - {fileID: 968845684}
+  - {fileID: 164277138}
