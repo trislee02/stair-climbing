@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TrainingView.unity
     guid: 1a3625cf3ac1edb43a0d9895293402f7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ViewSpiralStair.unity
     guid: e01ae8476fa363c49ae55b301a71a158
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SlopeUpView.unity
     guid: 93c2d782a0a529d47ab746a3ca761677
   m_configObjects:

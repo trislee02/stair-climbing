@@ -63,7 +63,7 @@ public class Stair : MonoBehaviour
                 }
                 //stairWall.transform.position = new Vector3(startPosition.x + treadLength / 2.0f, startPosition.y + ((i-4+1) * rise) - (rise / 2) + (wallHeight / 2), startPosition.z + ((i-4+1) * treadWidth) - (treadWidth / 2));
                 stairWall.transform.position = new Vector3(startPosition.x + 0.6f + (i == wallStep ? 1.5f : 0.05f), stepPosition.y + wallHeight / 2f - rise * wallStep, stepPosition.z - treadWidth * wallStep / 2f + (treadWidth / 2f));
-                stairWall.transform.localScale = new Vector3((i == wallStep ? 3f : 0.1f), wallHeight, treadWidth * wallStep);
+                stairWall.transform.localScale = new Vector3((i == wallStep ? 3f : 0.1f), wallHeight, treadWidth * wallStep + 0.02f);
                 stairWall.transform.parent = stairWalls.transform;
                 //
                 stairWall.GetComponent<Renderer>().material.mainTextureScale = wallTextureScale;
