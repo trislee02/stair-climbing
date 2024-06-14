@@ -10821,7 +10821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &341476697
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -21211,13 +21211,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513495508}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22373493, y: 0.44860414, z: -0.118159235, w: 0.8571671}
-  m_LocalPosition: {x: -1.39, y: 0.55999994, z: -1.3}
+  m_LocalRotation: {x: 0.124886155, y: 0.635408, z: -0.07930372, w: 0.7578727}
+  m_LocalPosition: {x: -2.46, y: 2.026, z: 1.409}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1161899390}
-  m_LocalEulerAnglesHint: {x: 29.312, y: 55.22, z: -0.12}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 16.863, y: 80.295, z: 2.306}
 --- !u!81 &513495510
 AudioListener:
   m_ObjectHideFlags: 0
@@ -21262,12 +21262,12 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 2
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 4ef22184dd080a447808bbb001ce5157, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -44034,7 +44034,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1161835580}
-  - {fileID: 513495509}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1162172444
@@ -53596,6 +53595,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2541217134824648271, guid: f636fc922be443c42921285d27f16b6e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541217134824648271, guid: f636fc922be443c42921285d27f16b6e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541217134824648271, guid: f636fc922be443c42921285d27f16b6e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541217134824648271, guid: f636fc922be443c42921285d27f16b6e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -540
+      objectReference: {fileID: 0}
     - target: {fileID: 6481782990778501765, guid: f636fc922be443c42921285d27f16b6e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -74500,7 +74515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2056163915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80652,7 +80667,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5069202498189416847}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1201dc85fe6279245a37c021dd1492e0, type: 3}
   m_Name: 
@@ -80671,7 +80686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a46a77ef8ae30341965a325cc53f28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFromKinect: 0
+  isFromKinect: 1
   pedalLength: 0.25
   kinectDevice: {fileID: 924191716}
 --- !u!114 &5553708535250551609
@@ -80687,8 +80702,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
-  maxFootHeight: 0.042
-  minFootHeight: 0.028
+  maxFootHeight: 0.15
+  minFootHeight: 0.02
   stepWidth: 0.375
   stepRise: 0.2
   bodyLiftingSpeed: 1
@@ -80699,7 +80714,7 @@ MonoBehaviour:
   stepRipple: {fileID: 341476698}
   counter: {fileID: 748207868}
   footHeightDebug: 0.01
-  isDebug: 1
+  isDebug: 0
 --- !u!114 &5553708535250551610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80707,7 +80722,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5069202498189416847}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2967e9d0b1a822d43828583c269a6cc5, type: 3}
   m_Name: 
@@ -83313,6 +83328,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 701674510}
+  - {fileID: 513495509}
   - {fileID: 1161899390}
   - {fileID: 1870371485}
   - {fileID: 1573810338}
