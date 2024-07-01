@@ -99,9 +99,9 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\ThirdParty\InterfaceSupport\InterfaceAttribute.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\VirtualActiveState.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\BestHoverInteractorGroup.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\OneEuroFilter\OneEuroFilterFactory.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\CylinderClipper.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Body\Input\BodyPrimitives.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\OneEuroFilter\OneEuroFilterFactory.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\Interactor.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\BoundsClipper.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Ray\Visuals\RayInteractorDebugGizmos.cs" />
@@ -146,9 +146,9 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Visuals\SelectorDebugVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Polyline\DebugGizmos.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Polyline\PolylineGizmos.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Debug\FingerFeatureSkeletalDebugVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\Hands\Hand.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\ClippedCylinderSurface.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Debug\FingerFeatureSkeletalDebugVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\ICollidersRef.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\UseGrab\IHandGrabUseDelegate.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Collections\EnumerableHashSet.cs" />
@@ -844,14 +844,6 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\Unity.Analytics.Tracker.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\Unity.Analytics.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
@@ -888,20 +880,12 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Azure.Kinect.Sensor">
       <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
