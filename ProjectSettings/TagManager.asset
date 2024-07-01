@@ -7,6 +7,8 @@ TagManager:
   - Walkable
   - lb_groundTarget
   - lb_perchTarget
+  - snowman
+  - controller
   layers:
   - Default
   - TransparentFX

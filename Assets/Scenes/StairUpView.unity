@@ -6738,6 +6738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1659235998}
   - {fileID: 1161835580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7755,11 +7756,11 @@ Transform:
   m_GameObject: {fileID: 1659235997}
   serializedVersion: 2
   m_LocalRotation: {x: 0.11178881, y: 0.6772468, z: -0.10897387, w: 0.7190026}
-  m_LocalPosition: {x: -2.177, y: 2.735, z: 1.654}
+  m_LocalPosition: {x: -3.177, y: 1.1329999, z: 0.69400007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1161899390}
   m_LocalEulerAnglesHint: {x: 17.96, y: 86.524, z: -0.318}
 --- !u!81 &1659235999
 AudioListener:
@@ -12257,7 +12258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a46a77ef8ae30341965a325cc53f28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFromKinect: 1
+  isFromKinect: 0
   pedalLength: 0.25
   kinectDevice: {fileID: 921941432}
 --- !u!114 &5553708535250551609
@@ -12273,8 +12274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorLoggerPath: ./log/sensor.csv
-  maxFootHeight: 0.15
-  minFootHeight: 0.02
+  maxFootHeight: 0.046
+  minFootHeight: 0.028
   stepWidth: 0.3
   stepRise: 0.16
   bodyLiftingSpeed: 1
@@ -14912,7 +14913,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 701674510}
-  - {fileID: 1659235998}
   - {fileID: 1161899390}
   - {fileID: 1870371485}
   - {fileID: 341476699}
