@@ -99,9 +99,9 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\ThirdParty\InterfaceSupport\InterfaceAttribute.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\VirtualActiveState.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\BestHoverInteractorGroup.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\OneEuroFilter\OneEuroFilterFactory.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\CylinderClipper.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Body\Input\BodyPrimitives.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\OneEuroFilter\OneEuroFilterFactory.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\Interactor.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\BoundsClipper.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\Ray\Visuals\RayInteractorDebugGizmos.cs" />
@@ -146,9 +146,9 @@
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Visuals\SelectorDebugVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Polyline\DebugGizmos.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Polyline\PolylineGizmos.cs" />
-    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Debug\FingerFeatureSkeletalDebugVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Input\Hands\Hand.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Surfaces\ClippedCylinderSurface.cs" />
+    <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\PoseDetection\Debug\FingerFeatureSkeletalDebugVisual.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Core\ICollidersRef.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Interaction\Models\UseGrab\IHandGrabUseDelegate.cs" />
     <Compile Include="Assets\Oculus\Interaction\Runtime\Scripts\Collections\EnumerableHashSet.cs" />
@@ -836,16 +836,20 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\Unity.Analytics.Tracker.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.Editor">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\Unity.Analytics.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
@@ -884,6 +888,10 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
@@ -892,16 +900,8 @@
       <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.GradleProject">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1396,19 +1396,19 @@
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Oculus.VR.csproj">
       <Project>{DC491AC0-D8D0-1A57-AAE5-E65991872BA1}</Project>
       <Name>Oculus.VR</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{FDAB6827-36D7-A8BB-10F9-055D776E407A}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{61F40998-BE5D-E396-6C0B-83F336B3764A}</Project>
-      <Name>UnityEngine.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

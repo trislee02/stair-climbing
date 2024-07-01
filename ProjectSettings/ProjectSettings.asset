@@ -846,6 +846,7 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -865,11 +866,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: eaa7d502-a3c4-4099-bfb6-e8b6ad23395c
+  cloudProjectId: 3a1115da-8ba2-4a24-80ee-bb202a4c764f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: stair-climbing
-  organizationId: trislee02
+  organizationId: huynhducnham
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

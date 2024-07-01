@@ -71,8 +71,8 @@ public class NewStairLegAnimation : MonoBehaviour
 
     private int countFootAboveStep = 0;
     private int countFootStep = 0;
-    [SerializeField]
-    private TMPro.TMP_Text counter;
+    //[SerializeField]
+    //private TMPro.TMP_Text counter;
 
     // Start is called before the first frame update
     void Start()
@@ -96,7 +96,7 @@ public class NewStairLegAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        counter.text = "Step: " + countFootAboveStep;
+        //counter.text = "Step: " + countFootAboveStep;
         //Debug.Log("Curve lift coefficient: " + (stepWidth / (float)Math.Pow(stepRise, curveLiftFoot)) + "; body lifting constant: " + bodyLiftingConstant);
         // Play ripple effect when a foot is above a step
         if (!isRightAbove && !isLeftAbove)
@@ -186,7 +186,7 @@ public class NewStairLegAnimation : MonoBehaviour
             {
                 float roll1Logging = 0;
                 float roll2Logging = 0;
-                float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                float dataLeftFootHeight = footHeightDebug;// dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
                 float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
 
                 Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight + "; CntFtAboveStep: " + countFootAboveStep + "; CntFtStep: " + countFootStep);

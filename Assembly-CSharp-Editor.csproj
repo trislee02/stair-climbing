@@ -421,16 +421,20 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\UnityEditor.Android.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\Unity.Analytics.Tracker.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.Editor">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\Unity.Analytics.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
@@ -469,6 +473,10 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
       <Private>False</Private>
@@ -477,20 +485,12 @@
       <HintPath>Assets\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Types">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.Gradle">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Android.GradleProject">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.GradleProject.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">
@@ -1001,12 +1001,144 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.XR.Management">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.Management.dll</HintPath>
+    <Reference Include="Unity.Services.Analytics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Analytics.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing.Stores">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Stores.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Services.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.HighDefinition.Config.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Config.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing.SecurityCore">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.Purchasing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.Oculus.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.Oculus.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing.SecurityStub">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements.Editor">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Advertisements.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Analytics">
+      <HintPath>Library\ScriptAssemblies\Analytics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Services.Analytics">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Analytics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Subsystem.Registration">
+      <HintPath>Library\ScriptAssemblies\Unity.Subsystem.Registration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.XR.Management">
+      <HintPath>Library\ScriptAssemblies\Unity.XR.Management.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.AI.Navigation">
@@ -1025,6 +1157,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
       <Private>False</Private>
@@ -1033,44 +1169,40 @@
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    <Reference Include="Unity.Services.Core.Environments">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.XR.Management.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.XR.Management.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    <Reference Include="UnityEngine.Purchasing.Codeless">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.Codeless.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    <Reference Include="Unity.Services.Core.Analytics">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.XR.Oculus.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.Oculus.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Animation.Rigging">
       <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.HighDefinition.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
@@ -1081,16 +1213,12 @@
       <HintPath>Library\ScriptAssemblies\UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.ProBuilder">
-      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Advertisements.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
@@ -1101,12 +1229,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>Library\ScriptAssemblies\UnityEditor.SpatialTracking.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    <Reference Include="Purchasing.Common">
+      <HintPath>Library\ScriptAssemblies\Purchasing.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
@@ -1121,20 +1253,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.XR.Oculus">
@@ -1147,10 +1275,6 @@
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Subsystem.Registration">
-      <HintPath>Library\ScriptAssemblies\Unity.Subsystem.Registration.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.AI.Navigation.Updater">
@@ -1169,16 +1293,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.AI.Navigation.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -1186,10 +1306,6 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{4EA679DD-0436-B48D-DFF9-33F52E991C87}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.WitAi.Lib.csproj">
-      <Project>{B1A3BA6E-63A0-6F97-4E1E-8EE6BB4D7E34}</Project>
-      <Name>Meta.WitAi.Lib</Name>
     </ProjectReference>
     <ProjectReference Include="Oculus.Interaction.OVR.Editor.csproj">
       <Project>{61D315D6-66DE-2A9B-4D9A-F06AFBFA3D3D}</Project>
@@ -1199,29 +1315,9 @@
       <Project>{FB53708E-302D-4950-17D3-7D411E5349E7}</Project>
       <Name>Facebook.Wit.Dictation</Name>
     </ProjectReference>
-    <ProjectReference Include="Meta.Voice.Samples.LiveUnderstanding.csproj">
-      <Project>{65799670-44F1-3D04-2536-34771487C3CC}</Project>
-      <Name>Meta.Voice.Samples.LiveUnderstanding</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualEffectGraph.Runtime.csproj">
-      <Project>{E8727922-CC5A-2EE8-3DEF-AEC25856595D}</Project>
-      <Name>Unity.VisualEffectGraph.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
-      <Project>{0070D7E2-6B22-A66D-8E83-2A6790573BF7}</Project>
-      <Name>Unity.RenderPipelines.Core.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="VoiceSDK.Runtime.csproj">
       <Project>{32427435-C52D-CC19-777F-27E2A03843A7}</Project>
       <Name>VoiceSDK.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.AudioManager.Utils.Editor.csproj">
-      <Project>{D4B85215-42E8-915A-6921-7EC7527295DA}</Project>
-      <Name>Oculus.AudioManager.Utils.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.VR.csproj">
-      <Project>{DC491AC0-D8D0-1A57-AAE5-E65991872BA1}</Project>
-      <Name>Oculus.VR</Name>
     </ProjectReference>
     <ProjectReference Include="Meta.VoiceSDK.Mic.WebGL.csproj">
       <Project>{CE8854F0-002D-5BDA-F9BA-36548CF5D4EC}</Project>
@@ -1231,29 +1327,9 @@
       <Project>{564D09CC-E329-98E8-BF95-A027DC73E4F3}</Project>
       <Name>Oculus.Platform.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Oculus.LipSync.Editor.csproj">
-      <Project>{4E5CE715-128A-9E71-F03F-53B25BB66A77}</Project>
-      <Name>Oculus.LipSync.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.Interaction.OVR.csproj">
-      <Project>{1196CB78-84D9-2E82-CF90-0EE5C54C6647}</Project>
-      <Name>Oculus.Interaction.OVR</Name>
-    </ProjectReference>
     <ProjectReference Include="VoiceSDK.Telemetry.csproj">
       <Project>{FD998C6D-0198-6A26-EAA4-D7D4BB0D9935}</Project>
       <Name>VoiceSDK.Telemetry</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
-      <Project>{0C6F1848-7CCC-D1E8-B300-8CF19EE77303}</Project>
-      <Name>Unity.RenderPipelines.Core.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualEffectGraph.Editor.csproj">
-      <Project>{F478DE8D-CC22-F6CD-75A5-982F3ED5A59A}</Project>
-      <Name>Unity.VisualEffectGraph.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.AudioManager.csproj">
-      <Project>{8EFD2027-7CE5-DE85-D901-E96C9067FF4A}</Project>
-      <Name>Oculus.AudioManager</Name>
     </ProjectReference>
     <ProjectReference Include="ALP8310_ControllerGlobal.csproj">
       <Project>{90DF42C1-9624-18D5-778E-7F5B481724E6}</Project>
@@ -1263,29 +1339,9 @@
       <Project>{F8E6A7B4-15E7-2541-165E-6A24EE9FD19B}</Project>
       <Name>Oculus.Spatializer</Name>
     </ProjectReference>
-    <ProjectReference Include="Meta.Voice.VSDKHub.Editor.csproj">
-      <Project>{10E1EAA2-4EA7-4070-42F3-542BA6E4B5FB}</Project>
-      <Name>Meta.Voice.VSDKHub.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.HighDefinition.Config.Runtime.csproj">
-      <Project>{310DAFFC-7B1B-3268-7D57-1003CBB06951}</Project>
-      <Name>Unity.RenderPipelines.HighDefinition.Config.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="Meta.Voice.Hub.Editor.csproj">
       <Project>{59CC2E75-5901-D372-6204-6B4EEF4521A6}</Project>
       <Name>Meta.Voice.Hub.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
-      <Project>{78A997F3-B64D-AFD4-DB9B-44982E7D242E}</Project>
-      <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.WitAi.TTS.csproj">
-      <Project>{C556B0DE-8825-F5A9-513E-4C7AAF3282DC}</Project>
-      <Name>Meta.WitAi.TTS</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.Voice.Samples.TTSVoices.csproj">
-      <Project>{DC8FA243-18DF-F9C2-4DD0-E41913D1E498}</Project>
-      <Name>Meta.Voice.Samples.TTSVoices</Name>
     </ProjectReference>
     <ProjectReference Include="Meta.WitAi.csproj">
       <Project>{369D6035-B00D-E39E-3FB0-35AC445F5B93}</Project>
@@ -1303,22 +1359,6 @@
       <Project>{C383E584-6C74-63AD-6B44-2C1B24FCABBB}</Project>
       <Name>Oculus.Interaction.OVR.Samples</Name>
     </ProjectReference>
-    <ProjectReference Include="Meta.Voice.Samples.BuiltInTimer.csproj">
-      <Project>{42E7B598-1C8D-68C0-D7DB-712F2D7E103A}</Project>
-      <Name>Meta.Voice.Samples.BuiltInTimer</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.Platform.csproj">
-      <Project>{AE2D1972-2AD4-585A-9ADF-A5774401BC42}</Project>
-      <Name>Oculus.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.HighDefinition.Editor.csproj">
-      <Project>{59ABE150-1E2A-6C6E-2178-B86F124CF86E}</Project>
-      <Name>Unity.RenderPipelines.HighDefinition.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="VoiceSDK.Dictation.Runtime.csproj">
-      <Project>{AE4FAB55-6789-7914-7B66-47D170BC140C}</Project>
-      <Name>VoiceSDK.Dictation.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="Oculus.LipSync.csproj">
       <Project>{2AF8DD97-2B65-C4CA-52E3-861F7C79BC51}</Project>
       <Name>Oculus.LipSync</Name>
@@ -1326,22 +1366,6 @@
     <ProjectReference Include="Meta.Voice.Samples.Dictation.csproj">
       <Project>{D75D7047-1777-B926-90AE-24046D0D9489}</Project>
       <Name>Meta.Voice.Samples.Dictation</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
-      <Project>{7D6AB06A-84DF-AD14-B9A9-F4F4E241607F}</Project>
-      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="ALP8310_ControllerGlobal.Editor.csproj">
-      <Project>{C7C7BADB-C357-05F2-C942-742E57831D03}</Project>
-      <Name>ALP8310_ControllerGlobal.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.WitAi.Conduit.csproj">
-      <Project>{C2C7A3F3-D7FC-5CAE-764C-702C9A5E2D25}</Project>
-      <Name>Meta.WitAi.Conduit</Name>
-    </ProjectReference>
-    <ProjectReference Include="VoiceSDK.Dictation.Editor.csproj">
-      <Project>{B45F3D0A-304B-EF48-6136-335BB8277F47}</Project>
-      <Name>VoiceSDK.Dictation.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Oculus.Spatializer.Editor.csproj">
       <Project>{94A9CDC7-A9B5-AD5B-F053-229BBB3D0C8C}</Project>
@@ -1355,6 +1379,98 @@
       <Project>{CBB8E950-5EF5-34B3-EAAC-7D3C4C0D2901}</Project>
       <Name>Oculus.Interaction.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Meta.Voice.Samples.Shapes.csproj">
+      <Project>{37665D85-52ED-8046-E92A-E77FF058AB53}</Project>
+      <Name>Meta.Voice.Samples.Shapes</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.VR.Editor.csproj">
+      <Project>{D980F845-CAA6-FEA8-5484-08591E8605F4}</Project>
+      <Name>Oculus.VR.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.VoiceSDK.Mic.Common.csproj">
+      <Project>{4B5FC79C-7781-D3ED-AEF1-8CEE51B020B5}</Project>
+      <Name>Meta.VoiceSDK.Mic.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.VR.Scripts.Editor.csproj">
+      <Project>{FFD282E5-0827-9BAD-22C1-68314F0ED39E}</Project>
+      <Name>Oculus.VR.Scripts.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.Interaction.Samples.Editor.csproj">
+      <Project>{B4915D53-4403-5053-877C-26E0EB50D572}</Project>
+      <Name>Oculus.Interaction.Samples.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.Voice.Samples.Chess.csproj">
+      <Project>{961AA625-7A14-82B0-D086-6C58EB48C723}</Project>
+      <Name>Meta.Voice.Samples.Chess</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.WitAI.Lib.Editor.csproj">
+      <Project>{1DCF934D-80CC-B1CB-8D77-9077DF9057C4}</Project>
+      <Name>Meta.WitAI.Lib.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.WitAi.Lib.csproj">
+      <Project>{B1A3BA6E-63A0-6F97-4E1E-8EE6BB4D7E34}</Project>
+      <Name>Meta.WitAi.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.Voice.Samples.LiveUnderstanding.csproj">
+      <Project>{65799670-44F1-3D04-2536-34771487C3CC}</Project>
+      <Name>Meta.Voice.Samples.LiveUnderstanding</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.AudioManager.Utils.Editor.csproj">
+      <Project>{D4B85215-42E8-915A-6921-7EC7527295DA}</Project>
+      <Name>Oculus.AudioManager.Utils.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.VR.csproj">
+      <Project>{DC491AC0-D8D0-1A57-AAE5-E65991872BA1}</Project>
+      <Name>Oculus.VR</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.LipSync.Editor.csproj">
+      <Project>{4E5CE715-128A-9E71-F03F-53B25BB66A77}</Project>
+      <Name>Oculus.LipSync.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.Interaction.OVR.csproj">
+      <Project>{1196CB78-84D9-2E82-CF90-0EE5C54C6647}</Project>
+      <Name>Oculus.Interaction.OVR</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.AudioManager.csproj">
+      <Project>{8EFD2027-7CE5-DE85-D901-E96C9067FF4A}</Project>
+      <Name>Oculus.AudioManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.Voice.VSDKHub.Editor.csproj">
+      <Project>{10E1EAA2-4EA7-4070-42F3-542BA6E4B5FB}</Project>
+      <Name>Meta.Voice.VSDKHub.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.WitAi.TTS.csproj">
+      <Project>{C556B0DE-8825-F5A9-513E-4C7AAF3282DC}</Project>
+      <Name>Meta.WitAi.TTS</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.Voice.Samples.TTSVoices.csproj">
+      <Project>{DC8FA243-18DF-F9C2-4DD0-E41913D1E498}</Project>
+      <Name>Meta.Voice.Samples.TTSVoices</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.Voice.Samples.BuiltInTimer.csproj">
+      <Project>{42E7B598-1C8D-68C0-D7DB-712F2D7E103A}</Project>
+      <Name>Meta.Voice.Samples.BuiltInTimer</Name>
+    </ProjectReference>
+    <ProjectReference Include="Oculus.Platform.csproj">
+      <Project>{AE2D1972-2AD4-585A-9ADF-A5774401BC42}</Project>
+      <Name>Oculus.Platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="VoiceSDK.Dictation.Runtime.csproj">
+      <Project>{AE4FAB55-6789-7914-7B66-47D170BC140C}</Project>
+      <Name>VoiceSDK.Dictation.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="ALP8310_ControllerGlobal.Editor.csproj">
+      <Project>{C7C7BADB-C357-05F2-C942-742E57831D03}</Project>
+      <Name>ALP8310_ControllerGlobal.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Meta.WitAi.Conduit.csproj">
+      <Project>{C2C7A3F3-D7FC-5CAE-764C-702C9A5E2D25}</Project>
+      <Name>Meta.WitAi.Conduit</Name>
+    </ProjectReference>
+    <ProjectReference Include="VoiceSDK.Dictation.Editor.csproj">
+      <Project>{B45F3D0A-304B-EF48-6136-335BB8277F47}</Project>
+      <Name>VoiceSDK.Dictation.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="AssistantCoreSDKRuntime.csproj">
       <Project>{E32DBC66-4DD9-74AF-8DF0-5C676946832B}</Project>
       <Name>AssistantCoreSDKRuntime</Name>
@@ -1363,25 +1479,9 @@
       <Project>{BBD37BBC-592B-27B8-52E6-14DF4A905C5D}</Project>
       <Name>Meta.Voice.Samples.LightTraits</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{112C1275-1DC0-7BAE-C7B7-BEA1C8B95E69}</Project>
-      <Name>Unity.ShaderGraph.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Meta.XR.BuildingBlocks.csproj">
       <Project>{FE82820F-8B78-2B6C-76C4-FC25615F7964}</Project>
       <Name>Meta.XR.BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{FDAB6827-36D7-A8BB-10F9-055D776E407A}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{61F40998-BE5D-E396-6C0B-83F336B3764A}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.Voice.Samples.Shapes.csproj">
-      <Project>{37665D85-52ED-8046-E92A-E77FF058AB53}</Project>
-      <Name>Meta.Voice.Samples.Shapes</Name>
     </ProjectReference>
     <ProjectReference Include="Oculus.Interaction.csproj">
       <Project>{843844CA-B01C-2416-02B3-CFB702F5F9F9}</Project>
@@ -1395,25 +1495,17 @@
       <Project>{D2E51AA9-179F-553D-29CE-D7E0E082055F}</Project>
       <Name>Meta.Voice.Samples.ShapesConduit</Name>
     </ProjectReference>
-    <ProjectReference Include="Oculus.VR.Editor.csproj">
-      <Project>{D980F845-CAA6-FEA8-5484-08591E8605F4}</Project>
-      <Name>Oculus.VR.Editor</Name>
+    <ProjectReference Include="Meta.WitAi.Editor.csproj">
+      <Project>{9B21DFBA-6490-E1E0-D0B7-08FB5D2699D8}</Project>
+      <Name>Meta.WitAi.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Meta.VoiceSDK.Mic.Other.csproj">
       <Project>{AB4999C1-BA83-B03F-AE7E-BBC115D4F2BA}</Project>
       <Name>Meta.VoiceSDK.Mic.Other</Name>
     </ProjectReference>
-    <ProjectReference Include="Meta.WitAi.Editor.csproj">
-      <Project>{9B21DFBA-6490-E1E0-D0B7-08FB5D2699D8}</Project>
-      <Name>Meta.WitAi.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Meta.WitAi.Conduit.Editor.csproj">
       <Project>{153CDAB0-3E46-8020-BA01-221158B14E27}</Project>
       <Name>Meta.WitAi.Conduit.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.VoiceSDK.Mic.Common.csproj">
-      <Project>{4B5FC79C-7781-D3ED-AEF1-8CEE51B020B5}</Project>
-      <Name>Meta.VoiceSDK.Mic.Common</Name>
     </ProjectReference>
     <ProjectReference Include="Meta.XR.BuildingBlocks.Editor.csproj">
       <Project>{82FEF0B9-0502-8CAE-7CD1-6D1CE01CD9E9}</Project>
@@ -1423,14 +1515,6 @@
       <Project>{A20558B1-F702-A578-3BAF-CA494715E606}</Project>
       <Name>Oculus.AudioManager.Audio.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Oculus.VR.Scripts.Editor.csproj">
-      <Project>{FFD282E5-0827-9BAD-22C1-68314F0ED39E}</Project>
-      <Name>Oculus.VR.Scripts.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.Interaction.Samples.Editor.csproj">
-      <Project>{B4915D53-4403-5053-877C-26E0EB50D572}</Project>
-      <Name>Oculus.Interaction.Samples.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Meta.Voice.Hub.Runtime.csproj">
       <Project>{65D89B31-CF81-5506-959D-7B9F80A2E9CD}</Project>
       <Name>Meta.Voice.Hub.Runtime</Name>
@@ -1438,18 +1522,6 @@
     <ProjectReference Include="AssistantCoreSDKEditor.csproj">
       <Project>{3062C2F7-48B8-12BD-F4B6-43D09FA4A2FE}</Project>
       <Name>AssistantCoreSDKEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.HighDefinition.Runtime.csproj">
-      <Project>{DC414184-195A-0974-E7DD-CF8AF4A9C7B2}</Project>
-      <Name>Unity.RenderPipelines.HighDefinition.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.Voice.Samples.Chess.csproj">
-      <Project>{961AA625-7A14-82B0-D086-6C58EB48C723}</Project>
-      <Name>Meta.Voice.Samples.Chess</Name>
-    </ProjectReference>
-    <ProjectReference Include="Meta.WitAI.Lib.Editor.csproj">
-      <Project>{1DCF934D-80CC-B1CB-8D77-9077DF9057C4}</Project>
-      <Name>Meta.WitAI.Lib.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
