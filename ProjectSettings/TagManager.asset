@@ -9,6 +9,10 @@ TagManager:
   - lb_perchTarget
   - snowman
   - controller
+  - goal
+  - player
+  - ovr
+  - obstacle
   layers:
   - Default
   - TransparentFX

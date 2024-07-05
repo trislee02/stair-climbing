@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -22,17 +23,23 @@ public class MenuHandler : MonoBehaviour
     [SerializeField]
     GameObject gameOver;
     [SerializeField]
+    TextMeshProUGUI scoreText;
+    [SerializeField]
     GameObject main;
     [SerializeField]
     GameObject help;
     [SerializeField]
     GameObject leaderBoard;
+    [SerializeField]
+    TMP_InputField nameInputField;
     
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // find the GameManager object by name "GameManager"
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -59,26 +66,41 @@ public class MenuHandler : MonoBehaviour
         menuStateStack.Push(MenuState.LeaderBoard);
     }
 
-    public void showProfile()
+    public void showProfile(bool shouldClear = false)
     {
         profile.SetActive(true);
+        if (shouldClear) menuStateStack.Clear();
         menuStateStack.Push(MenuState.Profile);
     }
 
     public void showGame()
     {
-        
+        string name = nameInputField.text;
+        if (name != null && name.Length > 0 && gameManager)
+        {
+            gameManager.startNewGame(name);
+            profile.SetActive(false);
+            menuStateStack.Clear();
+        }
+        else
+        {
+            Debug.Log("Name is empty");
+            // TODO: Show error message
+        }
     }
 
-    public void showGameOver()
+    public void showGameOver(int score, bool shouldClear = false)
     {
         gameOver.SetActive(true);
+        if (scoreText) scoreText.text = score.ToString();
+        if (shouldClear) menuStateStack.Clear();
         menuStateStack.Push(MenuState.GameOver);
     }
 
-    public void showMain()
+    public void showMain(bool shouldClear=false)
     {
         main.SetActive(true);
+        if (shouldClear) menuStateStack.Clear();
         menuStateStack.Push(MenuState.Main);
     }
 
@@ -103,7 +125,7 @@ public class MenuHandler : MonoBehaviour
             case MenuState.Profile: 
                 showProfile(); break;
             case MenuState.GameOver:
-                showGameOver(); break;
+                showGameOver(-999); break;
             case MenuState.Ongoing:
                 showGame(); break;
             case MenuState.Help:

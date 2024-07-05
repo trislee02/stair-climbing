@@ -109,11 +109,13 @@ public class ScoreManager : MonoBehaviour
         this.currentPlayingScoreRecord.score += score;
     }
 
-    public void saveCurrentPlayingScoreRecord()
+    public int saveCurrentPlayingScoreRecord()
     {
-        if (this.currentPlayingScoreRecord == null) return;
+        if (this.currentPlayingScoreRecord == null) return 0;
+        int score = this.currentPlayingScoreRecord.score;
         addScoreRecordToMap(this.currentPlayingScoreRecord);
         storeScoreRecordsMapToFile(scoreRecordsPath);
+        return score;
     }
 
     public ScoreRecord getHighestScore()

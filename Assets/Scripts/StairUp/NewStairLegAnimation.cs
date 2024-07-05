@@ -67,12 +67,19 @@ public class NewStairLegAnimation : MonoBehaviour
 
     private Vector3 currentAvatarPosition;
 
-    private MyLogger sensorLogger;
+    //private MyLogger sensorLogger;
 
     private int countFootAboveStep = 0;
     private int countFootStep = 0;
     //[SerializeField]
     //private TMPro.TMP_Text counter;
+
+    private bool couldMove = true;
+
+    public void setCouldMove(bool couldMove)
+    {
+        this.couldMove = couldMove;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -89,8 +96,8 @@ public class NewStairLegAnimation : MonoBehaviour
         countFootAboveStep = 0;
         countFootStep = 0;
 
-        sensorLogger = new MyLogger(sensorLoggerPath, -1);
-        sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight", "CntFtAboveStep", "CntFtStep" });
+        //sensorLogger = new MyLogger(sensorLoggerPath, -1);
+        //sensorLogger.Start(new string[] { "LeftRoll", "LeftFootHeight", "RightRoll", "RightFootHeight", "CntFtAboveStep", "CntFtStep" });
     }
 
     // Update is called once per frame
@@ -171,7 +178,7 @@ public class NewStairLegAnimation : MonoBehaviour
     float prevRightHeight = -100.0f;
     private void OnApplicationQuit()
     {
-        sensorLogger.Save();
+        //sensorLogger.Save();
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -184,117 +191,120 @@ public class NewStairLegAnimation : MonoBehaviour
             }
             else
             {
-                float roll1Logging = 0;
-                float roll2Logging = 0;
-                float dataLeftFootHeight = footHeightDebug;// dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
-                float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
-
-                Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight + "; CntFtAboveStep: " + countFootAboveStep + "; CntFtStep: " + countFootStep);
-                
-                // Add to log
-                List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight, ((float)countFootAboveStep), ((float)countFootStep) };
-                sensorLogger.Push(nums);
-
-
-                // Clip foot height
-                currentLeftDiffFootHeight = Mathf.Clamp(dataLeftFootHeight, minFootHeight, maxFootHeight);
-                currentRightDiffFootHeight = Mathf.Clamp(dataRightFootHeight, minFootHeight, maxFootHeight);
-                
-                currentLeftDiffFootHeight -= minFootHeight;
-                currentRightDiffFootHeight -= minFootHeight;
-
-                //Debug.Log("Diff Left height: " + currentLeftDiffFootHeight + "; Diff Right height: " + currentRightDiffFootHeight);
-
-                // Inverse kinematics
-                // Update IKPosition
-                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
-                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
-
-                float scaleHeightLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
-                float scaleHeightRightFoot = currentRightDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
-
-                float deltaLeftHeight = scaleHeightLeftFoot * currentLeftDiffFootHeight;
-                float deltaLeftDistance = 0;
-
-                float deltaRightHeight = scaleHeightRightFoot * currentRightDiffFootHeight;
-                float deltaRightDistance = 0;
-
-                if (!isLeftAbove && !isRightAbove)
+                if (couldMove)
                 {
-                    deltaLeftDistance = curveLiftCoefficient * (float)Math.Pow(deltaLeftHeight, curveLiftFoot);
-                    deltaRightDistance = curveLiftCoefficient * (float)Math.Pow(deltaRightHeight, curveLiftFoot);
-                    //Debug.Log("Delta left distance: " + deltaLeftDistance + "; Delta right distance: " + deltaRightDistance);
-                }
-                else
-                {
-                    // Push down the leg to lift the body
-                    if (isLeftAbove)
+                    float roll1Logging = 0;
+                    float roll2Logging = 0;
+                    float dataLeftFootHeight = footHeightDebug;// dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                    float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
+
+                    //Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight + "; CntFtAboveStep: " + countFootAboveStep + "; CntFtStep: " + countFootStep);
+
+                    // Add to log
+                    //List<float> nums = new List<float> { roll1Logging, dataLeftFootHeight, roll2Logging, dataRightFootHeight, ((float)countFootAboveStep), ((float)countFootStep) };
+                    //sensorLogger.Push(nums);
+
+
+                    // Clip foot height
+                    currentLeftDiffFootHeight = Mathf.Clamp(dataLeftFootHeight, minFootHeight, maxFootHeight);
+                    currentRightDiffFootHeight = Mathf.Clamp(dataRightFootHeight, minFootHeight, maxFootHeight);
+
+                    currentLeftDiffFootHeight -= minFootHeight;
+                    currentRightDiffFootHeight -= minFootHeight;
+
+                    //Debug.Log("Diff Left height: " + currentLeftDiffFootHeight + "; Diff Right height: " + currentRightDiffFootHeight);
+
+                    // Inverse kinematics
+                    // Update IKPosition
+                    animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+                    animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
+
+                    float scaleHeightLeftFoot = currentLeftDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
+                    float scaleHeightRightFoot = currentRightDiffFootHeight <= 0 ? 0 : risePerRealHeightUnit;
+
+                    float deltaLeftHeight = scaleHeightLeftFoot * currentLeftDiffFootHeight;
+                    float deltaLeftDistance = 0;
+
+                    float deltaRightHeight = scaleHeightRightFoot * currentRightDiffFootHeight;
+                    float deltaRightDistance = 0;
+
+                    if (!isLeftAbove && !isRightAbove)
                     {
-                        deltaLeftHeight = bodyLiftingSpeed * deltaLeftHeight + bodyLiftingConstant;
-                        deltaLeftHeight = deltaLeftHeight < 0 ? 0 : deltaLeftHeight;
-                        deltaLeftDistance = stepWidth / stepRise * deltaLeftHeight;
-
-                        if (deltaLeftHeight > stepRise / 2.0f)
-                        {
-                            deltaRightDistance = moveBackwardLegSpeed * (deltaLeftDistance - stepWidth);
-                            deltaRightHeight = moveUpwardLegSpeed * (stepRise - deltaLeftHeight);
-                        }
-                        else
-                        {
-                            deltaRightDistance = -moveBackwardLegSpeed * deltaLeftDistance;
-                            deltaRightHeight = moveUpwardLegSpeed * deltaLeftHeight;
-                        }
+                        deltaLeftDistance = curveLiftCoefficient * (float)Math.Pow(deltaLeftHeight, curveLiftFoot);
+                        deltaRightDistance = curveLiftCoefficient * (float)Math.Pow(deltaRightHeight, curveLiftFoot);
+                        //Debug.Log("Delta left distance: " + deltaLeftDistance + "; Delta right distance: " + deltaRightDistance);
                     }
                     else
                     {
-                        deltaRightHeight = bodyLiftingSpeed * deltaRightHeight + bodyLiftingConstant;
-                        deltaRightHeight = deltaRightHeight < 0 ? 0 : deltaRightHeight;
-                        deltaRightDistance = stepWidth / stepRise * deltaRightHeight;
-                        
-                        if (deltaRightHeight > stepRise / 2.0f)
+                        // Push down the leg to lift the body
+                        if (isLeftAbove)
                         {
-                            deltaLeftDistance = moveBackwardLegSpeed * (deltaRightDistance - stepWidth);
-                            deltaLeftHeight = moveUpwardLegSpeed * (stepRise - deltaRightHeight);
+                            deltaLeftHeight = bodyLiftingSpeed * deltaLeftHeight + bodyLiftingConstant;
+                            deltaLeftHeight = deltaLeftHeight < 0 ? 0 : deltaLeftHeight;
+                            deltaLeftDistance = stepWidth / stepRise * deltaLeftHeight;
+
+                            if (deltaLeftHeight > stepRise / 2.0f)
+                            {
+                                deltaRightDistance = moveBackwardLegSpeed * (deltaLeftDistance - stepWidth);
+                                deltaRightHeight = moveUpwardLegSpeed * (stepRise - deltaLeftHeight);
+                            }
+                            else
+                            {
+                                deltaRightDistance = -moveBackwardLegSpeed * deltaLeftDistance;
+                                deltaRightHeight = moveUpwardLegSpeed * deltaLeftHeight;
+                            }
                         }
                         else
                         {
-                            deltaLeftDistance = -moveBackwardLegSpeed * deltaRightDistance;
-                            deltaLeftHeight = moveUpwardLegSpeed * deltaRightHeight;
+                            deltaRightHeight = bodyLiftingSpeed * deltaRightHeight + bodyLiftingConstant;
+                            deltaRightHeight = deltaRightHeight < 0 ? 0 : deltaRightHeight;
+                            deltaRightDistance = stepWidth / stepRise * deltaRightHeight;
+
+                            if (deltaRightHeight > stepRise / 2.0f)
+                            {
+                                deltaLeftDistance = moveBackwardLegSpeed * (deltaRightDistance - stepWidth);
+                                deltaLeftHeight = moveUpwardLegSpeed * (stepRise - deltaRightHeight);
+                            }
+                            else
+                            {
+                                deltaLeftDistance = -moveBackwardLegSpeed * deltaRightDistance;
+                                deltaLeftHeight = moveUpwardLegSpeed * deltaRightHeight;
+                            }
                         }
                     }
+
+                    //Debug.Log("Left displacement: Rise = " + deltaLeftHeight + ", Tread = " + deltaLeftDistance);
+                    //Debug.Log("Right displacement: Rise = " + deltaRightHeight + ", Tread = " + deltaRightDistance);
+
+                    Vector3 initialLeftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition);
+                    Vector3 initialRightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
+                    initialLeftFootIKWorldPosition = initialLeftFootIKWorldPosition +
+                                                     transform.parent.parent.transform.forward * deltaLeftDistance +
+                                                     transform.parent.parent.transform.up * deltaLeftHeight;
+
+                    initialRightFootIKWorldPosition = initialRightFootIKWorldPosition +
+                                                      transform.parent.parent.transform.forward * deltaRightDistance +
+                                                      transform.parent.parent.transform.up * deltaRightHeight;
+
+                    animator.SetIKPosition(AvatarIKGoal.LeftFoot, initialLeftFootIKWorldPosition);
+                    animator.SetIKPosition(AvatarIKGoal.RightFoot, initialRightFootIKWorldPosition);
+
+                    currentLeftIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
+                    currentRightIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
+                    //Debug.Log("Height: " + (currentLeftIKPosition.y - initialLeftFootIKWorldPosition.y));
+
+                    // Update IKRotation
+                    animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
+                    animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
+
+                    Quaternion currentLeftFootRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
+                    Quaternion currentRightFootRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
+
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right) * currentLeftFootRotation);
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right) * currentRightFootRotation);
+
+                    //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + initialLeftFootIKWorldPosition);
                 }
-
-                //Debug.Log("Left displacement: Rise = " + deltaLeftHeight + ", Tread = " + deltaLeftDistance);
-                //Debug.Log("Right displacement: Rise = " + deltaRightHeight + ", Tread = " + deltaRightDistance);
-
-                Vector3 initialLeftFootIKWorldPosition = transform.TransformPoint(initialLeftFootIKLocalPosition);
-                Vector3 initialRightFootIKWorldPosition = transform.TransformPoint(initialRightFootIKLocalPosition);
-                initialLeftFootIKWorldPosition = initialLeftFootIKWorldPosition +
-                                                 transform.parent.parent.transform.forward * deltaLeftDistance +
-                                                 transform.parent.parent.transform.up * deltaLeftHeight;
-
-                initialRightFootIKWorldPosition = initialRightFootIKWorldPosition +
-                                                  transform.parent.parent.transform.forward * deltaRightDistance +
-                                                  transform.parent.parent.transform.up * deltaRightHeight;
-
-                animator.SetIKPosition(AvatarIKGoal.LeftFoot, initialLeftFootIKWorldPosition);
-                animator.SetIKPosition(AvatarIKGoal.RightFoot, initialRightFootIKWorldPosition);
-
-                currentLeftIKPosition = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
-                currentRightIKPosition = animator.GetIKPosition(AvatarIKGoal.RightFoot);
-                //Debug.Log("Height: " + (currentLeftIKPosition.y - initialLeftFootIKWorldPosition.y));
-
-                // Update IKRotation
-                animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1);
-                animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1);
-
-                Quaternion currentLeftFootRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
-                Quaternion currentRightFootRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
-
-                animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.LEFT_LEG), transform.right) * currentLeftFootRotation);
-                animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.AngleAxis(dataManager.getFootAngle(DataManager.RIGHT_LEG), transform.right) * currentRightFootRotation);
-
-                //Debug.Log("current left IK: " + currentLeftIKPosition + "; origin ik: " + initialLeftFootIKWorldPosition);
             }
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    private int timeLimitAsSeconds { get; set; } = 180;
+    private int timeLimitAsSeconds { get; set; } = 10;
 
     private GameManager gameManager;
 
@@ -18,6 +18,8 @@ public class Timer : MonoBehaviour
         this.remainingTime = timeLimitAsSeconds;
         this.isCountingDown = true;
         this.lastChecknTime = System.DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        // call second counting down handler
+        secondCountingDownHandler();
     }
 
     public int getRemainingTime()
@@ -48,7 +50,7 @@ public class Timer : MonoBehaviour
         // handle timer over
         if (gameManager != null)
         {
-            gameManager.timeoverCallback();
+            gameManager.timeoverCallback(this);
         }
     }
 

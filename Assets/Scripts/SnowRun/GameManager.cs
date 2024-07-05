@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public enum GameState
 {
@@ -9,6 +7,8 @@ public enum GameState
     GameIniting,
     GameInited,
     LevelLoading,
+    Preparing,
+    Prepared,
     Starting,
     Playing,
     Pausing,
@@ -28,22 +28,36 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject timerObject;
     [SerializeField]
-    private GameObject woodLogsHolder;
+    private GameObject woodlogsHolder;
+    [SerializeField]
+    private List<GameObject> woodLogSamples;
     [SerializeField]
     private GameObject snowmenHolder;
     [SerializeField]
+    private List<GameObject> snowmanSamples;
+    [SerializeField]
     private GameObject pickingUpItemsHolder;
+    [SerializeField]
+    private List<GameObject> pickingUpItemSamples;
     [SerializeField]
     private GameObject obstaclesHolder;
     [SerializeField]
-    private GameObject goalObject;
+    private List<GameObject> obstacleSamples;
+    [SerializeField]
+    private GameObject playerObject;
+    [SerializeField]
+    private NewStairLegAnimation stairLegAnimation;
+    [SerializeField]
+    private MenuHandler menuHandler;
+    [SerializeField]
+    private GameObject readyTimerObject;
 
     private static readonly int SNOWMAN_HIT_SCORE = 10;
     private static readonly int GOOD_FRUIT_SCORE = 2;
 
     // define level schemes
     private List<LevelScheme> levelSchemes = new List<LevelScheme>() {
-        new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = false, couldHasSnowman = true, timeLimitAsSeconds = 300 },
+        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 60 },
         new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 240 },
         new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 240 },
         new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 180 },
@@ -53,10 +67,15 @@ public class GameManager : MonoBehaviour
 
     private ScoreManager scoreManager;
     private Timer countDownTimer;
+    private Timer readyTimer;
+    //
+    private UnityEngine.Vector3 startingPlayerPosition;
+    private UnityEngine.Quaternion startingPlayerRotation;
     //
     private string playerName { get; set; } = "Player";
     private GameState gameState = GameState.NotInitialized;
     private int currentLevelIndex = 0;
+    //
     private List<GameObject> woodLogs = new List<GameObject>();
     private List<GameObject> snowmen = new List<GameObject>();
     private List<GameObject> pickingUpItems = new List<GameObject>();
@@ -89,6 +108,11 @@ public class GameManager : MonoBehaviour
         return this.currentLevelIndex + 1;
     }
 
+    public bool isPlaying()
+    {
+        return this.gameState == GameState.Playing;
+    }
+
     public void snowmanHitCallback()
     {
         // add score for current player
@@ -116,11 +140,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void timeoverCallback()
+    public void timeoverCallback(Timer timer)
     {
-        if (this.gameState == GameState.Playing)
+        if (timer == this.countDownTimer)
         {
-            this.gameState = GameState.Losing;
+            if (this.gameState == GameState.Playing)
+            {
+                this.gameState = GameState.Losing;
+            }
+        }
+        else if (timer == this.readyTimer)
+        {
+            if (this.gameState == GameState.Prepared)
+            {
+                this.gameState = GameState.Starting;
+            }
         }
     }
 
@@ -158,7 +192,7 @@ public class GameManager : MonoBehaviour
         List<bool> mask = new List<bool>();
         for (int i = 0; i < len; i++)
         {
-            mask.Add(false);
+            mask.Add(true);
         }
         for (int i = 0; i < truelyAmount; i++)
         {
@@ -170,32 +204,107 @@ public class GameManager : MonoBehaviour
 
     void prepareScene(LevelScheme scheme)
     {
-        int woodLogsAmount = this.woodLogs.Count / 2;
-        List<bool> woodLogsMask = makeRandomMask(this.woodLogs.Count, woodLogsAmount);
-        for (int i = 0; i < this.woodLogs.Count; i++)
+        //////////////////////////////////// clear scene //////////////////////////////////
+        // destroy all wood logs
+        foreach (var woodLog in this.woodLogs)
         {
-            this.woodLogs[i].SetActive(scheme.couldHasSnowman && woodLogsMask[i]);
+            Destroy(woodLog);
         }
-
-        int snowmenAmount = this.snowmen.Count / 2;
-        List<bool> snowmenMask = makeRandomMask(this.snowmen.Count, snowmenAmount);
-        for (int i = 0; i < this.snowmen.Count; i++)
+        this.woodLogs.Clear();
+        // destroy all snowmen
+        foreach (var snowman in this.snowmen)
         {
-            this.snowmen[i].SetActive(scheme.couldHasSnowman && snowmenMask[i]);
+            Destroy(snowman);
         }
-
-        int pickingUpItemsAmount = this.pickingUpItems.Count / 2;
-        List<bool> pickingUpItemsMask = makeRandomMask(this.pickingUpItems.Count, pickingUpItemsAmount);
-        for (int i = 0; i < this.pickingUpItems.Count; i++)
+        this.snowmen.Clear();
+        // destroy all picking up items
+        foreach (var pickingUpItem in this.pickingUpItems)
         {
-            this.pickingUpItems[i].SetActive(scheme.couldHasPickingUpItems && pickingUpItemsMask[i]);
+            Destroy(pickingUpItem);
         }
-
-        int pickingDownItemsAmount = this.obstacles.Count / 2;
-        List<bool> obstaclesMask = makeRandomMask(this.obstacles.Count, pickingDownItemsAmount);
-        for (int i = 0; i < this.obstacles.Count; i++)
+        this.pickingUpItems.Clear();
+        // destroy all obstacles
+        foreach (var obstacle in this.obstacles)
         {
-            this.obstacles[i].SetActive(scheme.couldHasObstacles && obstaclesMask[i]);
+            Destroy(obstacle);
+        }
+        this.obstacles.Clear();
+
+        ////////////////////////////////// create new scene by scheme //////////////////////////////////
+        int woodLogsAmount = this.woodLogSamples.Count / 2;
+        List<bool> woodLogsMask = makeRandomMask(this.woodLogSamples.Count, woodLogsAmount);
+        for (int i = 0; i < this.woodLogSamples.Count; i++)
+        {
+            if (scheme.couldHasSnowman && woodLogsMask[i])
+            {
+                // clone sample
+                GameObject woodLog = Instantiate(this.woodLogSamples[i]);
+                woodLog.SetActive(true);
+                woodLog.transform.parent = this.woodlogsHolder.transform;
+                this.woodLogs.Add(woodLog);
+            }
+        }
+        //
+        int snowmenAmount = this.snowmanSamples.Count / 2;
+        List<bool> snowmenMask = makeRandomMask(this.snowmanSamples.Count, snowmenAmount);
+        for (int i = 0; i < this.snowmanSamples.Count; i++)
+        {
+            if (scheme.couldHasSnowman && snowmenMask[i])
+            {
+                // clone sample and add to scene
+                GameObject snowman = Instantiate(this.snowmanSamples[i]);
+                snowman.SetActive(true);
+                snowman.transform.parent = this.snowmenHolder.transform;
+                this.snowmen.Add(snowman);
+            }
+        }
+        //
+        int pickingUpItemsAmount = this.pickingUpItemSamples.Count / 2;
+        List<bool> pickingUpItemsMask = makeRandomMask(this.pickingUpItemSamples.Count, pickingUpItemsAmount);
+        for (int i = 0; i < this.pickingUpItemSamples.Count; i++)
+        {
+            if (scheme.couldHasPickingUpItems && pickingUpItemsMask[i])
+            {
+                // clone sample and add to scene
+                GameObject item = Instantiate(this.pickingUpItemSamples[i]);
+                item.SetActive(true);
+                item.transform.parent = this.pickingUpItemsHolder.transform;
+                this.pickingUpItems.Add(item);
+            }
+        }
+        //
+        int obstaclesAmount = this.obstacleSamples.Count / 2;
+        List<bool> obstaclesMask = makeRandomMask(this.obstacleSamples.Count, obstaclesAmount);
+        for (int i = 0; i < this.obstacleSamples.Count; i++)
+        {
+            if (scheme.couldHasObstacles && obstaclesMask[i])
+            {
+                // clone sample and add to scene
+                GameObject obstacle = Instantiate(this.obstacleSamples[i]);
+                obstacle.SetActive(true);
+                obstacle.transform.parent = this.obstaclesHolder.transform;
+                this.obstacles.Add(obstacle);
+            }
+        }
+    }
+
+    void inactiveAllSamples()
+    {
+        foreach (var woodLogSample in this.woodLogSamples)
+        {
+            woodLogSample.SetActive(false);
+        }
+        foreach (var snowmanSample in this.snowmanSamples)
+        {
+            snowmanSample.SetActive(false);
+        }
+        foreach (var pickingUpItemSample in this.pickingUpItemSamples)
+        {
+            pickingUpItemSample.SetActive(false);
+        }
+        foreach (var obstacleSample in this.obstacleSamples)
+        {
+            obstacleSample.SetActive(false);
         }
     }
 
@@ -207,43 +316,24 @@ public class GameManager : MonoBehaviour
         {
             this.scoreManager = this.scoreManagerObject.GetComponent<ScoreManager>();
         }
-        // find timer by object name "GameTimer"
+        // find timer
         if (this.timerObject != null)
         {
             this.countDownTimer = this.timerObject.GetComponent<Timer>();
         }
-        // add all children game object of woodLogsHolder to woodLogs
-        if (this.woodLogsHolder != null)
+        // copy starting transform of playerObject to playerStartingTransform
+        if (this.playerObject != null)
         {
-            foreach (Transform child in this.woodLogsHolder.transform)
-            {
-                this.woodLogs.Add(child.gameObject);
-            }
+            this.startingPlayerPosition = this.playerObject.transform.position;
+            this.startingPlayerRotation = this.playerObject.transform.rotation;
         }
-        // add all children game object of snowmenHolder to snowmen
-        if (this.snowmenHolder != null)
+        // find ready timer
+        if (this.readyTimerObject != null)
         {
-            foreach (Transform child in this.snowmenHolder.transform)
-            {
-                this.snowmen.Add(child.gameObject);
-            }
+            this.readyTimer = this.readyTimerObject.GetComponent<Timer>();
         }
-        // add all children game object of pickingUpItemsHolder to pickingUpItems
-        if (this.pickingUpItemsHolder != null)
-        {
-            foreach (Transform child in this.pickingUpItemsHolder.transform)
-            {
-                this.pickingUpItems.Add(child.gameObject);
-            }
-        }
-        // add all children game object of obstaclesHolder to obstacles
-        if (this.obstaclesHolder != null)
-        {
-            foreach (Transform child in this.obstaclesHolder.transform)
-            {
-                this.obstacles.Add(child.gameObject);
-            }
-        }
+
+        inactiveAllSamples();// inactive all samples
 
         this.gameState = GameState.NotInitialized;
 
@@ -254,6 +344,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("GameManager.Update: " + this.gameState);
         switch (this.gameState)
         {
             case GameState.NotInitialized:
@@ -293,11 +384,36 @@ public class GameManager : MonoBehaviour
                     LevelScheme levelScheme = this.levelSchemes[this.currentLevelIndex];
                     // init timer
                     this.countDownTimer.init(levelScheme.timeLimitAsSeconds);
+                    if (readyTimer) this.readyTimer.init(3);
                     // prepare scene
                     this.prepareScene(levelScheme);
+                    // reset player position (ovr)
+                    if (this.playerObject != null)
+                    {
+                        this.playerObject.transform.position = this.startingPlayerPosition;
+                        this.playerObject.transform.rotation = this.startingPlayerRotation;
+                    }
                 }
                 // transition
-                this.gameState = GameState.Starting;
+                this.gameState = GameState.Preparing;
+                break;
+
+            case GameState.Preparing:
+                // actions
+                {
+                    if (readyTimer) this.readyTimer.startCountDown();
+                }
+                // transition
+                this.gameState = GameState.Prepared;
+                break;
+
+            case GameState.Prepared:
+                // actions
+                {
+                    //
+                }
+                // transition
+                if (!readyTimer) this.gameState = GameState.Starting;
                 break;
 
             // start level
@@ -305,6 +421,7 @@ public class GameManager : MonoBehaviour
                 // actions
                 {
                     this.countDownTimer.startCountDown();
+                    if (this.stairLegAnimation) this.stairLegAnimation.setCouldMove(true);
                 }
                 // transition
                 this.gameState = GameState.Playing;
@@ -322,6 +439,7 @@ public class GameManager : MonoBehaviour
                 // actions
                 {
                     this.countDownTimer.stopCountDown();
+                    if (this.stairLegAnimation) this.stairLegAnimation.setCouldMove(false);
                 }
                 // transition
                 this.gameState = GameState.Paused;
@@ -339,6 +457,7 @@ public class GameManager : MonoBehaviour
                 // actions
                 {
                     this.countDownTimer.resumeCountDown();
+                    if (this.stairLegAnimation) this.stairLegAnimation.setCouldMove(true);
                 }
                 // transition
                 this.gameState = GameState.Playing;
@@ -347,7 +466,7 @@ public class GameManager : MonoBehaviour
             case GameState.Winning:
                 // actions
                 {
-                    //
+                    if (this.stairLegAnimation) this.stairLegAnimation.setCouldMove(false);
                 }
                 // transition
                 this.gameState = GameState.LevelUpping;
@@ -356,7 +475,7 @@ public class GameManager : MonoBehaviour
             case GameState.Losing:
                 // actions
                 {
-                    //
+                    if (this.stairLegAnimation) this.stairLegAnimation.setCouldMove(false);
                 }
                 // transition
                 this.gameState = GameState.Ending;
@@ -376,6 +495,8 @@ public class GameManager : MonoBehaviour
                 // actions
                 {
                     this.countDownTimer.stopCountDown();
+                    int score = this.scoreManager.saveCurrentPlayingScoreRecord();
+                    this.menuHandler.showGameOver(score, true);
                 }
                 // transition
                 this.gameState = GameState.Ended;
@@ -384,7 +505,7 @@ public class GameManager : MonoBehaviour
             case GameState.Ended:
                 // actions
                 {
-                    //
+                    
                 }
                 // transition
                 break;
