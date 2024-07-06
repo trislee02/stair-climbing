@@ -36,6 +36,9 @@ public class DataManager : MonoBehaviour
     [SerializeField]
     private TrackerHandler kinectDevice;
 
+    [SerializeField]
+    private string ip = "192.168.137.195";
+
     private Accelerator accelerator = new Accelerator();
     
     private Socket sock;
@@ -46,7 +49,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        sock.Connect(IPAddress.Parse("192.168.137.37"), 4210);
+        sock.Connect(IPAddress.Parse(ip), 4210);
 
         Debug.Log("Started socket");
         Debug.Log("Send pin-code");
@@ -72,8 +75,8 @@ public class DataManager : MonoBehaviour
         accelerator.roll1 = float.Parse(rolls[0]);
         accelerator.roll2 = float.Parse(rolls[1]);
 
-        Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
-        Debug.Log("Data received: " + receivedMessage.ToString());
+        //Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
+        //Debug.Log("Data received: " + receivedMessage.ToString());
 
         if (fps < 0.00006)
         {

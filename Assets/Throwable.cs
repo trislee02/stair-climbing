@@ -8,12 +8,15 @@ public class Throwable : MonoBehaviour
     [SerializeField]
     private ParticleSystem effect;
 
+    private GameManager gameManager;
+
     private bool hasTouchTarget = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // find the game manager by name "GameManager"
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -24,16 +27,22 @@ public class Throwable : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        Debug.Log("Collision enter");
         if (!hasTouchTarget && collision.gameObject.tag == "snowman")
         {
-            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
             rb.isKinematic = true;
             effect.transform.position = gameObject.transform.position;
             effect.Play();
-            Debug.Log("Collision enter");
             hasTouchTarget = true;
-            //TODO: Add score
+            collision.gameObject.transform.parent.parent.transform.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            //
+            gameManager.snowmanHitCallback();
         }
+
+        
     }
 
     private void OnCollisionStay(Collision collision)

@@ -14,10 +14,13 @@ public class LeaderBoardUI : MonoBehaviour
 
     private GameManager gameManager;
 
-    // function that will be called when the gameobject active state is changed
-    private void OnEnable()
+    public int getTopN()
     {
-        List<ScoreRecord> top = gameManager.getScoreManager().getTopN(topN);
+        return topN;
+    }
+
+    public void updateScore(List<ScoreRecord> top)
+    {
         string namesText = "";
         string scoresText = "";
         for (int i = 0; i < top.Count; i++)

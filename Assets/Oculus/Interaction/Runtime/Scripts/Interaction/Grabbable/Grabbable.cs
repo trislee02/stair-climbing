@@ -103,6 +103,16 @@ namespace Oculus.Interaction
 
         public override void ProcessPointerEvent(PointerEvent evt)
         {
+            if (evt.Type == PointerEventType.Select) {
+                //Debug.Log("Grabbable.ProcessPointerEvent");
+                //Debug.Log(evt.Type);
+                Rigidbody rigid = GetComponent<Rigidbody>();
+                if (rigid != null)
+                {
+                    rigid.useGravity = true;
+                }
+            }
+
             switch (evt.Type)
             {
                 case PointerEventType.Select:

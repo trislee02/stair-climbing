@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class MenuHandler : MonoBehaviour
 {
-    Stack menuStateStack = new Stack();
+    Stack menuStack = new Stack();
 
     enum MenuState
     {
@@ -32,6 +33,10 @@ public class MenuHandler : MonoBehaviour
     GameObject leaderBoard;
     [SerializeField]
     TMP_InputField nameInputField;
+    [SerializeField]
+    GameObject menuBoard;
+    [SerializeField]
+    GameObject laserPointer;
     
     GameManager gameManager;
 
@@ -48,39 +53,27 @@ public class MenuHandler : MonoBehaviour
         
     }
 
-    public void loadLevel(string levelName)
-    {
-        //SceneManager.LoadScene(levelName);
-        Debug.Log("Loading level: " + levelName);
-    }
-
     public void quitGame()
     {
         Debug.Log("Quitting game");
         Application.Quit();
     }
 
-    public void showLeaderboard()
+    public void showLeaderboard(GameObject currentObject)
     {
-        leaderBoard.SetActive(true);
-        menuStateStack.Push(MenuState.LeaderBoard);
+        changeMenu(currentObject, leaderBoard);
     }
 
-    public void showProfile(bool shouldClear = false)
+    public void showGame(GameObject currentObject)
     {
-        profile.SetActive(true);
-        if (shouldClear) menuStateStack.Clear();
-        menuStateStack.Push(MenuState.Profile);
-    }
-
-    public void showGame()
-    {
-        string name = nameInputField.text;
+        //string name = nameInputField.text;
+        string name = "Player";
         if (name != null && name.Length > 0 && gameManager)
         {
             gameManager.startNewGame(name);
+            hideMenu();
             profile.SetActive(false);
-            menuStateStack.Clear();
+            menuStack.Clear();
         }
         else
         {
@@ -93,44 +86,64 @@ public class MenuHandler : MonoBehaviour
     {
         gameOver.SetActive(true);
         if (scoreText) scoreText.text = score.ToString();
-        if (shouldClear) menuStateStack.Clear();
-        menuStateStack.Push(MenuState.GameOver);
+        if (shouldClear) menuStack.Clear();
+        showMenu();
     }
 
-    public void showMain(bool shouldClear=false)
+    public void showMain(GameObject currentObject)
     {
-        main.SetActive(true);
-        if (shouldClear) menuStateStack.Clear();
-        menuStateStack.Push(MenuState.Main);
+        changeMenu(currentObject, main);
     }
 
-    public void showHelp()
+    public void showHelp(GameObject currentObject)
     {
-        help.SetActive(true);
-        menuStateStack.Push(MenuState.Help);
+        changeMenu(currentObject, help);
     }
-
 
     public void back(GameObject currentMenu)
     {
         //TODO: Pop from stack
-        var previousMenu = (MenuState) menuStateStack.Pop();
+        GameObject previousMenu = (GameObject) menuStack.Pop();
         currentMenu.SetActive(false);
-        switch (previousMenu)
-        {
-            case MenuState.Main:
-                showMain(); break;
-            case MenuState.LeaderBoard:
-                showLeaderboard(); break;
-            case MenuState.Profile: 
-                showProfile(); break;
-            case MenuState.GameOver:
-                showGameOver(-999); break;
-            case MenuState.Ongoing:
-                showGame(); break;
-            case MenuState.Help:
-                showHelp(); break;
-        }
-
+        previousMenu.SetActive(true);
     }
+
+    public void showProfile(GameObject currentObject)
+    {
+        changeMenu(currentObject, profile);
+        Debug.Log("Showing profile");
+    }
+
+    public void showMenu()
+    {
+        menuBoard.SetActive(true);
+        laserPointer.GetComponent<LineRenderer>().gameObject.SetActive(true);
+    }
+
+    public void hideMenu()
+    {
+        menuBoard.SetActive(false);
+        laserPointer.GetComponent<LineRenderer>().gameObject.SetActive(false);
+    }
+
+    private void changeMenu(GameObject currentMenu, GameObject nextMenu)
+    {
+        nextMenu.SetActive(true);
+        if (currentMenu != null)
+        {
+            menuStack.Push(currentMenu);
+            currentMenu.SetActive(false);
+        }
+        else
+        {
+            menuStack.Clear();
+        }
+    }
+
+    public void showKeyboard(GameObject keyboard)
+    {
+        keyboard.SetActive(true);
+    }
+    
+    
 }

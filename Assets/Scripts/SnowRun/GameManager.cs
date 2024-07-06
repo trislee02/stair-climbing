@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public enum GameState
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     // define level schemes
     private List<LevelScheme> levelSchemes = new List<LevelScheme>() {
-        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 60 },
+        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 300 },
         new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 240 },
         new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 240 },
         new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 180 },
@@ -338,7 +339,7 @@ public class GameManager : MonoBehaviour
         this.gameState = GameState.NotInitialized;
 
         // test
-        this.startNewGame("Player");
+        //this.startNewGame("Player");
     }
 
     // Update is called once per frame
@@ -496,6 +497,7 @@ public class GameManager : MonoBehaviour
                 {
                     this.countDownTimer.stopCountDown();
                     int score = this.scoreManager.saveCurrentPlayingScoreRecord();
+                    // TODO: show game over menu
                     this.menuHandler.showGameOver(score, true);
                 }
                 // transition
