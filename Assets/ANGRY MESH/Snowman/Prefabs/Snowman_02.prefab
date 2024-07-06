@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 65781720811688360}
   m_Layer: 0
   m_Name: Box (1)
-  m_TagString: Untagged
+  m_TagString: snowman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 65952274138339364}
   m_Layer: 0
   m_Name: Box
-  m_TagString: Untagged
+  m_TagString: snowman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 135530071005194110}
   m_Layer: 0
   m_Name: Spheres
-  m_TagString: Untagged
+  m_TagString: snowman
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

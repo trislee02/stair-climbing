@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class collectable : MonoBehaviour
 {
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        // find the game manager by name "GameManager"
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -28,7 +31,8 @@ public class collectable : MonoBehaviour
         if (other.CompareTag("controller") && triggerRight > 0.5)
         {
             Debug.Log("Collected the object");
-            //TODO: Add score
+            gameManager.itemsPickingUpCallback();
+            this.gameObject.SetActive(false);
         }
     }
 }

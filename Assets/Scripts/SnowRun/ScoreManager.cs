@@ -8,6 +8,8 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
     private string scoreRecordsPath = "";
+    [SerializeField]
+    private LeaderBoardUI leaderBoardUI;
 
     private Dictionary<string, int> scoreRecordsMap = new Dictionary<string, int>();// name => score
     private ScoreRecord currentPlayingScoreRecord = new ScoreRecord();
@@ -115,6 +117,7 @@ public class ScoreManager : MonoBehaviour
         int score = this.currentPlayingScoreRecord.score;
         addScoreRecordToMap(this.currentPlayingScoreRecord);
         storeScoreRecordsMapToFile(scoreRecordsPath);
+        onChangeScoreRecords();
         return score;
     }
 
@@ -155,11 +158,20 @@ public class ScoreManager : MonoBehaviour
         this.createNewPlayingScoreRecord(playerName);
     }
 
+    private void onChangeScoreRecords()
+    {
+        if (leaderBoardUI)
+        {
+            leaderBoardUI.updateScore(getTopN(leaderBoardUI.getTopN()));
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        var records = readScoreRecordsFromFile(scoreRecordsPath);
+        List<ScoreRecord> records = readScoreRecordsFromFile(scoreRecordsPath);
         scoreRecordsMap = convertScoreRecordsListToMap(records);
+        onChangeScoreRecords();
 
         //Debug.Log("Score records:");
         //foreach (var pair in scoreRecordsMap)

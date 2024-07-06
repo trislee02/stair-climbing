@@ -179,7 +179,7 @@ MonoBehaviour:
   _useClosestPointAsGrabSource: 0
   _releaseDistance: 0
   _resetGrabOnGrabsUpdated: 1
-  _physicsGrabbable: {fileID: 0}
+  _physicsGrabbable: {fileID: 3720504855762658825}
 --- !u!114 &3720504855762658825
 MonoBehaviour:
   m_ObjectHideFlags: 0
