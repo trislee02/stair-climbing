@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class KeyboardHandler : MonoBehaviour
 {
+    public TMP_InputField inputField;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,8 +16,17 @@ public class KeyboardHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public 
+    public void pressKey(string key)
+    {
+        inputField.text += key;
+    }
+
+    public void pressEnter()
+    {
+        inputField.DeactivateInputField();
+    }
+
 }

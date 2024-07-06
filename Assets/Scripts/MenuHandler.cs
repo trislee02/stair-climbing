@@ -37,6 +37,8 @@ public class MenuHandler : MonoBehaviour
     GameObject menuBoard;
     [SerializeField]
     GameObject laserPointer;
+    [SerializeField]
+    GameObject keyboard;
     
     GameManager gameManager;
 
@@ -140,10 +142,15 @@ public class MenuHandler : MonoBehaviour
         }
     }
 
-    public void showKeyboard(GameObject keyboard)
+    public void showKeyboard(GameObject currentInputField)
     {
         keyboard.SetActive(true);
+        keyboard.GetComponent<KeyboardHandler>().inputField = currentInputField.GetComponent<TMP_InputField>();
     }
-    
+
+    public void hideKeyboard()
+    {
+        keyboard.SetActive(false);
+    }    
     
 }
