@@ -115,6 +115,30 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    public void stopGame()
+    {
+        if (isPlaying())
+        {
+            this.gameState = GameState.Losing;
+        }
+    }
+
+    public void pauseGame()
+    {
+        if (this.gameState == GameState.Playing)
+        {
+            this.gameState = GameState.Pausing;
+        }
+    }
+
+    public void resumeGame()
+    {
+        if (this.gameState == GameState.Paused)
+        {
+            this.gameState = GameState.Resuming;
+        }
+    }
+
     public int getCurrentLevel()
     {
         return this.currentLevelIndex + 1;
@@ -122,7 +146,10 @@ public class GameManager : MonoBehaviour
 
     public bool isPlaying()
     {
-        return this.gameState == GameState.Playing;
+        return this.gameState == GameState.Playing
+                || this.gameState == GameState.Pausing
+                || this.gameState == GameState.Paused 
+                || this.gameState == GameState.Resuming;
     }
 
     public void snowmanHitCallback()
@@ -431,6 +458,8 @@ public class GameManager : MonoBehaviour
                     // init timer
                     this.countDownTimer.init(levelScheme.timeLimitAsSeconds, null);
                     if (readyTimer) this.readyTimer.init(3, menuHandler.preparingTimerUI);
+                    // timer ui
+                    menuHandler.preparingTimerUI.levelText = "Level " + (this.currentLevelIndex + 1).ToString();
                     // prepare scene
                     this.prepareScene(levelScheme);
                     // reset player position (ovr)

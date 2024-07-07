@@ -58,6 +58,17 @@ public class LaserPointer : OVRCursor
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        // Create a simple 2-color gradient with a fixed alpha of 1.0f
+        float alpha = 1.0f;
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(Color.green, 0.0f), new GradientColorKey(Color.red, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(0.0f, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+        );
+        lineRenderer.colorGradient = gradient;
+        lineRenderer.startWidth = 0.001f;
+        lineRenderer.endWidth = 0.01f;
     }
 
     private void Start()

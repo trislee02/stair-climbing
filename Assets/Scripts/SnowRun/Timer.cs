@@ -6,6 +6,7 @@ using UnityEngine;
 public class TimerUI
 {
     public string timeText { get; set; } = "";
+    public string levelText { get; set; } = "";
     public bool shouldShow { get; set; } = false;
 }
 

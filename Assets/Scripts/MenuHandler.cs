@@ -39,13 +39,15 @@ public class MenuHandler : MonoBehaviour
     [SerializeField]
     GameObject keyboard;
     [SerializeField]
+    GameObject pause;
+    [SerializeField]
     GameObject preparingTimerObject;
     [SerializeField]
-    GameObject pause;
+    TextMeshProUGUI preparingTimeText;
+    [SerializeField]
+    TextMeshProUGUI levelText;
 
     GameManager gameManager;
-
-    TextMeshProUGUI preparingTimeText;
 
     public TimerUI preparingTimerUI = new TimerUI();
 
@@ -54,10 +56,6 @@ public class MenuHandler : MonoBehaviour
     {
         // find the GameManager object by name "GameManager"
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-        //
-        if (preparingTimerObject)
-            preparingTimeText = preparingTimerObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -68,6 +66,7 @@ public class MenuHandler : MonoBehaviour
             if (preparingTimeText && preparingTimerUI.shouldShow)
             {
                 preparingTimeText.text = preparingTimerUI.timeText;
+                levelText.text = preparingTimerUI.levelText;
                 preparingTimerObject.SetActive(true);
             }
             else
@@ -76,7 +75,7 @@ public class MenuHandler : MonoBehaviour
             }
         }
         
-        if (gameManager.getGameState() != GameState.NotInitialized)
+        if (gameManager.isPlaying())
         {
             // Show the menu if the controller hand button is pressed
             if (OVRInput.GetDown(OVRInput.Button.Start))
@@ -85,11 +84,13 @@ public class MenuHandler : MonoBehaviour
                 {
                     hideMenu();
                     hidePauseMenu();
+                    gameManager.resumeGame();
                 }
                 else
                 {
                     showMenu();
                     showPauseMenu();
+                    gameManager.pauseGame();
                 }
             }
         }
@@ -197,10 +198,12 @@ public class MenuHandler : MonoBehaviour
         keyboard.SetActive(false);
     }    
     
-    public void stopGame()
+    public void stopGame(GameObject current)
     {
         //TODO: Stop game and get back to main menu
-        //gameManager.stopGame();
+        if (current) current.SetActive(false);
+        menuStack.Clear();
+        gameManager.stopGame();
     }
 
     public void showPauseMenu()
