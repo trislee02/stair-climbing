@@ -22,6 +22,8 @@ public class SoundManager : MonoBehaviour
     private AudioClip collectSound;
     [SerializeField]
     private AudioClip gameoverSound;
+    [SerializeField]
+    private AudioClip levelUpSound;
 
     // Start is called before the first frame update
     void Start()
@@ -66,5 +68,10 @@ public class SoundManager : MonoBehaviour
     public void PlayGameOverSound()
     {
         soundEffectAudioSource.PlayOneShot(gameoverSound);
+    }
+
+    public void PlayLevelUpSound()
+    {
+        soundEffectAudioSource.PlayOneShot(levelUpSound);
     }
 }

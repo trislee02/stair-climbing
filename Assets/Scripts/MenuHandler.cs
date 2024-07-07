@@ -88,8 +88,12 @@ public class MenuHandler : MonoBehaviour
 
     public void showGame(GameObject currentObject)
     {
-        //string name = nameInputField.text;
         string name = "Player";
+        if (nameInputField && nameInputField.text.Length > 0)
+        {
+            name = nameInputField.text;
+        }
+
         if (name != null && name.Length > 0 && gameManager)
         {
             gameManager.startNewGame(name);
@@ -109,6 +113,7 @@ public class MenuHandler : MonoBehaviour
         if (scoreText) scoreText.text = score.ToString();
         if (shouldClear) menuStack.Clear();
         showMenu();
+        
     }
 
     public void showMain(GameObject currentObject)

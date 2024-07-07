@@ -1,4 +1,7 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq.Expressions;
 using UnityEngine;
 
@@ -21,6 +24,12 @@ public enum GameState
     Ending,
     Ended,
 };
+
+// GameConfig class with static method loadConfig
+public class GameConfig
+{
+    public List<LevelScheme> levelSchemes { get; set; } = new List<LevelScheme>();
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -52,16 +61,20 @@ public class GameManager : MonoBehaviour
     private MenuHandler menuHandler;
     [SerializeField]
     private GameObject readyTimerObject;
+    [SerializeField]
+    private string relativeConfigPath = "game_config.json";
+
+    private SoundManager soundManager;
 
     private static readonly int SNOWMAN_HIT_SCORE = 10;
     private static readonly int GOOD_FRUIT_SCORE = 2;
 
     // define level schemes
     private List<LevelScheme> levelSchemes = new List<LevelScheme>() {
-        new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 300 },
-        new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 180 },
-        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 120 },
-        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 90 },
+        //new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 300 },
+        //new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 180 },
+        //new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 120 },
+        //new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 90 },
     };
 
     private ScoreManager scoreManager;
@@ -192,7 +205,7 @@ public class GameManager : MonoBehaviour
         List<bool> mask = new List<bool>();
         for (int i = 0; i < len; i++)
         {
-            mask.Add(true);
+            mask.Add(false);
         }
         for (int i = 0; i < truelyAmount; i++)
         {
@@ -231,7 +244,7 @@ public class GameManager : MonoBehaviour
         this.obstacles.Clear();
 
         ////////////////////////////////// create new scene by scheme //////////////////////////////////
-        int woodLogsAmount = this.woodLogSamples.Count / 2;
+        int woodLogsAmount = Mathf.RoundToInt((float)this.woodLogSamples.Count * 0.75f);
         List<bool> woodLogsMask = makeRandomMask(this.woodLogSamples.Count, woodLogsAmount);
         for (int i = 0; i < this.woodLogSamples.Count; i++)
         {
@@ -245,7 +258,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //
-        int snowmenAmount = this.snowmanSamples.Count / 2;
+        int snowmenAmount = Mathf.RoundToInt((float)this.snowmanSamples.Count * 0.5f);
         List<bool> snowmenMask = makeRandomMask(this.snowmanSamples.Count, snowmenAmount);
         for (int i = 0; i < this.snowmanSamples.Count; i++)
         {
@@ -259,7 +272,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //
-        int pickingUpItemsAmount = this.pickingUpItemSamples.Count / 2;
+        int pickingUpItemsAmount = Mathf.RoundToInt((float)this.pickingUpItemSamples.Count * 0.75f);
         List<bool> pickingUpItemsMask = makeRandomMask(this.pickingUpItemSamples.Count, pickingUpItemsAmount);
         for (int i = 0; i < this.pickingUpItemSamples.Count; i++)
         {
@@ -273,7 +286,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //
-        int obstaclesAmount = this.obstacleSamples.Count / 2;
+        int obstaclesAmount = Mathf.RoundToInt((float)this.obstacleSamples.Count * 0.75f);
         List<bool> obstaclesMask = makeRandomMask(this.obstacleSamples.Count, obstaclesAmount);
         for (int i = 0; i < this.obstacleSamples.Count; i++)
         {
@@ -307,10 +320,30 @@ public class GameManager : MonoBehaviour
             obstacleSample.SetActive(false);
         }
     }
+    GameConfig loadConfig(string path)
+    {
+        // handle if file does not exist
+        if (!File.Exists(path))
+        {
+            return null;
+        }
+
+        var serializer = new JsonSerializer();
+        GameConfig config = new();
+        using (var streamReader = new StreamReader(path))
+        using (var textReader = new JsonTextReader(streamReader))
+        {
+            config = serializer.Deserialize<GameConfig>(textReader);
+        }
+        return config;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        // find sound manager
+        this.soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         // find score manager
         if (this.scoreManagerObject != null)
         {
@@ -331,6 +364,17 @@ public class GameManager : MonoBehaviour
         if (this.readyTimerObject != null)
         {
             this.readyTimer = this.readyTimerObject.GetComponent<Timer>();
+        }
+
+        // load game config
+        if (this.relativeConfigPath.Length > 0)
+        {
+            string gameConfigPath = System.IO.Path.Combine(Application.streamingAssetsPath, this.relativeConfigPath);
+            GameConfig gameConfig = this.loadConfig(gameConfigPath);
+            if (gameConfig != null)
+            {
+                this.levelSchemes = gameConfig.levelSchemes;
+            }
         }
 
         inactiveAllSamples();// inactive all samples
@@ -502,6 +546,8 @@ public class GameManager : MonoBehaviour
                 {
                     // up level
                     this.currentLevelIndex++;
+                    if (this.currentLevelIndex < this.levelSchemes.Count)
+                        soundManager.PlayLevelUpSound();
                 }
                 // transition
                 if (this.currentLevelIndex < this.levelSchemes.Count)
@@ -517,6 +563,7 @@ public class GameManager : MonoBehaviour
                     int score = this.scoreManager.saveCurrentPlayingScoreRecord();
                     // TODO: show game over menu
                     this.menuHandler.showGameOver(score, true);
+                    soundManager.PlayGameOverSound();
                 }
                 // transition
                 this.gameState = GameState.Ended;

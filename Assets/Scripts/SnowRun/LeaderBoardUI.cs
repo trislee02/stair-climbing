@@ -25,7 +25,7 @@ public class LeaderBoardUI : MonoBehaviour
         string scoresText = "";
         for (int i = 0; i < top.Count; i++)
         {
-            namesText += top[i].name + "\n";
+            namesText += (i+1).ToString() + ". " + top[i].name + "\n";
             scoresText += top[i].score + "\n";
         }
         if (names) names.text = namesText;

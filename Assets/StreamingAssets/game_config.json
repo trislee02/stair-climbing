@@ -1,0 +1,28 @@
+{
+    "levelSchemes": [
+        {
+            "couldHasObstacles": false,
+            "couldHasPickingUpItems": false,
+            "couldHasSnowman": true,
+            "timeLimitAsSeconds": 300
+        },
+        {
+            "couldHasObstacles": false,
+            "couldHasPickingUpItems": true,
+            "couldHasSnowman": true,
+            "timeLimitAsSeconds": 180
+        },
+        {
+            "couldHasObstacles": true,
+            "couldHasPickingUpItems": true,
+            "couldHasSnowman": true,
+            "timeLimitAsSeconds": 120
+        },
+        {
+            "couldHasObstacles": true,
+            "couldHasPickingUpItems": true,
+            "couldHasSnowman": true,
+            "timeLimitAsSeconds": 90
+        }
+    ]
+}

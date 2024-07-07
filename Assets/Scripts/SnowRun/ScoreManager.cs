@@ -7,16 +7,18 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    private string scoreRecordsPath = "";
+    private string relativeScoreRecordsPath = "";
     [SerializeField]
     private LeaderBoardUI leaderBoardUI;
+
+    private string scoreRecordsPath = "";
 
     private Dictionary<string, int> scoreRecordsMap = new Dictionary<string, int>();// name => score
     private ScoreRecord currentPlayingScoreRecord = new ScoreRecord();
 
     List<ScoreRecord> readScoreRecordsFromFile(string path)
     {
-        if (scoreRecordsPath == "")
+        if (path == "")
         {
             Debug.LogError("Score log path is not set");
             return new List<ScoreRecord>();
@@ -70,7 +72,7 @@ public class ScoreManager : MonoBehaviour
 
     void storeScoreRecordsMapToFile(string path)
     {
-        if (scoreRecordsPath == "")
+        if (path == "")
         {
             return;
         }
@@ -169,6 +171,8 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreRecordsPath = Path.Combine(Application.streamingAssetsPath, relativeScoreRecordsPath);
+
         List<ScoreRecord> records = readScoreRecordsFromFile(scoreRecordsPath);
         scoreRecordsMap = convertScoreRecordsListToMap(records);
         onChangeScoreRecords();
