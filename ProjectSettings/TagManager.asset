@@ -13,6 +13,8 @@ TagManager:
   - player
   - ovr
   - obstacle
+  - controller_right
+  - controller_left
   layers:
   - Default
   - TransparentFX

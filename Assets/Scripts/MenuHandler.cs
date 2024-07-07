@@ -4,7 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
 public class MenuHandler : MonoBehaviour
 {
     Stack menuStack = new Stack();
@@ -39,20 +38,41 @@ public class MenuHandler : MonoBehaviour
     GameObject laserPointer;
     [SerializeField]
     GameObject keyboard;
-    
+    [SerializeField]
+    GameObject preparingTimerObject;
+
     GameManager gameManager;
+
+    TextMeshProUGUI preparingTimeText;
+
+    public TimerUI preparingTimerUI = new TimerUI();
 
     // Start is called before the first frame update
     void Start()
     {
         // find the GameManager object by name "GameManager"
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        //
+        if (preparingTimerObject)
+            preparingTimeText = preparingTimerObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (preparingTimerObject)
+        {
+            if (preparingTimeText && preparingTimerUI.shouldShow)
+            {
+                preparingTimeText.text = preparingTimerUI.timeText;
+                preparingTimerObject.SetActive(true);
+            }
+            else
+            {
+                preparingTimerObject.SetActive(false);
+            }
+        }
     }
 
     public void quitGame()
@@ -73,7 +93,6 @@ public class MenuHandler : MonoBehaviour
         if (name != null && name.Length > 0 && gameManager)
         {
             gameManager.startNewGame(name);
-            hideMenu();
             profile.SetActive(false);
             menuStack.Clear();
         }

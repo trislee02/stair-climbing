@@ -58,12 +58,10 @@ public class GameManager : MonoBehaviour
 
     // define level schemes
     private List<LevelScheme> levelSchemes = new List<LevelScheme>() {
-        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 300 },
-        new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 240 },
-        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 240 },
-        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 180 },
+        new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 300 },
+        new LevelScheme() { couldHasObstacles = false, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 180 },
         new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 120 },
-        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 60 },
+        new LevelScheme() { couldHasObstacles = true, couldHasPickingUpItems = true, couldHasSnowman = true, timeLimitAsSeconds = 90 },
     };
 
     private ScoreManager scoreManager;
@@ -342,7 +340,7 @@ public class GameManager : MonoBehaviour
         this.gameState = GameState.NotInitialized;
 
         // test
-        this.startNewGame("Player");
+        //this.startNewGame("Player");
     }
 
     // Update is called once per frame
@@ -387,8 +385,8 @@ public class GameManager : MonoBehaviour
                 {
                     LevelScheme levelScheme = this.levelSchemes[this.currentLevelIndex];
                     // init timer
-                    this.countDownTimer.init(levelScheme.timeLimitAsSeconds);
-                    if (readyTimer) this.readyTimer.init(3);
+                    this.countDownTimer.init(levelScheme.timeLimitAsSeconds, null);
+                    if (readyTimer) this.readyTimer.init(3, menuHandler.preparingTimerUI);
                     // prepare scene
                     this.prepareScene(levelScheme);
                     // reset player position (ovr)
@@ -397,6 +395,12 @@ public class GameManager : MonoBehaviour
                         this.playerObject.transform.position = this.startingPlayerPosition;
                         this.playerObject.transform.rotation = this.startingPlayerRotation;
                     }
+                    if (this.stairLegAnimation)
+                    {
+                        this.stairLegAnimation.resetState();
+                    }
+                    // show menu
+                    menuHandler.showMenu();
                 }
                 // transition
                 this.gameState = GameState.Preparing;
@@ -406,6 +410,7 @@ public class GameManager : MonoBehaviour
                 // actions
                 {
                     if (readyTimer) this.readyTimer.startCountDown();
+                    menuHandler.preparingTimerUI.shouldShow  = true;
                 }
                 // transition
                 this.gameState = GameState.Prepared;
@@ -424,6 +429,11 @@ public class GameManager : MonoBehaviour
             case GameState.Starting:
                 // actions
                 {
+                    // ui
+                    menuHandler.preparingTimerUI.shouldShow = false;
+                    menuHandler.hideMenu();
+                    menuHandler.hideKeyboard();
+
                     this.countDownTimer.startCountDown();
                     if (this.stairLegAnimation) this.stairLegAnimation.setCouldMove(true);
                 }
@@ -436,7 +446,9 @@ public class GameManager : MonoBehaviour
                 {
                     //
                 }
-                // transition
+                // transition  
+                // Debug
+                //if (this.countDownTimer.getTime() > 10) this.gameState = GameState.Winning;
                 break;
 
             case GameState.Pausing:
@@ -489,10 +501,13 @@ public class GameManager : MonoBehaviour
                 // actions
                 {
                     // up level
-                    if (this.currentLevelIndex < this.levelSchemes.Count - 1) this.currentLevelIndex++;
+                    this.currentLevelIndex++;
                 }
                 // transition
-                this.gameState = GameState.LevelLoading;
+                if (this.currentLevelIndex < this.levelSchemes.Count)
+                    this.gameState = GameState.LevelLoading;
+                else
+                    this.gameState = GameState.Ending;
                 break;
 
             case GameState.Ending:

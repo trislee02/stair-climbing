@@ -76,9 +76,11 @@ public class NewStairLegAnimation : MonoBehaviour
 
     private bool couldMove = true;
 
-    public void setCouldMove(bool couldMove)
+    private SoundManager soundManager;
+
+    public void setCouldMove(bool b)
     {
-        this.couldMove = couldMove;
+        this.couldMove = b;
     }
 
     // Start is called before the first frame update
@@ -86,6 +88,7 @@ public class NewStairLegAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         dataManager = GetComponent<DataManager>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         maxDiffFootHeight = maxFootHeight - minFootHeight;
         risePerRealHeightUnit = stepRise / maxDiffFootHeight;
@@ -111,6 +114,7 @@ public class NewStairLegAnimation : MonoBehaviour
             if (currentLeftDiffFootHeight >= maxDiffFootHeight)
             {
                 isLeftAbove = true;
+                soundManager.PlayStepSound();
                 countFootAboveStep++;
                 if (stepRipple)
                     stepRipple.transform.position = currentLeftIKPosition - new Vector3(0, 0.1f, 0);
@@ -118,6 +122,7 @@ public class NewStairLegAnimation : MonoBehaviour
             else if (currentRightDiffFootHeight >= maxDiffFootHeight)
             {
                 isRightAbove = true;
+                soundManager.PlayStepSound();
                 countFootAboveStep++;
                 if (stepRipple)
                     stepRipple.transform.position = currentRightIKPosition - new Vector3(0, 0.1f, 0);
@@ -195,7 +200,7 @@ public class NewStairLegAnimation : MonoBehaviour
                 {
                     float roll1Logging = 0;
                     float roll2Logging = 0;
-                    float dataLeftFootHeight = footHeightDebug;// dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                    float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
                     float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
 
                     //Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight + "; CntFtAboveStep: " + countFootAboveStep + "; CntFtStep: " + countFootStep);
@@ -312,5 +317,13 @@ public class NewStairLegAnimation : MonoBehaviour
     Vector3 computeDirection(Vector3 origin, Vector3 destination)
     {   
         return destination - origin; 
+    }
+
+    public void resetState()
+    {
+        countFootAboveStep = 0;
+        countFootStep = 0;
+        isLeftAbove = false;
+        isRightAbove = false;
     }
 }

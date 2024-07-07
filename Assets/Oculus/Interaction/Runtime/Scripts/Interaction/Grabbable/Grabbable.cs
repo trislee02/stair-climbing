@@ -60,6 +60,7 @@ namespace Oculus.Interaction
         private ITransformer OneGrabTransformer;
         private ITransformer TwoGrabTransformer;
 
+
         protected override void Awake()
         {
             base.Awake();
@@ -99,13 +100,12 @@ namespace Oculus.Interaction
             }
 
             this.EndStart(ref _started);
+
         }
 
         public override void ProcessPointerEvent(PointerEvent evt)
         {
             if (evt.Type == PointerEventType.Select) {
-                //Debug.Log("Grabbable.ProcessPointerEvent");
-                //Debug.Log(evt.Type);
                 Rigidbody rigid = GetComponent<Rigidbody>();
                 if (rigid != null)
                 {

@@ -1,6 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
+public class TimerUI
+{
+    public string timeText { get; set; } = "";
+    public bool shouldShow { get; set; } = false;
+}
 
 public class Timer : MonoBehaviour
 {
@@ -8,6 +15,7 @@ public class Timer : MonoBehaviour
     private int timeLimitAsSeconds { get; set; } = 10;
 
     private GameManager gameManager;
+    private TimerUI ui;
 
     private bool isCountingDown = false;
     private int remainingTime = 0;
@@ -27,12 +35,18 @@ public class Timer : MonoBehaviour
         return this.remainingTime;
     }
 
-    public void init(int timeLimitAsSeconds)
+    public int getTime()
+    {
+        return this.timeLimitAsSeconds - this.remainingTime;
+    }
+
+    public void init(int timeLimitAsSeconds, TimerUI _ui)
     {
         this.timeLimitAsSeconds = timeLimitAsSeconds;
         this.remainingTime = timeLimitAsSeconds;
         this.isCountingDown = false;
         this.lastChecknTime = 0;
+        this.ui = _ui;
     }
 
     public void stopCountDown()
@@ -58,6 +72,10 @@ public class Timer : MonoBehaviour
     {
         // handle second counting down
         Debug.Log("Second counting down: " + this.remainingTime);
+        if (ui != null)
+        {
+            ui.timeText = this.remainingTime.ToString();
+        }
     }
 
     // Start is called before the first frame update

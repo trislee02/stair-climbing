@@ -9,14 +9,17 @@ public class Throwable : MonoBehaviour
     private ParticleSystem effect;
 
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     private bool hasTouchTarget = false;
+    private bool isHolding = false;
 
     // Start is called before the first frame update
     void Start()
     {
         // find the game manager by name "GameManager"
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -40,9 +43,45 @@ public class Throwable : MonoBehaviour
             gameObject.SetActive(false);
             //
             gameManager.snowmanHitCallback();
+            soundManager.PlayHitSound();
         }
 
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger Throwable enter");
+        float triggerRight = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger);
+        float triggerLeft = OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger);
+        if ((triggerRight > 0.5 && other.gameObject.tag == "controller_right") || 
+            (triggerLeft > 0.5 && other.gameObject.tag == "controller_left"))
+        {
+            isHolding = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Trigger exit");
+        float triggerRight = OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger);
+        float triggerLeft = OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger);
+        if (isHolding &&
+            ((triggerRight < 0.5 && other.gameObject.tag == "controller_right") ||
+            (triggerLeft < 0.5 && other.gameObject.tag == "controller_left")))
+        {
+            isHolding = false;
+            soundManager.PlayThrowSound();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Debug.Log("Collision exit");
+        if (collision.gameObject.tag == "controller_right" || collision.gameObject.tag == "controller_left")
+        {
+            soundManager.PlayThrowSound();
+        }
     }
 
     private void OnCollisionStay(Collision collision)
