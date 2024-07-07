@@ -40,6 +40,8 @@ public class MenuHandler : MonoBehaviour
     GameObject keyboard;
     [SerializeField]
     GameObject preparingTimerObject;
+    [SerializeField]
+    GameObject pause;
 
     GameManager gameManager;
 
@@ -71,6 +73,24 @@ public class MenuHandler : MonoBehaviour
             else
             {
                 preparingTimerObject.SetActive(false);
+            }
+        }
+        
+        if (gameManager.getGameState() != GameState.NotInitialized)
+        {
+            // Show the menu if the controller hand button is pressed
+            if (OVRInput.GetDown(OVRInput.Button.Start))
+            {
+                if (menuBoard.activeSelf)
+                {
+                    hideMenu();
+                    hidePauseMenu();
+                }
+                else
+                {
+                    showMenu();
+                    showPauseMenu();
+                }
             }
         }
     }
@@ -177,4 +197,34 @@ public class MenuHandler : MonoBehaviour
         keyboard.SetActive(false);
     }    
     
+    public void stopGame()
+    {
+        //TODO: Stop game and get back to main menu
+        //gameManager.stopGame();
+    }
+
+    public void showPauseMenu()
+    {
+        pause.SetActive(true);
+    }
+
+    public void hidePauseMenu()
+    {
+        pause.SetActive(false);
+    }
+
+    public void toggleMusic(TMP_Text textButton)
+    {
+        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        if (soundManager.backgroundAudioSource.isPlaying)
+        {
+            soundManager.PauseBackgroundMusic();
+            textButton.text = "Music On";
+        }
+        else
+        {
+            soundManager.PlayBackgroundMusic();
+            textButton.text = "Music Off";
+        }
+    }
 }

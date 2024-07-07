@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
     [SerializeField]
-    private AudioSource backgroundAudioSource;
+    public AudioSource backgroundAudioSource;
     [SerializeField]
     private AudioSource soundEffectAudioSource;
 
     [Header("Sound Effects")]
     [SerializeField]
-    private AudioClip backgroundMusic;
+    public AudioClip backgroundMusic;
     [SerializeField]
     private AudioClip stepSound;
     [SerializeField]
@@ -45,6 +46,11 @@ public class SoundManager : MonoBehaviour
         backgroundAudioSource.Play();
     }
 
+    public void PauseBackgroundMusic()
+    {
+        backgroundAudioSource.Pause();
+    }
+
     public void PlayStepSound()
     {
         soundEffectAudioSource.PlayOneShot(stepSound);
@@ -74,4 +80,5 @@ public class SoundManager : MonoBehaviour
     {
         soundEffectAudioSource.PlayOneShot(levelUpSound);
     }
+
 }
