@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
     {
         if (this.gameState == GameState.Playing)
         {
+            Debug.Log("Goal touched by player");
             this.gameState = GameState.Winning;
         }
     }
@@ -336,10 +337,12 @@ public class GameManager : MonoBehaviour
 
         inactiveAllSamples();// inactive all samples
 
+        if (this.stairLegAnimation) this.stairLegAnimation.setCouldMove(false);
+        
         this.gameState = GameState.NotInitialized;
 
         // test
-        //this.startNewGame("Player");
+        this.startNewGame("Player");
     }
 
     // Update is called once per frame

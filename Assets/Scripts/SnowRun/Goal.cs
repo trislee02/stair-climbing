@@ -19,7 +19,6 @@ public class Goal : MonoBehaviour
         // check if the object that collided with the goal is the player
         if (collision.gameObject.tag == "player")
         {
-            Debug.Log("Goal touched by player");
             // call the Win() method in the GameManager script
             if (gameManager)
                 gameManager.goalTouchingCallback();

@@ -195,7 +195,7 @@ public class NewStairLegAnimation : MonoBehaviour
                 {
                     float roll1Logging = 0;
                     float roll2Logging = 0;
-                    float dataLeftFootHeight = dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
+                    float dataLeftFootHeight = footHeightDebug;// dataManager.getFootHeight(DataManager.LEFT_LEG, out roll1Logging);
                     float dataRightFootHeight = dataManager.getFootHeight(DataManager.RIGHT_LEG, out roll2Logging);
 
                     //Debug.Log("Data Left height: " + dataLeftFootHeight + "; Data Right height: " + dataRightFootHeight + "; CntFtAboveStep: " + countFootAboveStep + "; CntFtStep: " + countFootStep);
