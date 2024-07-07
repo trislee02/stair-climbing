@@ -21,6 +21,15 @@ public class KeyboardHandler : MonoBehaviour
 
     public void pressKey(string key)
     {
+        if (key == "backspace")
+        {
+            if (inputField.text.Length > 0)
+            {
+                inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
+            }
+            return;
+        }
+
         inputField.text += key;
     }
 
