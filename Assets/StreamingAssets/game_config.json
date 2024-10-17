@@ -3,26 +3,32 @@
         {
             "couldHasObstacles": false,
             "couldHasPickingUpItems": false,
+            "couldHasSnowman": false,
+            "timeLimitAsSeconds": 600
+        },
+        {
+            "couldHasObstacles": false,
+            "couldHasPickingUpItems": false,
             "couldHasSnowman": true,
-            "timeLimitAsSeconds": 300
+            "timeLimitAsSeconds": 420
         },
         {
             "couldHasObstacles": false,
             "couldHasPickingUpItems": true,
             "couldHasSnowman": true,
-            "timeLimitAsSeconds": 180
+            "timeLimitAsSeconds": 420
         },
         {
             "couldHasObstacles": true,
             "couldHasPickingUpItems": true,
             "couldHasSnowman": true,
-            "timeLimitAsSeconds": 120
+            "timeLimitAsSeconds": 300
         },
         {
             "couldHasObstacles": true,
             "couldHasPickingUpItems": true,
             "couldHasSnowman": true,
-            "timeLimitAsSeconds": 90
+            "timeLimitAsSeconds": 240
         }
     ]
 }

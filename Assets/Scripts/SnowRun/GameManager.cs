@@ -457,7 +457,7 @@ public class GameManager : MonoBehaviour
                     LevelScheme levelScheme = this.levelSchemes[this.currentLevelIndex];
                     // init timer
                     this.countDownTimer.init(levelScheme.timeLimitAsSeconds, null);
-                    if (readyTimer) this.readyTimer.init(3, menuHandler.preparingTimerUI);
+                    if (readyTimer) this.readyTimer.init(10, menuHandler.preparingTimerUI);
                     // timer ui
                     menuHandler.preparingTimerUI.levelText = "Level " + (this.currentLevelIndex + 1).ToString();
                     // prepare scene

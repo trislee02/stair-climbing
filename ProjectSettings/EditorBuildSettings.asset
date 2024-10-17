@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/StairUp.unity
     guid: 3bae88c1c66b33e4c93a09426a1849af
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StairUpView.unity
     guid: 3a46a3faa78ef7c4fb0247ef9e456f39
   - enabled: 0
@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SlopeUpView.unity
     guid: 93c2d782a0a529d47ab746a3ca761677
+  - enabled: 1
+    path: Assets/Scenes/SnowRun/SnowRun.unity
+    guid: 20dd52aca98b00147b07bfa09eb19267
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 12e65ab8a5e41e04da04952f61ac717a, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 8c3bd1c6ae4e03448a5254df59a04288, type: 2}
