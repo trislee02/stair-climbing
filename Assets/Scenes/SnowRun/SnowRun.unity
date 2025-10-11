@@ -84164,7 +84164,7 @@ MonoBehaviour:
   isFromKinect: 0
   pedalLength: 0.37
   kinectDevice: {fileID: 0}
-  ip: 192.168.137.37
+  ip: 192.168.137.97
 --- !u!95 &1058210614
 Animator:
   serializedVersion: 5

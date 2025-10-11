@@ -7,7 +7,6 @@ using System.Net.Sockets;
 
 using System;
 using System.Text;
-using Microsoft.Azure.Kinect.Sensor;
 
 [Serializable]
 public class Accelerator
@@ -28,16 +27,10 @@ public class DataManager : MonoBehaviour
     public static readonly int RIGHT_LEG = 1;
 
     [SerializeField]
-    private bool isFromKinect = false;
-
-    [SerializeField]
     private float pedalLength = 0.2f;
 
     [SerializeField]
-    private TrackerHandler kinectDevice;
-
-    [SerializeField]
-    private string ip = "192.168.137.195";
+    private string ip = "192.168.137.97";
 
     private Accelerator accelerator = new Accelerator();
     
@@ -75,9 +68,6 @@ public class DataManager : MonoBehaviour
         accelerator.roll1 = float.Parse(rolls[0]);
         accelerator.roll2 = float.Parse(rolls[1]);
 
-        //Debug.Log(receivedMessage + " - " + accelerator.roll1 + " - " + accelerator.roll2);
-        //Debug.Log("Data received: " + receivedMessage.ToString());
-
         if (fps < 0.00006)
         {
             startTick = DateTime.Now.Ticks;
@@ -101,64 +91,30 @@ public class DataManager : MonoBehaviour
     public float getFootHeight(int leg)
     {
         Debug.Log("Roll 1: " + accelerator.roll1 + "; Roll 2: " + accelerator.roll2);
-        if (!isFromKinect)
+        if (leg == LEFT_LEG)
         {
-            if (leg == LEFT_LEG)
-            {
-                //rollLogging = accelerator.roll1;
-                return (float)Math.Sin((double)(accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
-            }
-
-            //rollLogging = accelerator.roll2;
-            return (float)Math.Sin((double)(accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
+            //rollLogging = accelerator.roll1;
+            return (float)Math.Sin((double)(accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
         }
 
-        // maybe using getFootHeightLeft and getFootHeightRight
-        //float fDeltaHeight = kinectDevice.getFootDeltaHeight();
-        //if (leg == LEFT_LEG)
-        //    return fDeltaHeight < 0 ? -fDeltaHeight : 0;
-
-        //return fDeltaHeight > 0 ? fDeltaHeight : 0;
-
-        //rollLogging = 0;
-        if (leg == LEFT_LEG)
-            return kinectDevice.getFootHeightLeft();
-        else
-            return kinectDevice.getFootHeightRight();
+        //rollLogging = accelerator.roll2;
+        return (float)Math.Sin((double)(accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
     }
 
     public float getFootHeight(int leg, out float rollLogging)
     {
-        if (!isFromKinect)
+        if (leg == LEFT_LEG)
         {
-            if (leg == LEFT_LEG)
-            {
-                rollLogging = accelerator.roll1;
-                return (float)Math.Sin((double)(accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
-            }
-
-            rollLogging = accelerator.roll2;
-            return (float)Math.Sin((double)(accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
+            rollLogging = accelerator.roll1;
+            return (float)Math.Sin((double)(accelerator.roll1) * (Math.PI) / 180.0f) * pedalLength;
         }
 
-        // maybe using getFootHeightLeft and getFootHeightRight
-        //float fDeltaHeight = kinectDevice.getFootDeltaHeight();
-        //if (leg == LEFT_LEG)
-        //    return fDeltaHeight < 0 ? -fDeltaHeight : 0;
-
-        //return fDeltaHeight > 0 ? fDeltaHeight : 0;
-
-        rollLogging = 0;
-        if (leg == LEFT_LEG)
-            return kinectDevice.getFootHeightLeft();
-        else
-            return kinectDevice.getFootHeightRight();
+        rollLogging = accelerator.roll2;
+        return (float)Math.Sin((double)(accelerator.roll2) * (Math.PI) / 180.0f) * pedalLength;
     }
 
     public float getFootAngle(int leg)
     {
-        if (isFromKinect) return 0;
-
         if (leg == LEFT_LEG)
             return accelerator.roll1;
 

@@ -5831,6 +5831,7 @@ MonoBehaviour:
   isFromKinect: 0
   pedalLength: 0.2
   kinectDevice: {fileID: 0}
+  ip: 192.168.137.37
 --- !u!114 &604732117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8016,6 +8017,7 @@ MonoBehaviour:
   isFromKinect: 0
   pedalLength: 0.2
   kinectDevice: {fileID: 0}
+  ip: 192.168.137.37
 --- !u!4 &1870371485
 Transform:
   m_ObjectHideFlags: 0
@@ -12261,6 +12263,7 @@ MonoBehaviour:
   isFromKinect: 0
   pedalLength: 0.25
   kinectDevice: {fileID: 921941432}
+  ip: 192.168.137.97
 --- !u!114 &5553708535250551609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12283,8 +12286,7 @@ MonoBehaviour:
   moveUpwardLegSpeed: 1
   curveLiftFoot: 3
   stepRipple: {fileID: 341476698}
-  footHeightDebug: 0
-  counter: {fileID: 1235523975}
+  footHeightDebug: 0.05
 --- !u!114 &5553708535250551610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12292,7 +12294,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5069202498189416847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2967e9d0b1a822d43828583c269a6cc5, type: 3}
   m_Name: 
